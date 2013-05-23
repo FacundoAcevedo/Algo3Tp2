@@ -3,3 +3,9 @@ JUnit:
 
 GIT:
 -cheatsheet - http://byte.kde.org/~zrusin/git/git-cheat-sheet-large.png
+
+Java:
+-cheatsheet(deben haber mejores)  - http://introcs.cs.princeton.edu/java/11cheatsheet/
+-debug (video) - https://www.youtube.com/watch?v=lFLFxVUUD74
+-debug - https://www.ibm.com/developerworks/library/os-ecbug/
+
