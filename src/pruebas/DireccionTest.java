@@ -47,8 +47,46 @@ public class DireccionTest {
 
 
 	@Test
-	public void testInvertirSentido() {
-		
+	public void testInvertirSentidoNorte() {
+		Direccion direccion = new Direccion(Sentido.NORTE);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.SUR);
+	
+	}
+	@Test
+	public void testInvertirSentidoSur() {
+		Direccion direccion = new Direccion(Sentido.SUR);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.NORTE);
+	
+	}
+	@Test
+	public void testInvertirSentidoNoreste() {
+		Direccion direccion = new Direccion(Sentido.NORESTE);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.SUDOESTE);
+	
+	}
+	@Test
+	public void testInvertirSentidoNoroeste() {
+		Direccion direccion = new Direccion(Sentido.NOROESTE);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.SUDOESTE);
+	
+	}
+	@Test
+	public void testInvertirSentidoSudeste() {
+		Direccion direccion = new Direccion(Sentido.SUDESTE);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.NOROESTE);
+	
+	}
+	@Test
+	public void testInvertirSentidoSudoeste() {
+		Direccion direccion = new Direccion(Sentido.SUDOESTE);
+		direccion.invertirSentido();
+		assertEquals(direccion.sentido() , Sentido.NORESTE);
+	
 	}
 
 }

@@ -19,11 +19,29 @@ public class Direccion {
 	}
 	
 	public void invertirSentido(){
-		if (this.miSentido == Sentido.NORTE) this.miSentido = Sentido.SUR;
-		if (this.miSentido == Sentido.SUR) this.miSentido = Sentido.NORTE;
-		if (this.miSentido == Sentido.NOROESTE) this.miSentido = Sentido.SUDOESTE;
-		if (this.miSentido == Sentido.NORESTE) this.miSentido = Sentido.SUDOESTE;
-		if (this.miSentido == Sentido.SUDESTE) this.miSentido = Sentido.NOROESTE;
-		if (this.miSentido == Sentido.SUDOESTE) this.miSentido = Sentido.NORESTE;
+		if (this.miSentido == Sentido.NORTE){
+			this.miSentido = Sentido.SUR;
+			return;
+		}
+		if (this.miSentido == Sentido.SUR){
+			this.miSentido = Sentido.NORTE;
+			return;
+		}
+		if (this.miSentido == Sentido.NOROESTE){
+			this.miSentido = Sentido.SUDOESTE;
+			return;
+		}
+		if (this.miSentido == Sentido.NORESTE){
+			this.miSentido = Sentido.SUDOESTE;
+			return;
+		}
+		if (this.miSentido == Sentido.SUDESTE){
+			this.miSentido = Sentido.NOROESTE;
+			return;
+			}
+		if (this.miSentido == Sentido.SUDOESTE){
+			this.miSentido = Sentido.NORESTE;
+			return;
+		}
 	}
 }
