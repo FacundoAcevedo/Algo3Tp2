@@ -5,8 +5,8 @@ public class Nave {
 	private Direccion direccion;
 	
 	public Nave(int largoNave, Direccion direccionNave){
-		largo = largoNave;
-		direccion = direccionNave;
+		this.largo = largoNave;
+		this.direccion = direccionNave;
 	}
 	
 	public Direccion direccion(){
