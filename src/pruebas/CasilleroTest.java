@@ -1,14 +1,15 @@
 package pruebas;
+import juego.Casillero;
+import static org.junit.Assert.*;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-import modelo.Casillero;
+public class CasilleroTest {
 
-public class CasilleroTest extends TestCase{
-
-	public void testCrear() {
-		Casillero casillero = new Casillero();
-		assertTrue(casillero != null);
+	@Test
+    public void testCrear() {
+        Casillero casillero = new Casillero();
+        assertTrue(casillero != null);
 	}
-
+	
 }
