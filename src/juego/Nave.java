@@ -10,8 +10,7 @@ public class Nave {
 	}
 	
 	public Direccion direccion(){
-		return direccion;
-		
+		return direccion;	
 	}
 	
 	public int largo(){
