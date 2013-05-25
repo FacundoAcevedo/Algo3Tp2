@@ -1,7 +1,8 @@
-package batallaNavalgo.pruebas;
+package pruebas;
 
 import junit.framework.TestCase;
-import batallaNavalgo.modelo.Casillero;
+
+import modelo.Casillero;
 
 public class CasilleroTest extends TestCase{
 

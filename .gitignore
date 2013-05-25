@@ -36,3 +36,4 @@
 #*.jar
 #*.war
 #*.ear
+/bin

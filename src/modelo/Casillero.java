@@ -1,4 +1,4 @@
-package batallaNavalgo.modelo;
+package modelo;
 
 public class Casillero {
 

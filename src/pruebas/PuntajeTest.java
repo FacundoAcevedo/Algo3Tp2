@@ -1,7 +1,8 @@
-package batallaNavalgo.pruebas;
+package pruebas;
 
 import junit.framework.TestCase;
-import batallaNavalgo.modelo.Puntaje;
+
+import modelo.Puntaje;
 
 public class PuntajeTest extends TestCase{
 
