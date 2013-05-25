@@ -13,7 +13,7 @@ public class Puntaje {
     }
 
     public void descontarPuntos(int puntosPerdidos) {
-            puntos -= puntosPerdidos;
+            puntos -= puntosPerdidos;        
     }
 
 }
