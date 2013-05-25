@@ -1,4 +1,4 @@
-package juego;
+package naves;
 
 public class Nave {
 	private int largo;

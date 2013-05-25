@@ -1,4 +1,4 @@
-package juego;
+package naves;
 
 public class PortaAviones extends Nave {
 	final static int miLargo = 4;

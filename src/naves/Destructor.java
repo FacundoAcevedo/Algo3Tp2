@@ -1,4 +1,4 @@
-package juego;
+package naves;
 
 public class Destructor extends Nave{
 	final static int miLargo = 3;

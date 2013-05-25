@@ -1,4 +1,5 @@
-package juego;
+package naves;
+
 
 /*Los enum van con la primer letra en mayusculas*/ 
 

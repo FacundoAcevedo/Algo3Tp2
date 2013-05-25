@@ -1,7 +1,8 @@
 package pruebas;
-import juego.Direccion;
-import juego.Sentido;
 import static org.junit.Assert.*;
+
+import naves.Direccion;
+import naves.Sentido;
 
 import org.junit.Test;
 

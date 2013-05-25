@@ -1,4 +1,4 @@
-package juego;
+package naves;
 
 public class Rompehielos extends Nave{
 	final static int miLargo = 3;
