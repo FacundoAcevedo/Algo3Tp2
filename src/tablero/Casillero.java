@@ -19,6 +19,7 @@ public class Casillero {
 	}
 	
 	public void ponerMunicion(Municion municion){
+		//Deberia verificar que la municion este "activa" y ver que impacte...
 		this.contenido.ponerMunicion(municion);
 	}	
 	public int[] id(){
