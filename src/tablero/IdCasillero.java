@@ -29,13 +29,13 @@ public class IdCasillero {
 	}
 	// metodo estatio para validar id
 	static public void validarId(int x, int y) throws ErrorIdCasilleroInvalido{
-		if (x < 0 || x > 99 || y < 0 || y > 99){
+		if (x < 0 || x > 9 || y < 0 || y > 9){
 			throw  new ErrorIdCasilleroInvalido();
 		}
 	}
 	static public void validarId(int [] id) throws ErrorIdCasilleroInvalido{
 		int x = id[0], y = id[1];
-		if (x < 0 || x > 99 || y < 0 || y > 99){
+		if (x < 0 || x > 9 || y < 0 || y > 9){
 			throw  new ErrorIdCasilleroInvalido();
 		}
 	}
