@@ -78,6 +78,9 @@ public class Nave {
 		return EstadoDeSalud.DESTRUIDO;
 	}
 	
+	public List<SeccionDeNave> secciones(){
+		return this.secciones;
+	}
 	
 
 }
