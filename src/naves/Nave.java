@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Nave {
-	private int largo;
-	private Direccion direccion;
+	protected int largo;
+	protected Direccion direccion;
 	protected EstadoDeSalud estado;
-	private List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
+	protected List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
 
 	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
@@ -34,7 +34,7 @@ public class Nave {
 		return this.estado;
 	}
 
-	public void actualizar() {
+	protected void actualizar() {
 		// Reviso todas las secciones
 		int i = 0;
 		SeccionDeNave seccion = this.secciones.get(i);
@@ -43,6 +43,7 @@ public class Nave {
 			//de la nave y TODAS estan destruidas, luego el estado de la nave sera DESTRUIDO
 			if ( i >= this.largo) this.estado = EstadoDeSalud.DESTRUIDO;
 			i++;
+			seccion = this.secciones.get(i);
 		} while( seccion.estado() == EstadoDeSalud.DESTRUIDO);
 	}
 
