@@ -1,6 +1,6 @@
 package municiones;
 
-public class MinaSubmarinaPorContacto extends Municion{
+public class MinaSubmarinaPorContacto extends MinaSubmarina{
 	final static int miCosto = 150;
 	
 	public MinaSubmarinaPorContacto(){
