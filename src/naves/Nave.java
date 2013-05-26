@@ -14,7 +14,7 @@ public class Nave {
 	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
 		this.direccion = direccionNave;
-		this.estado = EstadoDeSalud.ACTIVO;
+		this.estado = EstadoDeSalud.SANO;
 
 		// Genero las secciones de la nave
 		for (int i = 0; i <= this.largo; i++) {
