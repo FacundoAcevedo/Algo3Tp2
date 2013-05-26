@@ -22,6 +22,7 @@ public class ContenidoCasillero {
 	}
 
 	public boolean estaVacio() {
+		//Devuelve que esta vacio, si NO HAY secciones de naves NI municiones en el casillero.
 		if (this.coleccionDeSeccionesDeNave.isEmpty() && this.coleccionMuniciones.isEmpty()) return true;
 		return false;
 	}
