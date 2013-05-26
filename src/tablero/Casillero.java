@@ -10,6 +10,12 @@ public class Casillero {
 		this.id = new	IdCasillero(x, y);
 		this.contenido = new ContenidoCasillero(); 
 	}
+	public Casillero(int [] id){
+		int x = id[0];
+		int y = id[1];
+		this.id = new	IdCasillero(x, y);
+		this.contenido = new ContenidoCasillero(); 
+	}
 	
 	public void ponerNave(Nave nave){
 		this.contenido.ponerNave(nave);
