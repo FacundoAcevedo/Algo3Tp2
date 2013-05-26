@@ -2,12 +2,13 @@ package tablero;
 
 import municiones.Municion;
 import naves.Nave;
+import naves.SeccionDeNave;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ContenidoCasillero {
-	protected List<Nave> coleccionNaves = new LinkedList<Nave>();
+	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
 	protected List<Municion> coleccionMuniciones= new LinkedList<Municion>();
 	
 	public void ponerNave(Nave nave) {
@@ -21,7 +22,7 @@ public class ContenidoCasillero {
 	}
 
 	public boolean estaVacio() {
-		if (this.coleccionNaves.isEmpty() && this.coleccionMuniciones.isEmpty()) return true;
+		if (this.coleccionDeSeccionesDeNave.isEmpty() && this.coleccionMuniciones.isEmpty()) return true;
 		return false;
 	}
 
