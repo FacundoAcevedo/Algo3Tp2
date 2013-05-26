@@ -37,15 +37,21 @@ public class Nave {
 
 	protected void actualizarEstado() {
 		// Reviso todas las secciones
-		int i = 0;
-		SeccionDeNave seccion = this.secciones.get(i);
-		do {	
-			//Este condicional se cunple cuando ya se recorrio todas las partes
-			//de la nave y TODAS estan destruidas, luego el estado de la nave sera DESTRUIDO
-			if ( i >= this.largo) this.estado = EstadoDeSalud.DESTRUIDO;
-			i++;
+		int i = 0;	
+		int seccionesSanas = 0, seccionesDestruidas = 0, seccionesDanadas = 0;
+		SeccionDeNave seccion;
+		for (i = 0; i <= this.largo; i++){
 			seccion = this.secciones.get(i);
-		} while( seccion.estado() == EstadoDeSalud.DESTRUIDO);
+			if (seccion.estado() == EstadoDeSalud.SANO) seccionesSanas++;
+			if (seccion.estado() == EstadoDeSalud.DANADO) seccionesDanadas++;
+			if (seccion.estado() == EstadoDeSalud.DESTRUIDO) seccionesDestruidas++;
+		}
+		
+		if (seccionesDestruidas == this.largo) this.estado = EstadoDeSalud.DESTRUIDO;
+		else if (seccionesSanas == this.largo) this.estado = EstadoDeSalud.SANO;
+		else this.estado = EstadoDeSalud.DANADO;
+		
+		
 	}
 
 	public void recibirImpacto(Municion municion) {
