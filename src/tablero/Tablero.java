@@ -10,7 +10,13 @@ public class Tablero {
 	
 	public Casillero obtenerCasillero(int[] id){
 		IdCasillero.validarId(id);
+		if ( this.coleccionCasilleros.contains(id) ){
 		return this.coleccionCasilleros.get(id);
+		}
+		Casillero casillero = new Casillero(id);
+		this.coleccionCasilleros.put(id, casillero);
+		return casillero;
+		
 		
 	}
 	
