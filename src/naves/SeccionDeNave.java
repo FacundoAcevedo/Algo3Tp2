@@ -6,7 +6,7 @@ public class SeccionDeNave {
 	
 	public SeccionDeNave(Nave nave) {
 		this.nave = nave;
-		this.estado = EstadoDeSalud.ACTIVO;
+		this.estado = EstadoDeSalud.SANO;
 	}
 	
 	public void destruir(){
