@@ -28,6 +28,14 @@ public class Direccion {
 			this.miSentido = Sentido.NORTE;
 			return;
 		}
+		if (this.miSentido == Sentido.OESTE){
+			this.miSentido = Sentido.ESTE;
+			return;
+		}
+		if (this.miSentido == Sentido.ESTE){
+			this.miSentido = Sentido.OESTE;
+			return;
+		}
 		if (this.miSentido == Sentido.NOROESTE){
 			this.miSentido = Sentido.SUDOESTE;
 			return;
