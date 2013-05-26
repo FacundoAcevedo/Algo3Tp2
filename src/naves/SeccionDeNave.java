@@ -14,9 +14,22 @@ public class SeccionDeNave {
 		this.nave.actualizarEstado();
 	}
 	public void recibirImpacto(Municion municion){
-		if (this.nave.vulnerable(municion)){
+		EstadoDeSalud gradoDeVulnerabilidad = this.nave.vulnerable(municion);
+		
+		if (gradoDeVulnerabilidad == EstadoDeSalud.DESTRUIDO){
 			this.destruir();
-			this.nave.recibirImpacto(municion);//algunas naves no hacen nada con este metodo, otras si.
+			this.nave.recibirImpacto(municion);
+		}
+		
+		else if (gradoDeVulnerabilidad == EstadoDeSalud.DANADO){
+			if(this.estado == EstadoDeSalud.SANO){
+				this.estado = EstadoDeSalud.DANADO;
+				this.nave.recibirImpacto(municion);
+			}
+			if(this.estado == EstadoDeSalud.DANADO){
+				this.estado = EstadoDeSalud.DESTRUIDO;
+				this.nave.recibirImpacto(municion);
+			}
 		}
 		
 	}
