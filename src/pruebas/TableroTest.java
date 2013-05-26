@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import excepciones.ErrorIdCasilleroInvalido;
+
 import tablero.*;
 
 public class TableroTest {
@@ -15,6 +17,21 @@ public class TableroTest {
         assertTrue(tablero != null);
 	}
 	
+	@Test
+	public void testPedirCasilleroValido() {
+		Tablero tablero = new Tablero();
+		int [] id = {0,0};
+        Casillero casillero = tablero.obtenerCasillero(id);
+        assertTrue(casillero != null);
+	}
+	
+	@Test(expected=ErrorIdCasilleroInvalido.class)
+	public void testPedirCasilleroInvalido() {
+		Tablero tablero = new Tablero();
+		int [] id = {-10,10};
+		tablero.obtenerCasillero(id);
+
+	}
 	
 
 
