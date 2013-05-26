@@ -1,6 +1,6 @@
 package naves;
 
 public enum EstadoDeSalud { 
-	SANO, DESTRUIDO
+	ACTIVO, DESTRUIDO
 
 }
