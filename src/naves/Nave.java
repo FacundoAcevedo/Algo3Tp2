@@ -42,7 +42,7 @@ public class Nave {
 		int i = 0;	
 		int seccionesSanas = 0, seccionesDestruidas = 0, seccionesDanadas = 0;
 		SeccionDeNave seccion;
-		for (i = 0; i <= this.largo; i++){
+		for (i = 0; i < this.largo; i++){
 			seccion = this.secciones.get(i);
 			if (seccion.estado() == EstadoDeSalud.SANO) seccionesSanas++;
 			if (seccion.estado() == EstadoDeSalud.DANADO) seccionesDanadas++;
