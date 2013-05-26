@@ -11,7 +11,7 @@ public class SeccionDeNave {
 	
 	public void destruir(){
 		this.estado = EstadoDeSalud.DESTRUIDO;
-		this.nave.actualizar();
+		this.nave.actualizarEstado();
 	}
 	public void recibirImpacto(Municion municion){
 		if (this.nave.vulnerable(municion)){

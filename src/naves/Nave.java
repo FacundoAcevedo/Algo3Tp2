@@ -35,7 +35,7 @@ public class Nave {
 		return this.estado;
 	}
 
-	protected void actualizar() {
+	protected void actualizarEstado() {
 		// Reviso todas las secciones
 		int i = 0;
 		SeccionDeNave seccion = this.secciones.get(i);

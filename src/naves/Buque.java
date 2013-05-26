@@ -18,7 +18,7 @@ public class Buque extends Nave{
 			SeccionDeNave seccion = this.secciones.get(i);
 			seccion.destruir();		
 		}
-		this.actualizar(); 
+		this.actualizarEstado(); 
 		
 	}
 	

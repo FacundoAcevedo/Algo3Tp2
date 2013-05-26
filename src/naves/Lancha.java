@@ -1,5 +1,6 @@
 package naves;
 
+
 public class Lancha extends Nave{
 	final static int miLargo = 2;
 
