@@ -7,17 +7,19 @@ public class Casillero {
 	ContenidoCasillero contenido;
 	
 	public Casillero(int x, int y){
-		id = new	IdCasillero(x, y);
-		contenido = new ContenidoCasillero(); 
+		this.id = new	IdCasillero(x, y);
+		this.contenido = new ContenidoCasillero(); 
 	}
 	
 	public void ponerNave(Nave nave){
-		contenido.ponerNave(nave);
+		this.contenido.ponerNave(nave);
 	}
 	
 	public void ponerMunicion(Municion municion){
-		contenido.ponerMunicion(municion);
+		this.contenido.ponerMunicion(municion);
 	}	
-	
+	public int[] id(){
+		return this.id.id();
+	}
 
 }
