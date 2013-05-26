@@ -10,7 +10,7 @@ public class Destructor extends Nave{
 	}
 
 	public  boolean vulnerable(Municion municion){
-		if (municion instanceof DisparoConvecional){
+		if (municion instanceof DisparoConvencional){
 			return true;
 		}
 		return false;
