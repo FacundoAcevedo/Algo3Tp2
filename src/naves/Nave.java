@@ -73,8 +73,9 @@ public class Nave {
 
 	}
 	
-	public boolean vulnerable(Municion municion){
-		return true;
+	public EstadoDeSalud vulnerable(Municion municion){
+		//Devuelve el grado de vulnerabilidad a ese tipo de municion
+		return EstadoDeSalud.DESTRUIDO;
 	}
 	
 	
