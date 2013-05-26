@@ -10,11 +10,13 @@ public class Nave {
 	protected Direccion direccion;
 	protected EstadoDeSalud estado;
 	protected List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
+	protected float porcentajeDeVida;
 
 	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
 		this.direccion = direccionNave;
 		this.estado = EstadoDeSalud.SANO;
+		porcentajeDeVida = 100;
 
 		// Genero las secciones de la nave
 		for (int i = 0; i <= this.largo; i++) {
@@ -47,11 +49,24 @@ public class Nave {
 			if (seccion.estado() == EstadoDeSalud.DESTRUIDO) seccionesDestruidas++;
 		}
 		
-		if (seccionesDestruidas == this.largo) this.estado = EstadoDeSalud.DESTRUIDO;
-		else if (seccionesSanas == this.largo) this.estado = EstadoDeSalud.SANO;
-		else this.estado = EstadoDeSalud.DANADO;
+		if (seccionesDestruidas == this.largo){
+			this.estado = EstadoDeSalud.DESTRUIDO;
+			this.porcentajeDeVida = 0;
+		}
+		else if (seccionesSanas == this.largo){
+			this.estado = EstadoDeSalud.SANO;
+			this.porcentajeDeVida = 100;
+		}
+		else{
+			this.estado = EstadoDeSalud.DANADO;
+			this.porcentajeDeVida= ((seccionesDanadas)/2 + seccionesSanas) * (100/this.largo);			
+		}
 		
 		
+	}
+	
+	public float porcentajeVida(){
+		return this.porcentajeDeVida;
 	}
 
 	public void recibirImpacto(Municion municion) {
