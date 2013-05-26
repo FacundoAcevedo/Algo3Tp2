@@ -21,5 +21,8 @@ public class Casillero {
 	public int[] id(){
 		return this.id.id();
 	}
+	public	boolean estaVacio(){
+		return contenido.estaVacio();
+	}
 
 }

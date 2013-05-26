@@ -30,22 +30,22 @@ public class CasilleroTest {
 	
 	@Test(expected=ErrorIdCasilleroInvalido.class)
     public void testCasilleroObtenerIdInferiorACero(){
-	 Casillero casillero = new Casillero(-1,-2);
+	 new Casillero(-1,-2);
 	}
 	
 	@Test(expected=ErrorIdCasilleroInvalido.class)
     public void testCasilleroObtenerIdSuperiorAnoventaYNueve(){
-	 Casillero casillero = new Casillero(100,123);
+	 new Casillero(100,123);
 	}
 	
 	@Test(expected=ErrorIdCasilleroInvalido.class)
     public void testCasilleroObtenerIdXInvalido(){
-	 Casillero casillero = new Casillero(100,5);
+	 new Casillero(100,5);
 	}
 	
 	@Test(expected=ErrorIdCasilleroInvalido.class)
     public void testCasilleroObtenerIdYInvalido(){
-	 Casillero casillero = new Casillero(5,100);
+	 new Casillero(5,100);
 	}
 	
 	
