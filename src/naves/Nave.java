@@ -1,5 +1,6 @@
 package naves;
 
+
 import municiones.Municion;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,5 +51,11 @@ public class Nave {
 	public void recibirImpacto(Municion municion) {
 
 	}
+	
+	public boolean vulnerable(Municion municion){
+		return true;
+	}
+	
+	
 
 }
