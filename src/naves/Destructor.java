@@ -9,11 +9,11 @@ public class Destructor extends Nave{
 		super(miLargo, direccionDestructor);
 	}
 
-	public  boolean vulnerable(Municion municion){
+	public  EstadoDeSalud vulnerable(Municion municion){
 		if (municion instanceof DisparoConvencional){
-			return true;
+			return EstadoDeSalud.DESTRUIDO;
 		}
-		return false;
+		return EstadoDeSalud.SANO;
 	}
 	
 
