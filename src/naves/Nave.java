@@ -1,21 +1,53 @@
 package naves;
 
+import municiones.Municion;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Nave {
 	private int largo;
 	private Direccion direccion;
-	
-	public Nave(int largoNave, Direccion direccionNave){
+	protected EstadoDeSalud estado;
+	private List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
+
+	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
 		this.direccion = direccionNave;
+		this.estado = EstadoDeSalud.ACTIVO;
+
+		// Genero las secciones de la nave
+		for (int i = 0; i <= this.largo; i++) {
+			SeccionDeNave seccion = new SeccionDeNave(this);
+			this.secciones.add(seccion);
+		}
 	}
-	
-	public Direccion direccion(){
-		return direccion;	
+
+	public Direccion direccion() {
+		return this.direccion;
 	}
-	
-	public int largo(){
-		return largo;
+
+	public int largo() {
+		return this.largo;
 	}
-	
+
+	public EstadoDeSalud estado() {
+		return this.estado;
+	}
+
+	public void actualizar() {
+		// Reviso todas las secciones
+		int i = 0;
+		SeccionDeNave seccion = this.secciones.get(i);
+		do {	
+			//Este condicional se cunple cuando ya se recorrio todas las partes
+			//de la nave y TODAS estan destruidas, luego el estado de la nave sera DESTRUIDO
+			if ( i >= this.largo) this.estado = EstadoDeSalud.DESTRUIDO;
+			i++;
+		} while( seccion.estado() == EstadoDeSalud.DESTRUIDO);
+	}
+
+	public void recibirImpacto(Municion municion) {
+
+	}
 
 }
