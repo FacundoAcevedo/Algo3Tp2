@@ -30,7 +30,7 @@ public class PuntajeTest {
 		assertTrue(puntaje.puntos() == 9900);
 	}
 	@Test
-	public void testDescontar1000Puntos() {
+	public void testDescontar10000Puntos() {
 		Puntaje puntaje = new Puntaje();
 		puntaje.descontarPuntos(10000);
 		assertTrue(puntaje.puntos() == 0);
