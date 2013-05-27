@@ -82,5 +82,9 @@ public class Nave {
 		return this.secciones;
 	}
 	
+	public void invertirSentido(){
+		this.direccion.invertirSentido();
+	}
+	
 
 }
