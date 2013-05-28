@@ -25,8 +25,8 @@ public class Nave {
 		}
 	}
 
-	public Direccion direccion() {
-		return this.direccion;
+	public Sentido direccion() {
+		return this.direccion.sentido();
 	}
 
 	public int largo() {
