@@ -19,7 +19,7 @@ public class Nave {
 		porcentajeDeVida = 100;
 
 		// Genero las secciones de la nave
-		for (int i = 0; i <= this.largo; i++) {
+		for (int i = 0; i < this.largo; i++) {
 			SeccionDeNave seccion = new SeccionDeNave(this);
 			this.secciones.add(seccion);
 		}
