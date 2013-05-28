@@ -48,7 +48,7 @@ public class DestructorTest {
 		Destructor destructor = new Destructor(direccion);
 		SeccionDeNave seccion;
 		seccion = destructor.secciones().get(1);
-		seccion.destruir();
+		seccion.recibirImpacto(disparo);
 		
 		destructor.recibirImpacto(disparo);
 		assertTrue(destructor.estado() == EstadoDeSalud.DANADO);
@@ -59,7 +59,7 @@ public class DestructorTest {
 		SeccionDeNave seccion;
 		for (int i=0; i < destructor.largo(); i++){
 			seccion = destructor.secciones().get(i);
-			seccion.destruir();
+			seccion.recibirImpacto(disparo);
 		}
 		
 		assertTrue(destructor.estado() == EstadoDeSalud.DESTRUIDO);
