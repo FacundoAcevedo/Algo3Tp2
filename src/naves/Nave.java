@@ -70,6 +70,7 @@ public class Nave {
 	}
 
 	public void recibirImpacto(Municion municion) {
+		this.actualizarEstado();
 
 	}
 	
