@@ -1,6 +1,7 @@
 package pruebas;
 
 import static org.junit.Assert.*;
+import municiones.DisparoConvencional;
 import municiones.Municion;
 import naves.Direccion;
 import naves.EstadoDeSalud;
@@ -14,7 +15,7 @@ public class NaveTest {
 	private int largo;
 	private Direccion direccion;
 	private Nave nave;
-	private Municion municion;
+	private Municion disparo;
 		
 	@Test
 	public void testCrear() {
@@ -25,6 +26,7 @@ public class NaveTest {
 	@Before
 	public void prepararObjetos(){
 	largo = 6;
+	disparo = new DisparoConvencional();
 	direccion = new Direccion(Sentido.SUR);
 	nave = new Nave(largo, direccion);
 	}
@@ -52,7 +54,7 @@ public class NaveTest {
 	@Test
 	public void vulnerableTest(){
 		//por defecto las naves son vulnerables a cualquier municion, salvo que sobreescriban el metodo
-		assertEquals(nave.vulnerable(municion) ,  EstadoDeSalud.DESTRUIDO);
+		assertEquals(nave.vulnerable(disparo) ,  EstadoDeSalud.DESTRUIDO);
 	}
 	@Test
 	public void seccionesTest(){
@@ -67,7 +69,7 @@ public class NaveTest {
 	public void estadosSiDestruyoUnaSeccionTest(){
 		SeccionDeNave seccion;
 		seccion = nave.secciones().get(1);
-		seccion.destruir();
+		seccion.recibirImpacto(disparo);
 		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
 		
 	}
@@ -77,7 +79,7 @@ public class NaveTest {
 		int porcentajeVidaCorrecto = (int)(5*100/6);
 		SeccionDeNave seccion;
 		seccion = nave.secciones().get(1);
-		seccion.destruir();
+		seccion.recibirImpacto(disparo);
 		assertTrue(nave.porcentajeVida() == porcentajeVidaCorrecto);
 
 		
@@ -88,7 +90,8 @@ public class NaveTest {
 		SeccionDeNave seccion;
 		for (int i = 0; i < 2; i++){
 			seccion = nave.secciones().get(i);
-			seccion.destruir();
+			seccion.recibirImpacto(disparo);
+
 		}
 		
 		assertTrue(nave.porcentajeVida() == porcentajeVidaCorrecto);
@@ -101,7 +104,7 @@ public class NaveTest {
 		SeccionDeNave seccion;
 		for (int i = 0; i < 3; i++){
 			seccion = nave.secciones().get(i);
-			seccion.destruir();
+			seccion.recibirImpacto(disparo);
 		}
 		
 		assertTrue(nave.porcentajeVida() == porcentajeVidaCorrecto);
@@ -114,7 +117,7 @@ public class NaveTest {
 		SeccionDeNave seccion;
 		for (int i = 0; i < 6; i++){
 			seccion = nave.secciones().get(i);
-			seccion.destruir();
+					seccion.recibirImpacto(disparo);
 		}
 		
 		assertTrue(nave.porcentajeVida() == porcentajeVidaCorrecto);
@@ -127,11 +130,11 @@ public class NaveTest {
 		SeccionDeNave seccion;
 		for (int i = 0; i < 6; i++){
 			seccion = nave.secciones().get(i);
-			seccion.destruir();
+					seccion.recibirImpacto(disparo);
 		}
 		for (int i = 0; i < 6; i++){
 			seccion = nave.secciones().get(i);
-			seccion.destruir();
+					seccion.recibirImpacto(disparo);
 		}
 		
 		assertTrue(nave.porcentajeVida() == porcentajeVidaCorrecto);
