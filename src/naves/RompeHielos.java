@@ -2,10 +2,10 @@ package naves;
 
 import municiones.Municion;
 
-public class Rompehielos extends Nave{
+public class RompeHielos extends Nave{
 	final static int miLargo = 3;
 	
-	public Rompehielos(Direccion direccionRompehielos){
+	public RompeHielos(Direccion direccionRompehielos){
 		//Llamo al constructor de Nave
 		super(miLargo, direccionRompehielos);
 		

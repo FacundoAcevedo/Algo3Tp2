@@ -10,14 +10,14 @@ import municiones.MinaSubmarinaTripleConRetardo;
 import municiones.Municion;
 import naves.Direccion;
 import naves.EstadoDeSalud;
-import naves.Rompehielos;
+import naves.RompeHielos;
 import naves.SeccionDeNave;
 import naves.Sentido;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class RompehielosTest {
+public class RompeHielosTest {
 
 	private Direccion direccion;
 	private Municion disparo;
@@ -39,13 +39,13 @@ public class RompehielosTest {
 	}
 	@Test
 	public void testCrear() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		assertTrue(rompeHielos != null);
 	}
 
 	@Test
 	public void testRecibirImpactoDirectoEnSeccion() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		SeccionDeNave seccion;
 		seccion = rompeHielos.secciones().get(1);
 		seccion.recibirImpacto(disparo);
@@ -55,7 +55,7 @@ public class RompehielosTest {
 	}
 	@Test
 	public void testRecibirImpactoDirectoCantidadNecesariaParaDestruirLaNave() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		SeccionDeNave seccion;
 		for (int i=0; i < rompeHielos.largo(); i++){
 			seccion = rompeHielos.secciones().get(i);
@@ -67,25 +67,25 @@ public class RompehielosTest {
 
 	@Test
 	public void testEsVulnerableAMinaSubmarinaDobleConRetardo() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		assertTrue(rompeHielos.vulnerable(minaSubmarinaDobleConRetardo) == EstadoDeSalud.DANADO);
 	}
 
 	@Test
 	public void testEsVulnerableAMinaSubmarinaPuntualConRetardo() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		assertTrue(rompeHielos.vulnerable(minaSubmarinaPuntualConRetardo) == EstadoDeSalud.DANADO);
 	}
 
 	@Test
 	public void testEsVulnerableAMinaSubmarinaTripleConRetardo() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		assertTrue(rompeHielos.vulnerable(minaSubmarinaTripleConRetardo) == EstadoDeSalud.DANADO);
 	}
 
 	@Test
 	public void testEsVulnerableAMinaSubmarinaPorContacto() {
-		Rompehielos rompeHielos = new Rompehielos(direccion);
+		RompeHielos rompeHielos = new RompeHielos(direccion);
 		assertTrue(rompeHielos.vulnerable(minaSubmarinaPorContacto) == EstadoDeSalud.DANADO);
 	}
 }
