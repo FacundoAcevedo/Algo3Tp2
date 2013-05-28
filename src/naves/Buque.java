@@ -16,7 +16,8 @@ public class Buque extends Nave{
 		//Destruyo c/u de las partes
 		for(int i = 0; i < this.largo; i++){
 			SeccionDeNave seccion = this.secciones.get(i);
-			seccion.destruir();		
+			seccion.destruir();
+			
 		}
 		this.actualizarEstado(); 
 		
