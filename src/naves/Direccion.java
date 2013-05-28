@@ -24,31 +24,31 @@ public class Direccion {
 			this.miSentido = Sentido.SUR;
 			return;
 		}
-		if (this.miSentido == Sentido.SUR){
+		else if (this.miSentido == Sentido.SUR){
 			this.miSentido = Sentido.NORTE;
 			return;
 		}
-		if (this.miSentido == Sentido.OESTE){
+		else if (this.miSentido == Sentido.OESTE){
 			this.miSentido = Sentido.ESTE;
 			return;
 		}
-		if (this.miSentido == Sentido.ESTE){
+		else if (this.miSentido == Sentido.ESTE){
 			this.miSentido = Sentido.OESTE;
 			return;
 		}
-		if (this.miSentido == Sentido.NOROESTE){
+		else if (this.miSentido == Sentido.NOROESTE){
 			this.miSentido = Sentido.SUDOESTE;
 			return;
 		}
-		if (this.miSentido == Sentido.NORESTE){
+		else if (this.miSentido == Sentido.NORESTE){
 			this.miSentido = Sentido.SUDOESTE;
 			return;
 		}
-		if (this.miSentido == Sentido.SUDESTE){
+		else if (this.miSentido == Sentido.SUDESTE){
 			this.miSentido = Sentido.NOROESTE;
 			return;
 			}
-		if (this.miSentido == Sentido.SUDOESTE){
+		else if (this.miSentido == Sentido.SUDOESTE){
 			this.miSentido = Sentido.NORESTE;
 			return;
 		}
