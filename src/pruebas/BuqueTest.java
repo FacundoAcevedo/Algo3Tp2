@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class BuqueTest {
 	private Direccion direccion;
-	private Municion disparo, minaSubmarina, minaSubmarinaConRetardo, minaSubmarinaDobleConRetardo, minaSubmarinaPuntualConRetardo,
-	minaSubmarinaTripleConRetardo;
+	private Municion disparo;/*, minaSubmarina, minaSubmarinaConRetardo, minaSubmarinaDobleConRetardo, minaSubmarinaPuntualConRetardo,
+	minaSubmarinaTripleConRetardo;*/
 	@Before
 	public void preparaObjetos(){
 		direccion = new Direccion(Sentido.SUR);
