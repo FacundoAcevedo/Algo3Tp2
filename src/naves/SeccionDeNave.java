@@ -26,7 +26,7 @@ public class SeccionDeNave {
 				this.estado = EstadoDeSalud.DANADO;
 				this.nave.recibirImpacto(municion);
 			}
-			if(this.estado == EstadoDeSalud.DANADO){
+			else if(this.estado == EstadoDeSalud.DANADO){
 				this.estado = EstadoDeSalud.DESTRUIDO;
 				this.nave.recibirImpacto(municion);
 			}

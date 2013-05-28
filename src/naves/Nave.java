@@ -10,7 +10,7 @@ public class Nave {
 	protected Direccion direccion;
 	protected EstadoDeSalud estado;
 	protected List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
-	protected float porcentajeDeVida;
+	protected int porcentajeDeVida;
 
 	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
@@ -19,14 +19,14 @@ public class Nave {
 		porcentajeDeVida = 100;
 
 		// Genero las secciones de la nave
-		for (int i = 0; i <= this.largo; i++) {
+		for (int i = 0; i < this.largo; i++) {
 			SeccionDeNave seccion = new SeccionDeNave(this);
 			this.secciones.add(seccion);
 		}
 	}
 
-	public Direccion direccion() {
-		return this.direccion;
+	public Sentido direccion() {
+		return this.direccion.sentido();
 	}
 
 	public int largo() {
@@ -59,7 +59,7 @@ public class Nave {
 		}
 		else{
 			this.estado = EstadoDeSalud.DANADO;
-			this.porcentajeDeVida= ((seccionesDanadas)/2 + seccionesSanas) * (100/this.largo);			
+			this.porcentajeDeVida = (int)( ((seccionesDanadas)/2 + seccionesSanas) * ((float)100/this.largo));			
 		}
 		
 		
@@ -70,6 +70,7 @@ public class Nave {
 	}
 
 	public void recibirImpacto(Municion municion) {
+		this.actualizarEstado();
 
 	}
 	
@@ -80,6 +81,10 @@ public class Nave {
 	
 	public List<SeccionDeNave> secciones(){
 		return this.secciones;
+	}
+	
+	public void invertirSentido(){
+		this.direccion.invertirSentido();
 	}
 	
 
