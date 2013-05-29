@@ -1,5 +1,5 @@
 package tablero;
-import naves.Nave;
+import naves.SeccionDeNave;
 import municiones.Municion;
 
 public class Casillero {
@@ -14,12 +14,13 @@ public class Casillero {
 		this(id[0],id[1]); 
 	}
 	
-	public void ponerNave(Nave nave){
-		this.contenido.ponerNave(nave);
+	public void ponerSeccionDeNave(SeccionDeNave seccionDeNave){
+		this.contenido.ponerSeccionDeNave(seccionDeNave);
 	}
 	
 	public void ponerMunicion(Municion municion){
-		//Deberia verificar que la municion este "activa" y ver que impacte...
+		//Deberia verificar que la municion este "activa" 
+		//y ver que impacte...
 		this.contenido.ponerMunicion(municion);
 	}	
 	public int[] id(){
