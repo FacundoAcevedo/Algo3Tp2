@@ -16,14 +16,20 @@ public class ContenidoCasillero {
 		}
 		
 	}
+	public List<SeccionDeNave> devolverSeccionesDeNave(){
+		return this.coleccionDeSeccionesDeNave;
+	}
 
 	public void ponerMunicion(Municion municion) {
 		if (!this.coleccionMuniciones.contains(municion)){
 			this.coleccionMuniciones.add(municion);
-		}		
+		}
+		
 		
 	}
-
+	public List<Municion> devolverMuniciones(){
+		return this.coleccionMuniciones;
+	}
 	public boolean estaVacio() {
 		//Devuelve que esta vacio, si NO HAY secciones de naves NI municiones en el casillero.
 		if (this.coleccionDeSeccionesDeNave.isEmpty() && this.coleccionMuniciones.isEmpty()) return true;

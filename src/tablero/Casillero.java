@@ -1,4 +1,6 @@
 package tablero;
+import java.util.List;
+
 import naves.SeccionDeNave;
 import municiones.Municion;
 
@@ -18,11 +20,19 @@ public class Casillero {
 		this.contenido.ponerSeccionDeNave(seccionDeNave);
 	}
 	
+	public List<SeccionDeNave> devolverSeccionesDeNave(){
+		return this.contenido.devolverSeccionesDeNave();
+	}
+	
 	public void ponerMunicion(Municion municion){
 		//Deberia verificar que la municion este "activa" 
 		//y ver que impacte...
 		this.contenido.ponerMunicion(municion);
 	}	
+	public List<Municion> devolverMuniciones(){
+		return this.contenido.devolverMuniciones();
+	}
+	
 	public int[] id(){
 		return this.id.id();
 	}
