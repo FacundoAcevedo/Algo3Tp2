@@ -1,7 +1,6 @@
 package tablero;
 
 import municiones.Municion;
-import naves.Nave;
 import naves.SeccionDeNave;
 
 import java.util.LinkedList;
@@ -11,13 +10,17 @@ public class ContenidoCasillero {
 	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
 	protected List<Municion> coleccionMuniciones= new LinkedList<Municion>();
 	
-	public void ponerNave(Nave nave) {
-		// TODO Auto-generated method stub
+	public void ponerSeccionDeNave(SeccionDeNave seccionDeNave) {
+		if (!this.coleccionDeSeccionesDeNave.contains(seccionDeNave)){
+			this.coleccionDeSeccionesDeNave.add(seccionDeNave);
+		}
 		
 	}
 
 	public void ponerMunicion(Municion municion) {
-		// TODO Auto-generated method stub
+		if (!this.coleccionMuniciones.contains(municion)){
+			this.coleccionMuniciones.add(municion);
+		}		
 		
 	}
 
