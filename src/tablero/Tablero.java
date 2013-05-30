@@ -20,6 +20,10 @@ public class Tablero {
 		
 	}
 	
+	public boolean estaVacio (){
+		return coleccionCasilleros.isEmpty();
+	}
+	
 	
 
 }
