@@ -1,5 +1,12 @@
 package tablero;
 import java.util.Hashtable;
+import java.util.Iterator;
+
+import naves.Nave;
+import naves.SeccionDeNave;
+import tablero.Casillero;
+import excepciones.ErrorIdCasilleroInvalido;
+
 
 public class Tablero {
 	private Hashtable<int[], Casillero> coleccionCasilleros;
@@ -24,6 +31,28 @@ public class Tablero {
 		return coleccionCasilleros.isEmpty();
 	}
 	
-	
+	public void ubicarProaDeNave(Nave unaNave, Casillero unCasillero){
+		/* con el casillero de la proa (parte de adelante) y con la direccion que tiene
+		 la nave podemos saber que casilleros va a ocupar. Si no entra supongo que
+		 habría que levantar una excepcion, o redefinir la firma de la funcion a bool..
+		*/
+		
+		
+		 int[] idPopa = unCasillero.id();
+		 try{
+		 	IdCasillero.validarId(idPopa);
+		 }
+		 catch (ErrorIdCasilleroInvalido e){
+		 	return; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
+		 }
+		
+		
+		Casillero casilleroActual = unCasillero;
+		//itera las secciones de la nave.
+		for(Object unaSeccionDeNave : unaNave){ //no se porque tira error con SeccionesDeNave en vez de object 
+			casilleroActual.ponerSeccionDeNave((SeccionDeNave)unaSeccionDeNave);
+			//casilleroActual = siguiente casillero
+		}
+	}
 
 }
