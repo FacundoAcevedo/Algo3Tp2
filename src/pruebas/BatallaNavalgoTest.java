@@ -18,7 +18,8 @@ public class BatallaNavalgoTest {
 	@Test
 	public void testCrear() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertTrue(batallaNavalgo.puntosDelJugador() == 10000); 
+		assertTrue(batallaNavalgo.puntosDelJugador() == 10000);
+		assertTrue(batallaNavalgo.tablero().estaVacio());
 	}
 	
 	@Test
@@ -65,4 +66,20 @@ public class BatallaNavalgoTest {
 		batallaNavalgo.jugadorDispara(mina,casillero);
 		assertTrue (batallaNavalgo.puntosDelJugador() == 9865);
 	}
+	
+	@Test
+	public void testDisparar(){
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		DisparoConvencional disparo = new DisparoConvencional();
+		MinaSubmarinaTripleConRetardo minatriple = new MinaSubmarinaTripleConRetardo();
+		MinaSubmarinaDobleConRetardo minadoble = new MinaSubmarinaDobleConRetardo();
+		Casillero unCasillero = new Casillero(1,1);
+		Casillero otroCasillero = new Casillero(0,0);
+		batallaNavalgo.jugadorDispara(disparo,unCasillero);
+		batallaNavalgo.jugadorDispara(minadoble,unCasillero);
+		batallaNavalgo.jugadorDispara(minatriple,otroCasillero);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9545);
+	}
+	
+
 }
