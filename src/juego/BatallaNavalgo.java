@@ -29,5 +29,9 @@ public class BatallaNavalgo {
 	public void jugadorDispara(Municion municion, Casillero casillero){
 		
 	}
+	
+	public int navesDestruidas(){
+		return 0;
+	}
 }
 
