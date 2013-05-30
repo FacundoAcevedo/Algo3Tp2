@@ -1,6 +1,5 @@
 package tablero;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import naves.Nave;
 import naves.SeccionDeNave;
@@ -32,9 +31,10 @@ public class Tablero {
 	}
 	
 	public void ubicarProaDeNave(Nave unaNave, Casillero unCasillero){
-		/* con el casillero de la proa (parte de adelante) y con la direccion que tiene
-		 la nave podemos saber que casilleros va a ocupar. Si no entra supongo que
-		 habría que levantar una excepcion, o redefinir la firma de la funcion a bool..
+		/* con el casillero de la proa (parte de adelante) y con la direccion
+		 que tiene la nave podemos saber que casilleros va a ocupar.
+		 Si no entra supongo que habría que levantar una excepcion,
+		 o redefinir la firma de la funcion a bool..
 		*/
 		
 		
