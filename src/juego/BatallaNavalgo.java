@@ -14,6 +14,18 @@ public class BatallaNavalgo {
 		this.tablero = new Tablero();
 	}
 	
+	public void partida(){
+		while( ! this.juegoTerminado() ){
+			//juega el jugador
+			this.finDeTurno();
+		}
+	}
+	
+	public boolean juegoTerminado() {
+		//si quedan barcos -> return false
+		return true;
+	}
+
 	public Jugador jugador(){
 		return this.jugador;
 	}
@@ -26,8 +38,14 @@ public class BatallaNavalgo {
 		return this.jugador.puntaje().puntos();
 	}
 	
+	public void finDeTurno(){
+		this.jugador.descontarPuntos(10);
+	}
+	
 	public void jugadorDispara(Municion municion, Casillero casillero){
+		//FALTA IMPLEMENTAR EL DISPARO EN SI
 		
+		this.jugador.descontarPuntos(municion.costo());
 	}
 	
 	public int navesDestruidas(){
