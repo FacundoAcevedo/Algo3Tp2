@@ -10,4 +10,9 @@ public class Jugador {
 	public Puntaje puntaje(){
 		return this.puntaje;
 	}
+
+	public void descontarPuntos(int puntosPerdidos) {
+		puntaje.descontarPuntos(puntosPerdidos);
+	}
+	
 }

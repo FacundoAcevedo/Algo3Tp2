@@ -1,13 +1,13 @@
 package municiones;
 
 public class Municion {
-	private int costo;
+	private int miCosto;
 	
 	public Municion(int unCosto){
-		costo = unCosto;
+		miCosto = unCosto;
 	}
 	
 	public int costo(){
-		return costo;
+		return miCosto;
 	}
 }
