@@ -2,10 +2,12 @@ package naves;
 
 
 import municiones.Municion;
+
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Nave {
+public class Nave implements Iterable{
 	protected int largo;
 	protected Direccion direccion;
 	protected EstadoDeSalud estado;
@@ -85,6 +87,34 @@ public class Nave {
 	
 	public void invertirSentido(){
 		this.direccion.invertirSentido();
+	}
+	
+	public SeccionDeNave popa(){
+		return secciones.get(0);
+	}
+	
+	@Override
+	public Iterator<SeccionDeNave> iterator() {
+		Iterator<SeccionDeNave> iterador = new Iterator<SeccionDeNave>(){
+			
+			private Iterator<SeccionDeNave> iteradorDeSecciones = secciones.iterator();
+			
+			@Override
+			public boolean hasNext(){
+				return iteradorDeSecciones.hasNext();
+			}
+			
+			@Override
+			public SeccionDeNave next(){
+				return iteradorDeSecciones.next(); 
+			}
+			
+			@Override
+			public void remove(){
+				//no hace nada pero me obliga a definirlo.
+			}
+		};
+		return iterador;
 	}
 	
 
