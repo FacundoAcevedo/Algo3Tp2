@@ -18,6 +18,12 @@ public class TableroTest {
 	}
 	
 	@Test
+	public void testSeCreaVacio() {
+		Tablero tablero = new Tablero();
+        assertTrue(tablero.estaVacio());
+	}
+	
+	@Test
 	public void testPedirCasilleroValido() {
 		Tablero tablero = new Tablero();
 		int [] id = {0,0};
