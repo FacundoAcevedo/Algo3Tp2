@@ -89,7 +89,7 @@ public class Nave implements Iterable{
 		this.direccion.invertirSentido();
 	}
 	
-	public SeccionDeNave popa(){
+	public SeccionDeNave proa(){
 		return secciones.get(0);
 	}
 	

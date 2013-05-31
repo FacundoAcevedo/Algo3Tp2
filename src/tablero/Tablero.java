@@ -38,9 +38,9 @@ public class Tablero {
 		*/
 		
 		
-		 int[] idPopa = unCasillero.id();
+		 int[] idProa = unCasillero.id();
 		 try{
-		 	IdCasillero.validarId(idPopa);
+		 	IdCasillero.validarId(idProa);
 		 }
 		 catch (ErrorIdCasilleroInvalido e){
 		 	return; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
