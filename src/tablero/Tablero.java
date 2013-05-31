@@ -9,9 +9,19 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero {
 	private Hashtable<int[], Casillero> coleccionCasilleros;
+	private List<Nave> naves;
 	
 	public Tablero (){
 		this.coleccionCasilleros = new Hashtable<>();
+		this.naves = new LinkedList<Nave>();
+		
+		this.naves.add(new Lancha());
+		this.naves.add(new Lancha());
+		this.naves.add(new Destructor());
+		this.naves.add(new Destructor());
+		this.naves.add(new Buque());
+		this.naves.add(new PortaAviones());
+		this.naves.add(new RompeHielos());
 	}
 	
 	public Casillero obtenerCasillero(int[] id){
@@ -55,4 +65,20 @@ public class Tablero {
 		}
 	}
 
+	public int navesDestruidas(){
+		
+		int navesDestruidas = 0;
+		
+		for(i=0,i<7,i++){
+			//habria que hacer la lista de naves iterable
+			
+			if (this.naves.get(i).porcentajeDeVida() == 0){
+				navesDestruidas = navesDestruidas++;
+			}
+		}
+		
+		return navesDestruidas;
+		
+	}
+	
 }
