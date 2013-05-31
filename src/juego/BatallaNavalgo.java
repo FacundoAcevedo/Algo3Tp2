@@ -22,8 +22,11 @@ public class BatallaNavalgo {
 	}
 	
 	public boolean juegoTerminado() {
-		//si quedan barcos -> return false
-		return true;
+		if (this.navesDestruidas() == 7 ){
+			return true
+		}else{
+			return false;
+		}
 	}
 
 	public Jugador jugador(){
@@ -49,7 +52,8 @@ public class BatallaNavalgo {
 	}
 	
 	public int navesDestruidas(){
-		return 0;
+		return this.tablero.navesDestruidas();
 	}
+	
 }
 
