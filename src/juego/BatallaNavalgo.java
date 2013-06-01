@@ -23,7 +23,7 @@ public class BatallaNavalgo {
 	
 	public boolean juegoTerminado() {
 		if (this.navesDestruidas() == 7 ){
-			return true
+			return true;
 		}else{
 			return false;
 		}

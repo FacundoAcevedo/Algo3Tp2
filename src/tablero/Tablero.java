@@ -1,7 +1,13 @@
 package tablero;
 import java.util.Hashtable;
+import java.util.LinkedList;
 
+import naves.Buque;
+import naves.Destructor;
+import naves.Lancha;
 import naves.Nave;
+import naves.PortaAviones;
+import naves.RompeHielos;
 import naves.SeccionDeNave;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
@@ -9,19 +15,24 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero {
 	private Hashtable<int[], Casillero> coleccionCasilleros;
-	private List<Nave> naves;
+	private LinkedList<Nave> naves;
 	
 	public Tablero (){
 		this.coleccionCasilleros = new Hashtable<>();
 		this.naves = new LinkedList<Nave>();
 		
-		this.naves.add(new Lancha());
-		this.naves.add(new Lancha());
-		this.naves.add(new Destructor());
-		this.naves.add(new Destructor());
-		this.naves.add(new Buque());
-		this.naves.add(new PortaAviones());
-		this.naves.add(new RompeHielos());
+		/* habria que ver como genera las direcciones
+		   aleatorias para agregar las naves en el 
+		   tablero
+		*/
+		
+		this.naves.add(new Lancha(null));
+		this.naves.add(new Lancha(null));
+		this.naves.add(new Destructor(null));
+		this.naves.add(new Destructor(null));
+		this.naves.add(new Buque(null));
+		this.naves.add(new PortaAviones(null));
+		this.naves.add(new RompeHielos(null));
 	}
 	
 	public Casillero obtenerCasillero(int[] id){
@@ -69,10 +80,10 @@ public class Tablero {
 		
 		int navesDestruidas = 0;
 		
-		for(i=0,i<7,i++){
+		for(int i=0; i<7; i++){
 			//habria que hacer la lista de naves iterable
 			
-			if (this.naves.get(i).porcentajeDeVida() == 0){
+			if (this.naves.get(i).porcentajeVida() == 0){
 				navesDestruidas = navesDestruidas++;
 			}
 		}
