@@ -1,9 +1,11 @@
 package tablero;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import naves.Buque;
 import naves.Destructor;
+import naves.Direccion;
 import naves.Lancha;
 import naves.Nave;
 import naves.PortaAviones;
@@ -13,7 +15,7 @@ import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
 
-public class Tablero {
+public class Tablero implements Iterable{
 	private Hashtable<int[], Casillero> coleccionCasilleros;
 	private LinkedList<Nave> naves;
 	
@@ -21,18 +23,51 @@ public class Tablero {
 		this.coleccionCasilleros = new Hashtable<>();
 		this.naves = new LinkedList<Nave>();
 		
-		/* habria que ver como genera las direcciones
-		   aleatorias para agregar las naves en el 
-		   tablero
-		*/
+		Nave nave;
+		Direccion direccion = new Direccion(null);
 		
-		this.naves.add(new Lancha(null));
-		this.naves.add(new Lancha(null));
-		this.naves.add(new Destructor(null));
-		this.naves.add(new Destructor(null));
-		this.naves.add(new Buque(null));
-		this.naves.add(new PortaAviones(null));
-		this.naves.add(new RompeHielos(null));
+		direccion.random();
+		nave = new Lancha(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new Lancha(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new Destructor(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new Destructor(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new Buque(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new PortaAviones(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+		direccion.random();
+		nave = new RompeHielos(direccion);
+		this.posicionarNaveEnTablero(nave);
+		this.naves.add(nave);
+
+	}
+	
+	/*Hay que ver como situa el tablero una nave
+	  en si mismo.
+	 */
+	public void  posicionarNaveEnTablero(Nave n){
+		
 	}
 	
 	public Casillero obtenerCasillero(int[] id){
@@ -79,17 +114,50 @@ public class Tablero {
 	public int navesDestruidas(){
 		
 		int navesDestruidas = 0;
+		Nave nave;
+		Iterator<Nave> iteradorDeNaves = naves.iterator();
 		
-		for(int i=0; i<7; i++){
-			//habria que hacer la lista de naves iterable
+		if (iteradorDeNaves.hasNext()){
 			
-			if (this.naves.get(i).porcentajeVida() == 0){
+			nave = iteradorDeNaves.next();
+			
+			if (nave.porcentajeVida() == 0){
 				navesDestruidas = navesDestruidas++;
 			}
 		}
 		
 		return navesDestruidas;
 		
+	}
+	
+	
+	/*Mismo iterador que usa la clase Nave con sus secciones
+	  pero para las naves.
+	  Hay que chequear la implementacion, tanto del iterator,
+	  como de navesDestruidas
+	*/
+	@Override
+	public Iterator<Nave> iterator() {
+		Iterator<Nave> iterador = new Iterator<Nave>(){
+			
+			private Iterator<Nave> iteradorDeNaves = naves.iterator();
+			
+			@Override
+			public boolean hasNext(){
+				return iteradorDeNaves.hasNext();
+			}
+			
+			@Override
+			public Nave next(){
+				return iteradorDeNaves.next(); 
+			}
+			
+			@Override
+			public void remove(){
+				//no hace nada pero me obliga a definirlo.
+			}
+		};
+		return iterador;
 	}
 	
 }
