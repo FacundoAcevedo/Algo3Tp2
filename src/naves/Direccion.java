@@ -53,4 +53,8 @@ public class Direccion {
 			return;
 		}
 	}
+	public void random() {
+		this.miSentido = Sentido.values()[(int) (Math.random() * 8)];
+	}
+	
 }
