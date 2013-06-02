@@ -11,6 +11,7 @@ import naves.Nave;
 import naves.PortaAviones;
 import naves.RompeHielos;
 import naves.SeccionDeNave;
+import naves.Sentido;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
@@ -66,19 +67,41 @@ public class Tablero implements Iterable{
 	/*Hay que ver como situa el tablero una nave
 	  en si mismo.
 	 */
+	@SuppressWarnings("null")
 	public void  posicionarNaveEnTablero(Nave n){
+		
+		Casillero unCasillero;
+		int[] id = null;
+		
+		do{
+			id[0] = (int) Math.random() * 10;
+			id[1] = (int) Math.random() * 10;
+			
+			unCasillero = coleccionCasilleros.get(id);
+		}while( this.ubicarProaDeNave(n, unCasillero) );
+		
+		Iterator<SeccionDeNave> iteradorDeSecciones = n.secciones().iterator();
+		iteradorDeSecciones.next();
+		while (iteradorDeSecciones.hasNext()){
+			id = this.proximoCasillero(unCasillero, n.direccion());
+			unCasillero = coleccionCasilleros.get(id);
+			unCasillero.ponerSeccionDeNave(iteradorDeSecciones.next());
+		}
+		
 		
 	}
 	
 	public Casillero obtenerCasillero(int[] id){
 		IdCasillero.validarId(id);
+		
 		if ( this.coleccionCasilleros.contains(id) ){
 		return this.coleccionCasilleros.get(id);
 		}
+		
 		Casillero casillero = new Casillero(id);
 		this.coleccionCasilleros.put(id, casillero);
-		return casillero;
 		
+		return casillero;
 		
 	}
 	
@@ -86,7 +109,7 @@ public class Tablero implements Iterable{
 		return coleccionCasilleros.isEmpty();
 	}
 	
-	public void ubicarProaDeNave(Nave unaNave, Casillero unCasillero){
+	public boolean ubicarProaDeNave(Nave unaNave, Casillero unCasillero){
 		/* con el casillero de la proa (parte de adelante) y con la direccion
 		 que tiene la nave podemos saber que casilleros va a ocupar.
 		 Si no entra supongo que habría que levantar una excepcion,
@@ -99,7 +122,7 @@ public class Tablero implements Iterable{
 		 	IdCasillero.validarId(idProa);
 		 }
 		 catch (ErrorIdCasilleroInvalido e){
-		 	return; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
+		 	return false; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
 		 }
 		
 		
@@ -109,6 +132,7 @@ public class Tablero implements Iterable{
 			casilleroActual.ponerSeccionDeNave((SeccionDeNave)unaSeccionDeNave);
 			//casilleroActual = siguiente casillero
 		}
+		return true;
 	}
 
 	public int navesDestruidas(){
@@ -130,6 +154,47 @@ public class Tablero implements Iterable{
 		
 	}
 	
+	/* Sirve para obtener el casillero proximo en la direccion 
+	 */
+	@SuppressWarnings("null")
+	public int[] proximoCasillero(Casillero c, Sentido s){
+		int[] nuevoId = null; //nuevoId no sobrevive fuera del if. CORREGIR!!
+		
+		if (s == Sentido.NOROESTE){
+			nuevoId[0] = c.id()[0] - 1;
+			nuevoId[1] = c.id()[1] - 1;
+		}
+		if (s == Sentido.NORTE){
+			nuevoId[0] = c.id()[0];
+			nuevoId[1] = c.id()[1] - 1;
+		}
+		if (s == Sentido.NORESTE){
+			nuevoId[0] = c.id()[0] + 1;
+			nuevoId[1] = c.id()[1] - 1;
+		}
+		if (s == Sentido.ESTE){
+			nuevoId[0] = c.id()[0] + 1;
+			nuevoId[1] = c.id()[1];
+		}
+		if (s == Sentido.SUDESTE){
+			nuevoId[0] = c.id()[0] + 1;
+			nuevoId[1] = c.id()[1] + 1;
+		}
+		if (s == Sentido.SUR){
+			nuevoId[0] = c.id()[0];
+			nuevoId[1] = c.id()[1] + 1;
+		}
+		if (s == Sentido.SUDOESTE){
+			nuevoId[0] = c.id()[0] - 1;
+			nuevoId[1] = c.id()[1] + 1;
+		}
+		if (s == Sentido.OESTE){
+			nuevoId[0] = c.id()[0] - 1;
+			nuevoId[1] = c.id()[1];
+		}
+		
+		return nuevoId;
+	}
 	
 	/*Mismo iterador que usa la clase Nave con sus secciones
 	  pero para las naves.
