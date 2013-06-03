@@ -6,8 +6,8 @@ import tablero.Tablero;
 
 
 public class BatallaNavalgo {
-	protected Jugador jugador;
-	protected Tablero tablero;
+	private Jugador jugador;
+	private Tablero tablero;
 	
 	public BatallaNavalgo(){
 		this.jugador = new Jugador();
@@ -37,14 +37,22 @@ public class BatallaNavalgo {
 		return this.jugador.puntaje().puntos();
 	}
 	
-	public void finDeTurno(){
-		this.jugador.descontarPuntos(10);
+	private void avanzarTurno(){
+		//Este método debería revisar el contenido de cada uno de los casilleros, y en los que
+		//haya alguna munición con retardo = 0, debería accionarlas. Es decir, fijarse si en ese 
+		//mismo casillero hay una parte de nave, y si la hay, atacarla. Luego borrar la munición 
+		//del casillero. En los casilleros con municiones con retardo != 0, debería hacerce
+		//retardo - = 1. 
 	}
 	
+	private void finDeTurno(){
+		this.jugador.descontarPuntos(10);
+	}
+
 	public void jugadorDispara(Municion municion, Casillero casillero){
-		//FALTA IMPLEMENTAR EL DISPARO EN SI
-		
-		this.jugador.descontarPuntos(municion.costo());
+		this.jugador.disparar(municion, casillero);
+		this.avanzarTurno();
+		this.finDeTurno();
 	}
 	
 	public int navesDestruidas(){
