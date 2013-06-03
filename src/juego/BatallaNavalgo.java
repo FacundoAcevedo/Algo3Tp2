@@ -16,9 +16,16 @@ public class BatallaNavalgo {
 	
 	public void partida(){
 		while( ! this.juegoTerminado() ){
-			//juega el jugador
-			this.finDeTurno();
+			this.ronda();
 		}
+	}
+	
+	public void ronda(){
+		//juega el jugador
+		
+		//this.jugadorDispara(municion, casillero);
+		this.avanzarTurno();
+		this.finDeTurno();
 	}
 	
 	public boolean juegoTerminado() {
@@ -51,8 +58,6 @@ public class BatallaNavalgo {
 
 	public void jugadorDispara(Municion municion, Casillero casillero){
 		this.jugador.disparar(municion, casillero);
-		this.avanzarTurno();
-		this.finDeTurno();
 	}
 	
 	public int navesDestruidas(){
