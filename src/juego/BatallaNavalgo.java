@@ -22,11 +22,7 @@ public class BatallaNavalgo {
 	}
 	
 	public boolean juegoTerminado() {
-		if (this.navesDestruidas() == 7 ){
-			return true;
-		}else{
-			return false;
-		}
+		return ( this.navesDestruidas() == this.cantidadTotalNaves() );
 	}
 
 	public Jugador jugador(){
@@ -53,6 +49,11 @@ public class BatallaNavalgo {
 	
 	public int navesDestruidas(){
 		return this.tablero.navesDestruidas();
+	}
+	
+	/* Cantidad de naves en el tablero, sin importar estado. */
+	public int cantidadTotalNaves(){
+		return this.tablero.cantidadTotalNaves();
 	}
 	
 }
