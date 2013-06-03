@@ -18,9 +18,20 @@ public class BatallaNavalgoTest {
 	@Test
 	public void testCrear() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertTrue(batallaNavalgo.puntosDelJugador() == 10000);
-		assertTrue(batallaNavalgo.tablero().estaVacio());
+		assertTrue(batallaNavalgo != null);
 	}
+	
+	@Test
+	public void testJugadorComienzaConPuntajeCorrecto() {
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		assertTrue(batallaNavalgo.puntosDelJugador() == 10000);
+	}
+	
+	@Test
+	public void testTableroNoSeCreaVacio() {
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		assertFalse(batallaNavalgo.tablero().estaVacio());
+	} 
 	
 	@Test
 	public void testDispararConvencional(){
