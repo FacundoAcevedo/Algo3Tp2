@@ -71,13 +71,13 @@ public class Tablero implements Iterable{
 	public void  posicionarNaveEnTablero(Nave n){
 		
 		Casillero unCasillero;
-		int[] id = null;
+		int[] id = new int[2];
 		
 		do{
 			id[0] = (int) Math.random() * 10;
 			id[1] = (int) Math.random() * 10;
 			
-			unCasillero = coleccionCasilleros.get(id);
+			unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vacía.
 		}while( this.ubicarProaDeNave(n, unCasillero) );
 		
 		Iterator<SeccionDeNave> iteradorDeSecciones = n.secciones().iterator();
@@ -154,11 +154,17 @@ public class Tablero implements Iterable{
 		
 	}
 	
+	/* Cantidad de naves en el tablero, sin importar estado. */
+	public int cantidadTotalNaves(){
+		return naves.size();
+	}
+	
 	/* Sirve para obtener el casillero proximo en la direccion 
 	 */
-	@SuppressWarnings("null")
 	public int[] proximoCasillero(Casillero c, Sentido s){
-		int[] nuevoId = null; //nuevoId no sobrevive fuera del if. CORREGIR!!
+		int[] nuevoId = new int[2]; //nuevoId no sobrevive fuera del if. CORREGIR!!
+								// "Corregido": Creo que es un problema de como estaba declarado
+								// Hay que revisar que sea solo eso.
 		
 		if (s == Sentido.NOROESTE){
 			nuevoId[0] = c.id()[0] - 1;
