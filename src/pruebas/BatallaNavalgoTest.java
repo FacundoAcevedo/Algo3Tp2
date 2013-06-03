@@ -28,7 +28,7 @@ public class BatallaNavalgoTest {
 		DisparoConvencional disparo = new DisparoConvencional();
 		Casillero casillero = new Casillero(0,0);
 		batallaNavalgo.jugadorDispara(disparo,casillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9800);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9790);
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class BatallaNavalgoTest {
 		MinaSubmarinaPorContacto mina = new MinaSubmarinaPorContacto();
 		Casillero casillero = new Casillero(0,0);
 		batallaNavalgo.jugadorDispara(mina,casillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9850);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9840);
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class BatallaNavalgoTest {
 		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
 		Casillero casillero = new Casillero(0,0);
 		batallaNavalgo.jugadorDispara(mina,casillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9950);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9940);
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class BatallaNavalgoTest {
 		MinaSubmarinaDobleConRetardo mina = new MinaSubmarinaDobleConRetardo();
 		Casillero casillero = new Casillero(0,0);
 		batallaNavalgo.jugadorDispara(mina,casillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9900);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9890);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class BatallaNavalgoTest {
 		MinaSubmarinaTripleConRetardo mina = new MinaSubmarinaTripleConRetardo();
 		Casillero casillero = new Casillero(0,0);
 		batallaNavalgo.jugadorDispara(mina,casillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9875);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9865);
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class BatallaNavalgoTest {
 		batallaNavalgo.jugadorDispara(disparo,unCasillero);
 		batallaNavalgo.jugadorDispara(minadoble,unCasillero);
 		batallaNavalgo.jugadorDispara(minatriple,otroCasillero);
-		assertTrue (batallaNavalgo.puntosDelJugador() == 9575);
+		assertTrue (batallaNavalgo.puntosDelJugador() == 9545);
 	}
 	
 
