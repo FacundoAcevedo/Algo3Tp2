@@ -244,31 +244,33 @@ public class Tablero implements Iterable{
 		this.casillerosConMunicion.add(casillero.id());
 	}
 	
-	private Hashtable<int[], Casillero> casillerosConMunicionesSinRetardo(){
-		/*Todavía no entiendo cómo crear hashs y listas. ah*/
-		Hashtable <int[], Casillero> casilleros;
-		casilleros = new Hashtable<>();
-		List<Municion> listaMuniciones = new LinkedList<Municion>();
+	private List<Casillero> casillerosConMunicionesSinRetardo(){
+		//Hashtable <int[], Casillero> casilleros;
+		//casilleros = new Hashtable<>();
+		List<Casillero> casilleros = new LinkedList<Casillero>();
 		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); //devolverMunciones().size();
 		/*Recorro la lista de casilleros con municiones*/
 		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
 			Casillero casillero = this.coleccionCasilleros.get (casilleros.get(i));
 			
 			/*Miro municiones que hay en cada casillero*/
-			for (int x = 0; x < cantidadDeCasillerosConMunicion; x++){
+			int cantidadDeMunicionesEnCasillero = casillero.devolverMuniciones().size();
+			for (int x = 0; x < cantidadDeMunicionesEnCasillero; x++){
 				/*Me fijo si tienen retardo = 0 y agrego al Hashtable*/
-				if ( casilleros.get(x).devolverMunciones().retardo() = 0 ){
-					casilleros.add(casilleros.devolverMunciones().get(x));
+				if ( casillero.devolverMuniciones().get(x).retardo() == 0 ){
+					casilleros.add(casillero); //Aunque si tiene dos municiones, una ret != 0 y otra ret= 0, la agrega igual. hay qe verificar después que solo se accionen las ret=0
 				}
 			}
 			
 		}
 		
+		return casilleros;
 	}
 	
 	public void actualizarTablero(){
 		/*Este sería un hash con las municiones con retardo = 0*/
-		Hashtable<int[], Casillero> Casilleros = this.casillerosConMunicionesSinRetardo();
+		List<Casillero> casilleros;
+		casilleros = this.casillerosConMunicionesSinRetardo();
 		/*Acá debería accionarlas, es decir, fijarse si en ese casillero hay una parte de nave y dañarla.
 		 * Luego borrar la municion del casillero.*/
 		
