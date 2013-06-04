@@ -72,4 +72,15 @@ public class Casillero {
 	static public void validarId(int[] id) throws ErrorIdCasilleroInvalido {
 		Casillero.validarId(id[0], id[1]);
 	}
+	
+	public void efectuarImpacto(int indiceMunicion){
+		/*Si hay naves*/
+		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
+			
+			int cantidadDeSeccionesDeNave = this.coleccionDeSeccionesDeNave.size();
+			for (int i = 0; i < cantidadDeSeccionesDeNave; i++){
+				(this.coleccionDeSeccionesDeNave.get(i)).recibirImpacto(coleccionMuniciones.get(indiceMunicion));
+			}
+		}
+	}
 }
