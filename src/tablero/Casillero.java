@@ -11,7 +11,6 @@ import municiones.Municion;
 public class Casillero {
 	protected int x, y;
 
-
 	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
 	protected List<Municion> coleccionMuniciones = new LinkedList<Municion>();
 
@@ -71,10 +70,6 @@ public class Casillero {
 	}
 
 	static public void validarId(int[] id) throws ErrorIdCasilleroInvalido {
-		int x = id[0], y = id[1];
-		if (x < 0 || x > 9 || y < 0 || y > 9) {
-			throw new ErrorIdCasilleroInvalido();
-		}
+		Casillero.validarId(id[0], id[1]);
 	}
-
 }
