@@ -2,7 +2,9 @@ package tablero;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
+import municiones.Municion;
 import naves.Buque;
 import naves.Destructor;
 import naves.Direccion;
@@ -93,9 +95,7 @@ public class Tablero implements Iterable{
 		
 	}
 	
-	public Casillero obtenerCasillero(int[] id){
-		IdCasillero.validarId(id);
-		
+	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido{
 		if ( this.coleccionCasilleros.contains(id) ){
 		return this.coleccionCasilleros.get(id);
 		}
@@ -121,18 +121,25 @@ public class Tablero implements Iterable{
 		
 		 int[] idProa = unCasillero.id();
 		 try{
-		 	IdCasillero.validarId(idProa);
+		 	Casillero.validarId(idProa);
 		 }
 		 catch (ErrorIdCasilleroInvalido e){
 		 	return false; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
 		 }
 		
-		
 		Casillero casilleroActual = unCasillero;
+		
 		//itera las secciones de la nave.
-		for(Object unaSeccionDeNave : unaNave){ //no se porque tira error con SeccionesDeNave en vez de object 
-			casilleroActual.ponerSeccionDeNave((SeccionDeNave)unaSeccionDeNave);
+		//for(SeccionDeNave unaSeccionDeNave : unaNave){ //no se porque tira error con SeccionesDeNave en vez de object 
+			//casilleroActual.ponerSeccionDeNave((SeccionDeNave)unaSeccionDeNave);
 			//casilleroActual = siguiente casillero
+		//}
+		
+		Iterator<SeccionDeNave> iteradorDeSeccionesDeNave= unaNave.iterator();
+		SeccionDeNave unaSeccionDeNave;
+		while(iteradorDeSeccionesDeNave.hasNext()){
+			unaSeccionDeNave = iteradorDeSeccionesDeNave.next();
+			casilleroActual.ponerSeccionDeNave(unaSeccionDeNave);			
 		}
 		return true;
 	}
@@ -239,18 +246,18 @@ public class Tablero implements Iterable{
 	
 	private Hashtable<int[], Casillero> casillerosConMunicionesSinRetardo(){
 		/*Todavía no entiendo cómo crear hashs y listas. ah*/
-		private Hashtable <int[], Casillero> casilleros;
+		Hashtable <int[], Casillero> casilleros;
 		casilleros = new Hashtable<>();
-		private listaMuniciones = new LinkedList<Municion>();
-		
+		List<Municion> listaMuniciones = new LinkedList<Municion>();
+		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); //devolverMunciones().size();
 		/*Recorro la lista de casilleros con municiones*/
-		for (int i = 0; i < this.casillerosConMunicion.size(); i++) {
+		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
 			Casillero casillero = this.coleccionCasilleros.get (casilleros.get(i));
 			
 			/*Miro municiones que hay en cada casillero*/
-			for (int x = 0; x < this.casillerosConMunicion.devolverMunciones().size(); x++){
+			for (int x = 0; x < cantidadDeCasillerosConMunicion; x++){
 				/*Me fijo si tienen retardo = 0 y agrego al Hashtable*/
-				if ( casilleros.devolverMunciones().get(x).retardo() = 0 ){
+				if ( casilleros.get(x).devolverMunciones().retardo() = 0 ){
 					casilleros.add(casilleros.devolverMunciones().get(x));
 				}
 			}
@@ -259,13 +266,18 @@ public class Tablero implements Iterable{
 		
 	}
 	
-	public actualizarTablero(){
+	public void actualizarTablero(){
 		/*Este sería un hash con las municiones con retardo = 0*/
-		private Hashtable<int[], Casillero> Casilleros = this.casillerosConMunicionesSinRetardo();
+		Hashtable<int[], Casillero> Casilleros = this.casillerosConMunicionesSinRetardo();
 		/*Acá debería accionarlas, es decir, fijarse si en ese casillero hay una parte de nave y dañarla.
 		 * Luego borrar la municion del casillero.*/
 		
 		/*Este método debería hacer retardo -= 1 de las municiones que quedan en el tablero. Falta implementar*/
-		this.restarRetardo();
+		this.restarRetardoDeMuniciones();
+	}
+
+	private void restarRetardoDeMuniciones() {
+		// TODO Auto-generated method stub
+		
 	}
 }
