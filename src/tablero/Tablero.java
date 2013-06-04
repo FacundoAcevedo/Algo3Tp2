@@ -244,11 +244,12 @@ public class Tablero implements Iterable{
 		this.casillerosConMunicion.add(casillero.id());
 	}
 	
-	private List<Casillero> casillerosConMunicionesSinRetardo(){
-		//Hashtable <int[], Casillero> casilleros;
-		//casilleros = new Hashtable<>();
-		List<Casillero> casilleros = new LinkedList<Casillero>();
+	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo(){
+		Hashtable <Casillero, Integer> casilleros;
+		casilleros = new Hashtable<>();
+
 		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); //devolverMunciones().size();
+
 		/*Recorro la lista de casilleros con municiones*/
 		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
 			Casillero casillero = this.coleccionCasilleros.get (casilleros.get(i));
@@ -256,9 +257,10 @@ public class Tablero implements Iterable{
 			/*Miro municiones que hay en cada casillero*/
 			int cantidadDeMunicionesEnCasillero = casillero.devolverMuniciones().size();
 			for (int x = 0; x < cantidadDeMunicionesEnCasillero; x++){
+		
 				/*Me fijo si tienen retardo = 0 y agrego al Hashtable*/
 				if ( casillero.devolverMuniciones().get(x).retardo() == 0 ){
-					casilleros.add(casillero); //Aunque si tiene dos municiones, una ret != 0 y otra ret= 0, la agrega igual. hay qe verificar después que solo se accionen las ret=0
+					casilleros.put(casillero, x); //Aunque si tiene dos municiones, una ret != 0 y otra ret= 0, la agrega igual. hay qe verificar después que solo se accionen las ret=0
 				}
 			}
 			
@@ -268,11 +270,10 @@ public class Tablero implements Iterable{
 	}
 	
 	public void actualizarTablero(){
-		/*Este sería un hash con las municiones con retardo = 0*/
-		List<Casillero> casilleros;
+		Hashtable <Casillero, Integer> casilleros;
 		casilleros = this.casillerosConMunicionesSinRetardo();
-		/*Acá debería accionarlas, es decir, fijarse si en ese casillero hay una parte de nave y dañarla.
-		 * Luego borrar la municion del casillero.*/
+		/*Acá debería hacerce para todos los casilleros del hash, casillero.efectuarImpacto(indiceMunicion).
+		 * con indiceMunicion= valor del casillero en el hash.*/
 		
 		/*Este método debería hacer retardo -= 1 de las municiones que quedan en el tablero. Falta implementar*/
 		this.restarRetardoDeMuniciones();
