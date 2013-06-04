@@ -1,51 +1,80 @@
 package tablero;
+
+import java.util.LinkedList;
 import java.util.List;
+
+import excepciones.ErrorIdCasilleroInvalido;
 
 import naves.SeccionDeNave;
 import municiones.Municion;
 
 public class Casillero {
-	IdCasillero id; //¿Lo definimos como IdCasillero pero se implementa como int[]? Hay algo raro
-	ContenidoCasillero contenido;
-	
-	public Casillero(int x, int y){
-		this.id = new	IdCasillero(x, y);
-		this.contenido = new ContenidoCasillero(); 
+	protected int x, y;
+
+
+	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
+	protected List<Municion> coleccionMuniciones = new LinkedList<Municion>();
+
+	public Casillero(int x, int y) throws ErrorIdCasilleroInvalido {
+		Casillero.validarId(x, y);
+		this.x = x;
+		this.y = y;
 	}
-	
-	public Casillero(int [] id){
-		this(id[0],id[1]); 
+
+	public Casillero(int[] id) {
+		this(id[0], id[1]);
 	}
-	
-	// Hay que definir como usar el id
-	public Casillero(IdCasillero id) {
-		this.id = id;
+
+	public void ponerSeccionDeNave(SeccionDeNave seccionDeNave) {
+		if (!this.coleccionDeSeccionesDeNave.contains(seccionDeNave)) {
+			this.coleccionDeSeccionesDeNave.add(seccionDeNave);
+		}
+
 	}
-	
-	public void ponerSeccionDeNave(SeccionDeNave seccionDeNave){
-		this.contenido.ponerSeccionDeNave(seccionDeNave);
+
+	public List<SeccionDeNave> devolverSeccionesDeNave() {
+		return this.coleccionDeSeccionesDeNave;
 	}
-	
-	public List<SeccionDeNave> devolverSeccionesDeNave(){
-		return this.contenido.devolverSeccionesDeNave();
+
+	public void ponerMunicion(Municion municion) {
+		if (!this.coleccionMuniciones.contains(municion)) {
+			this.coleccionMuniciones.add(municion);
+		}
+
 	}
-	
-	public void ponerMunicion(Municion municion){
-		//Deberia verificar que la municion este "activa" 
-		//y ver que impacte...
-		this.contenido.ponerMunicion(municion);
-	}	
-	public List<Municion> devolverMuniciones(){
-		return this.contenido.devolverMuniciones();
+
+	public List<Municion> devolverMuniciones() {
+		return this.coleccionMuniciones;
 	}
-	
-	
-	// ¿No deberia devolver IdCasillero en lugar de int[]?
-	public int[] id(){
-		return this.id.id();
+
+	public int[] id() {
+		int[] duplaPosicion = new int[2];
+		duplaPosicion[0] = this.x;
+		duplaPosicion[1] = this.y;
+		return duplaPosicion;
 	}
-	public	boolean estaVacio(){
-		return contenido.estaVacio();
+
+	public boolean estaVacio() {
+		// Devuelve que esta vacio, si NO HAY secciones de naves NI municiones
+		// en el casillero.
+		if (this.coleccionDeSeccionesDeNave.isEmpty()
+				&& this.coleccionMuniciones.isEmpty())
+			return true;
+		return false;
+	}
+
+	// metodo estatico para validar id
+	static public void validarId(int x, int y) throws ErrorIdCasilleroInvalido {
+		if (x < 0 || x > 9 || y < 0 || y > 9) {
+			throw new ErrorIdCasilleroInvalido();
+		}
+	}
+
+	static public void validarId(int[] id) throws ErrorIdCasilleroInvalido {
+		int x = id[0], y = id[1];
+		if (x < 0 || x > 9 || y < 0 || y > 9) {
+			throw new ErrorIdCasilleroInvalido();
+		}
 	}
 
 }
