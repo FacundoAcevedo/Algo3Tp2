@@ -20,6 +20,7 @@ public class Jugador {
 
 	public void disparar(Municion municion, Casillero casillero){
 		casillero.ponerMunicion(municion);
-		this.descontarPuntos(municion.costo()); //10 es la cantidad de puntos que se pierden por turno. Ver si es mejor definirlo en otro lado.
+		this.descontarPuntos(municion.costo());
+		
 	}
 }
