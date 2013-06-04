@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Nave implements Iterable{
+public class Nave implements Iterable<SeccionDeNave>{
 	protected int largo;
 	protected Direccion direccion;
 	protected EstadoDeSalud estado;
