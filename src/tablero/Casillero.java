@@ -80,6 +80,7 @@ public class Casillero {
 			int cantidadDeSeccionesDeNave = this.coleccionDeSeccionesDeNave.size();
 			for (int i = 0; i < cantidadDeSeccionesDeNave; i++){
 				(this.coleccionDeSeccionesDeNave.get(i)).recibirImpacto(coleccionMuniciones.get(indiceMunicion));
+				/*Acá falta borrar la munición que ya impactó del casillero*/
 			}
 		}
 	}
