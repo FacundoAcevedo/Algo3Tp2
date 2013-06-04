@@ -18,10 +18,12 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero implements Iterable{
 	private Hashtable<int[], Casillero> coleccionCasilleros;
+	private LinkedList<int[]> casillerosConMunicion;
 	private LinkedList<Nave> naves;
 	
 	public Tablero (){
 		this.coleccionCasilleros = new Hashtable<>();
+		this.casillerosConMunicion = new LinkedList<int[]>();
 		this.naves = new LinkedList<Nave>();
 		
 		Nave nave;
@@ -231,4 +233,39 @@ public class Tablero implements Iterable{
 		return iterador;
 	}
 	
+	public void agregarCasilleroConMunicion(Casillero casillero){
+		this.casillerosConMunicion.add(casillero.id());
+	}
+	
+	private Hashtable<int[], Casillero> casillerosConMunicionesSinRetardo(){
+		/*Todavía no entiendo cómo crear hashs y listas. ah*/
+		private Hashtable <int[], Casillero> casilleros;
+		casilleros = new Hashtable<>();
+		private listaMuniciones = new LinkedList<Municion>();
+		
+		/*Recorro la lista de casilleros con municiones*/
+		for (int i = 0; i < this.casillerosConMunicion.size(); i++) {
+			Casillero casillero = this.coleccionCasilleros.get (casilleros.get(i));
+			
+			/*Miro municiones que hay en cada casillero*/
+			for (int x = 0; x < this.casillerosConMunicion.devolverMunciones().size(); x++){
+				/*Me fijo si tienen retardo = 0 y agrego al Hashtable*/
+				if ( casilleros.devolverMunciones().get(x).retardo() = 0 ){
+					casilleros.add(casilleros.devolverMunciones().get(x));
+				}
+			}
+			
+		}
+		
+	}
+	
+	public actualizarTablero(){
+		/*Este sería un hash con las municiones con retardo = 0*/
+		private Hashtable<int[], Casillero> Casilleros = this.casillerosConMunicionesSinRetardo();
+		/*Acá debería accionarlas, es decir, fijarse si en ese casillero hay una parte de nave y dañarla.
+		 * Luego borrar la municion del casillero.*/
+		
+		/*Este método debería hacer retardo -= 1 de las municiones que quedan en el tablero. Falta implementar*/
+		this.restarRetardo();
+	}
 }

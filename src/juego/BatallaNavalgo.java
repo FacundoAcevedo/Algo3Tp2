@@ -45,11 +45,7 @@ public class BatallaNavalgo {
 	}
 	
 	private void avanzarTurno(){
-		//Este método debería revisar el contenido de cada uno de los casilleros, y en los que
-		//haya alguna munición con retardo = 0, debería accionarlas. Es decir, fijarse si en ese 
-		//mismo casillero hay una parte de nave, y si la hay, atacarla. Luego borrar la munición 
-		//del casillero. En los casilleros con municiones con retardo != 0, debería hacerce
-		//retardo - = 1. 
+		this.tablero.actualizarTablero();
 	}
 	
 	private void finDeTurno(){
@@ -58,6 +54,7 @@ public class BatallaNavalgo {
 
 	public void jugadorDispara(Municion municion, Casillero casillero){
 		this.jugador.disparar(municion, casillero);
+		this.tablero.agregarCasilleroConMunicion(casillero);
 	}
 	
 	public int navesDestruidas(){
