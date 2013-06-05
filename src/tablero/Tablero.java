@@ -78,10 +78,10 @@ public class Tablero implements Iterable{
 		int[] id = new int[2];
 		
 		do{
-			id[0] = (int) Math.random() * 10;
-			id[1] = (int) Math.random() * 10;
+			id[0] = (int) (Math.random() * 10);
+			id[1] = (int) (Math.random() * 10);
 			
-			unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vacía.
+			unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vacï¿½a.
 		}while( this.ubicarProaDeNave(n, unCasillero) );
 		
 		Iterator<SeccionDeNave> iteradorDeSecciones = n.secciones().iterator();
@@ -114,7 +114,7 @@ public class Tablero implements Iterable{
 	public boolean ubicarProaDeNave(Nave unaNave, Casillero unCasillero){
 		/* con el casillero de la proa (parte de adelante) y con la direccion
 		 que tiene la nave podemos saber que casilleros va a ocupar.
-		 Si no entra supongo que habría que levantar una excepcion,
+		 Si no entra supongo que habrï¿½a que levantar una excepcion,
 		 o redefinir la firma de la funcion a bool..
 		*/
 		
@@ -260,7 +260,7 @@ public class Tablero implements Iterable{
 		
 				/*Me fijo si tienen retardo = 0 y agrego al Hashtable*/
 				if ( casillero.devolverMuniciones().get(x).retardo() == 0 ){
-					casilleros.put(casillero, x); //Aunque si tiene dos municiones, una ret != 0 y otra ret= 0, la agrega igual. hay qe verificar después que solo se accionen las ret=0
+					casilleros.put(casillero, x); //Aunque si tiene dos municiones, una ret != 0 y otra ret= 0, la agrega igual. hay qe verificar despuï¿½s que solo se accionen las ret=0
 				}
 			}
 			
@@ -272,10 +272,10 @@ public class Tablero implements Iterable{
 	public void actualizarTablero(){
 		Hashtable <Casillero, Integer> casilleros;
 		casilleros = this.casillerosConMunicionesSinRetardo();
-		/*Acá debería hacerce para todos los casilleros del hash, casillero.efectuarImpacto(indiceMunicion).
+		/*Acï¿½ deberï¿½a hacerce para todos los casilleros del hash, casillero.efectuarImpacto(indiceMunicion).
 		 * con indiceMunicion= valor del casillero en el hash.*/
 		
-		/*Este método debería hacer retardo -= 1 de las municiones que quedan en el tablero. Falta implementar*/
+		/*Este mï¿½todo deberï¿½a hacer retardo -= 1 de las municiones que quedan en el tablero. Falta implementar*/
 		this.restarRetardoDeMuniciones();
 	}
 
