@@ -92,5 +92,10 @@ public class BatallaNavalgoTest {
 		assertTrue (batallaNavalgo.puntosDelJugador() == 9575);
 	}
 	
+	@Test
+	public void testCantidadDeNaves(){
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		assertTrue(batallaNavalgo.cantidadTotalNaves() == 7 );
+	}
 
 }
