@@ -81,7 +81,8 @@ public class Tablero implements Iterable{
 			id[0] = (int) (Math.random() * 10);
 			id[1] = (int) (Math.random() * 10);
 			
-			unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vac�a.
+			//unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vac�a.
+			unCasillero = this.obtenerCasillero(id);
 		}while( this.ubicarProaDeNave(n, unCasillero) );
 		
 		Iterator<SeccionDeNave> iteradorDeSecciones = n.secciones().iterator();
