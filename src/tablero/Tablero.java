@@ -1,10 +1,10 @@
 package tablero;
+
 import java.util.Hashtable;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
-import municiones.Municion;
 import naves.Buque;
 import naves.Destructor;
 import naves.Direccion;
@@ -19,12 +19,13 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 
 public class Tablero implements Iterable{
-	private Hashtable<int[], Casillero> coleccionCasilleros;
+	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<int[]> casillerosConMunicion;
 	private LinkedList<Nave> naves;
 	
 	public Tablero (){
 		this.coleccionCasilleros = new Hashtable<>();
+		this.crearCasilleros(coleccionCasilleros);
 		this.casillerosConMunicion = new LinkedList<int[]>();
 		this.naves = new LinkedList<Nave>();
 		
@@ -68,11 +69,22 @@ public class Tablero implements Iterable{
 
 	}
 	
+	private void crearCasilleros(Hashtable<String,Casillero> coleccionCasilleros) {
+
+		for(int x = 0; x < 10; x++){
+			for(int y = 0; y < 10; y++){
+				int[] id = {x,y};
+				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
+			}
+		}
+		
+	}
+
 	/*Hay que ver como situa el tablero una nave
 	  en si mismo.
 	 */
 	@SuppressWarnings("null")
-	public void  posicionarNaveEnTablero(Nave n){
+	public void  posicionarNaveEnTablero(Nave unaNave){
 		
 		Casillero unCasillero;
 		int[] id = new int[2];
@@ -83,14 +95,19 @@ public class Tablero implements Iterable{
 			
 			//unCasillero = coleccionCasilleros.get(id); // REVISAR: no se crean los casilleros, es una coleccion vac�a.
 			unCasillero = this.obtenerCasillero(id);
-		}while( this.ubicarProaDeNave(n, unCasillero) );
+		}while( ! this.ubicarProaDeNave(unaNave, unCasillero) );
 		
-		Iterator<SeccionDeNave> iteradorDeSecciones = n.secciones().iterator();
-		iteradorDeSecciones.next();
+		Iterator<SeccionDeNave> iteradorDeSecciones = unaNave.secciones().iterator();
+		//iteradorDeSecciones.next(); no entiendo que hace esto, estaba bien?
 		while (iteradorDeSecciones.hasNext()){
-			id = this.proximoCasillero(unCasillero, n.direccion());
-			unCasillero = coleccionCasilleros.get(id);
-			unCasillero.ponerSeccionDeNave(iteradorDeSecciones.next());
+			id = this.proximoCasillero(unCasillero, unaNave.direccion());
+			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
+			if( unCasillero == null){
+				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
+				unCasillero = coleccionCasilleros.get(Arrays.toString(id));
+			}
+			SeccionDeNave valor = iteradorDeSecciones.next();
+			unCasillero.ponerSeccionDeNave(valor);
 		}
 		
 		
@@ -98,11 +115,11 @@ public class Tablero implements Iterable{
 	
 	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido{
 		if ( this.coleccionCasilleros.contains(id) ){
-		return this.coleccionCasilleros.get(id);
+		return this.coleccionCasilleros.get(Arrays.toString(id));
 		}
 		
 		Casillero casillero = new Casillero(id);
-		this.coleccionCasilleros.put(id, casillero);
+		this.coleccionCasilleros.put(Arrays.toString(id), casillero);
 		
 		return casillero;
 		
@@ -120,13 +137,9 @@ public class Tablero implements Iterable{
 		*/
 		
 		
-		 int[] idProa = unCasillero.id();
-		 try{
-		 	Casillero.validarId(idProa);
-		 }
-		 catch (ErrorIdCasilleroInvalido e){
-		 	return false; //no se puede poner aca la nave. Aca va return false o throw excepcion	 
-		 }
+		if( ! this.naveEntraEn(unaNave, unCasillero) ){
+			return false;
+		}
 		
 		Casillero casilleroActual = unCasillero;
 		
@@ -142,6 +155,24 @@ public class Tablero implements Iterable{
 			unaSeccionDeNave = iteradorDeSeccionesDeNave.next();
 			casilleroActual.ponerSeccionDeNave(unaSeccionDeNave);			
 		}
+		return true;
+	}
+
+	private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
+		int[] id = new int[2];
+		
+		
+
+		for(int tmp = 0; tmp < unaNave.largo(); tmp++){
+			id = this.proximoCasillero(unCasillero, unaNave.direccion());
+			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
+			try{
+				Casillero.validarId(id);
+			}catch(ErrorIdCasilleroInvalido e){
+				return false;
+			}
+		}
+		
 		return true;
 	}
 
