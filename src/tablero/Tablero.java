@@ -28,42 +28,48 @@ public class Tablero implements Iterable{
 		this.crearCasilleros(coleccionCasilleros);
 		this.casillerosConMunicion = new LinkedList<int[]>();
 		this.naves = new LinkedList<Nave>();
+		//Creo un objeto direccion por cada nave
+		Direccion[] arrayDeDirecciones = null;
+		for (int i =0; i<6; i++){
+			arrayDeDirecciones[i] = new Direccion(null);
+			arrayDeDirecciones[i].random();
+		}
 		
 		Nave nave;
 		Direccion direccion = new Direccion(null);
 		
 		direccion.random();
-		nave = new Lancha(direccion);
+		nave = new Lancha(arrayDeDirecciones[0]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new Lancha(direccion);
+		nave = new Lancha(arrayDeDirecciones[1]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new Destructor(direccion);
+		nave = new Destructor(arrayDeDirecciones[2]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new Destructor(direccion);
+		nave = new Destructor(arrayDeDirecciones[3]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new Buque(direccion);
+		nave = new Buque(arrayDeDirecciones[4]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new PortaAviones(direccion);
+		nave = new PortaAviones(arrayDeDirecciones[5]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
 		direccion.random();
-		nave = new RompeHielos(direccion);
+		nave = new RompeHielos(arrayDeDirecciones[6]);
 		this.posicionarNaveEnTablero(nave);
 		this.naves.add(nave);
 
