@@ -321,4 +321,62 @@ public class Tablero implements Iterable{
 		// TODO Auto-generated method stub
 		
 	}
+	private int[] sumarPatronDeSumaEId(int[] id ,int[] patronDeSuma){
+		int[] total= new int[2];
+		total[0] = id[0] + patronDeSuma[0];
+		total[1] = id[1] + patronDeSuma[1];
+		
+		return total;
+	}
+	private int [] patronDeSumaParaUbicarNave(Direccion direccionNave){
+		//Devuelve un patron para sumarle al idCelda y ubicar las secciones de nave
+		int[] patronSur = {0,-1};
+		int[] patronNorte = {0,1};
+		int[] patronOeste = {-1,0};
+		int[] patronEste = {1,0};
+		int[] patronSudEste = {1,-1};
+		int[] patronNorEste = {1,1};
+		int[] patronSudOeste = {-1,-1};
+		int[] patronNorOeste = {-1,-1};
+		
+		if (direccionNave.sentido() == Sentido.SUR)
+			return patronSur;
+		else if (direccionNave.sentido() == Sentido.NORTE)
+			return patronNorte;
+		else if (direccionNave.sentido() == Sentido.ESTE)
+			return patronEste;
+		else if (direccionNave.sentido() == Sentido.OESTE)
+			return patronOeste;
+		else if (direccionNave.sentido() == Sentido.NORESTE)
+			return patronNorte;
+		else if (direccionNave.sentido() == Sentido.NOROESTE)
+			return  patronNorOeste;
+		else if (direccionNave.sentido() == Sentido.SUDESTE)
+			return  patronSudOeste;
+		else // (direccionNave.sentido() == Sentido.SUDOESTE)
+			return  patronSudOeste;		
+	}
+	private int[] buscarCasilleroParaProa(int largoNave){
+		//Pone el barco en un area segura y devuelve el id
+		boolean idX = false;
+		boolean idY = true;
+		int[] id = new int[2];
+		final int MAX=6, MIN=3;
+		
+		while (idX == false){
+			id[0] = (int) (Math.random() * 10);
+
+			if (id[0]<MAX || id[0]>MIN)
+				idX=true;	
+		}
+
+			id[1] = (int) (Math.random() * 10);
+
+		while (idY == false){
+			id[0] = (int) (Math.random() * 10);
+			if (id[1]<MAX || id[1]>MIN)
+				idX=true;			
+		}
+		return id;
+	}
 }
