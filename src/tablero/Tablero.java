@@ -211,31 +211,31 @@ public class Tablero implements Iterable{
 			nuevoId[0] = c.id()[0] - 1;
 			nuevoId[1] = c.id()[1] - 1;
 		}
-		if (s == Sentido.NORTE){
+		else if (s == Sentido.NORTE){
 			nuevoId[0] = c.id()[0];
 			nuevoId[1] = c.id()[1] - 1;
 		}
-		if (s == Sentido.NORESTE){
+		else  if (s == Sentido.NORESTE){
 			nuevoId[0] = c.id()[0] + 1;
 			nuevoId[1] = c.id()[1] - 1;
 		}
-		if (s == Sentido.ESTE){
+		else  if (s == Sentido.ESTE){
 			nuevoId[0] = c.id()[0] + 1;
 			nuevoId[1] = c.id()[1];
 		}
-		if (s == Sentido.SUDESTE){
+		else if (s == Sentido.SUDESTE){
 			nuevoId[0] = c.id()[0] + 1;
 			nuevoId[1] = c.id()[1] + 1;
 		}
-		if (s == Sentido.SUR){
+		else if (s == Sentido.SUR){
 			nuevoId[0] = c.id()[0];
 			nuevoId[1] = c.id()[1] + 1;
 		}
-		if (s == Sentido.SUDOESTE){
+		else if (s == Sentido.SUDOESTE){
 			nuevoId[0] = c.id()[0] - 1;
 			nuevoId[1] = c.id()[1] + 1;
 		}
-		if (s == Sentido.OESTE){
+		else if (s == Sentido.OESTE){
 			nuevoId[0] = c.id()[0] - 1;
 			nuevoId[1] = c.id()[1];
 		}
