@@ -18,9 +18,9 @@ public class TableroTest {
 	}
 	
 	@Test
-	public void testSeCreaVacio() {
+	public void testNoSeCreaVacio() {
 		Tablero tablero = new Tablero();
-        assertTrue(tablero.estaVacio());
+        assertFalse(tablero.estaVacio());
 	}
 	
 	@Test
