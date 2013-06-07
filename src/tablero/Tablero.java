@@ -34,9 +34,9 @@ public class Tablero implements Iterable {
 	public void posicionarNavesAleatoriamente() {
 		
 		// Creo un objeto direccion por cada nave
-		Direccion[] arrayDeDirecciones = null;
-		Nave[] arrayDeNaves =null;
-		for (int i = 0; i < 6; i++) {
+		Direccion[] arrayDeDirecciones = new Direccion[7];
+		Nave[] arrayDeNaves =new Nave[7];
+		for (int i = 0; i < 7; i++) {
 			arrayDeDirecciones[i] = new Direccion(null);
 			arrayDeDirecciones[i].random();
 		}
@@ -49,7 +49,7 @@ public class Tablero implements Iterable {
 		arrayDeNaves[5] = new PortaAviones(arrayDeDirecciones[5]);
 		arrayDeNaves[6] = new RompeHielos(arrayDeDirecciones[6]);
 		
-		for (int i =0; i<6; i++){
+		for (int i =0; i<7; i++){
 			this.posicionarNaveEnTablero(arrayDeNaves[i]);
 			this.naves.add(arrayDeNaves[i]);
 			
