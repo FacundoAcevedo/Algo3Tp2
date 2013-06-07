@@ -3,6 +3,10 @@ package pruebas;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
+
+import naves.Nave;
+
 import org.junit.Test;
 
 import excepciones.ErrorIdCasilleroInvalido;
@@ -23,10 +27,15 @@ public class TableroTest {
         assertFalse(tablero.estaVacio());
 	}
 	@Test
-	public void testPonerNaves() {
+	public void testPonerNavesAleatoriamente() {
 		Tablero tablero = new Tablero();
         tablero.posicionarNavesAleatoriamente();
         assertTrue(tablero.cantidadTotalNaves() == 7);
+        LinkedList<Nave> naves = tablero.devolverNaves();
+        
+        for(Nave nave : naves){
+        	assertTrue(nave instanceof Nave);
+        }
 	}
 	
 	@Test
