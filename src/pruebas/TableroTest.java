@@ -22,6 +22,12 @@ public class TableroTest {
 		Tablero tablero = new Tablero();
         assertFalse(tablero.estaVacio());
 	}
+	@Test
+	public void testPonerNaves() {
+		Tablero tablero = new Tablero();
+        tablero.posicionarNavesAleatoriamente();
+        assertTrue(tablero.cantidadTotalNaves() == 7);
+	}
 	
 	@Test
 	public void testPedirCasilleroValido() {
