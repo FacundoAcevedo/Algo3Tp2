@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import naves.Buque;
 import naves.Destructor;
 import naves.Direccion;
+import naves.EstadoDeSalud;
 import naves.Lancha;
 import naves.Nave;
 import naves.PortaAviones;
@@ -184,7 +185,21 @@ public class Tablero implements Iterable {
 
 	/* Cantidad de naves en el tablero, sin importar estado. */
 	public int cantidadTotalNaves() {
-		return naves.size();
+		return this.naves.size();
+	}
+	public int cantidadDeNavesActivas(){
+		//Devuelve la cantidad de naves sanas y dañadas
+		int totalNavesActivas =0;
+		for (Nave nave : this.naves){
+			if( nave.estado()== EstadoDeSalud.SANO || nave.estado()== EstadoDeSalud.DANADO)
+				totalNavesActivas +=1;
+		}
+		return totalNavesActivas;
+	}
+	public int cantidadDeNavesDestruidas(){
+		int totalNaves = this.cantidadTotalNaves();
+		int totalNavesActivas = this.cantidadDeNavesActivas();
+		return (totalNaves - totalNavesActivas);
 	}
 
 	/*
