@@ -35,7 +35,7 @@ public class Tablero implements Iterable {
 		
 		// Creo un objeto direccion por cada nave
 		Direccion[] arrayDeDirecciones = new Direccion[7];
-		Nave[] arrayDeNaves =new Nave[7];
+		Nave[] arrayDeNaves = new Nave[7];
 		for (int i = 0; i < 7; i++) {
 			arrayDeDirecciones[i] = new Direccion(null);
 			arrayDeDirecciones[i].random();
@@ -55,6 +55,7 @@ public class Tablero implements Iterable {
 			
 		}
 	}
+	
 	public LinkedList<Nave> devolverNaves(){
 		return this.naves;
 	}
@@ -71,37 +72,46 @@ public class Tablero implements Iterable {
 
 	}
 
-	/*
-	 * Hay que ver como situa el tablero una nave en si mismo.
-	 */
-	@SuppressWarnings("null")
-	public void posicionarNaveEnTablero(Nave unaNave) {
-
-		Casillero unCasillero;
-		int[] id = new int[2];
-
-		do {
-			id[0] = (int) (Math.random() * 10);
-			id[1] = (int) (Math.random() * 10);
-
-			// unCasillero = coleccionCasilleros.get(id); // REVISAR: no se
-			// crean los casilleros, es una coleccion vac�a.
-			unCasillero = this.obtenerCasillero(id);
-		} while (!this.ubicarProaDeNave(unaNave, unCasillero));
-
-		Iterator<SeccionDeNave> iteradorDeSecciones = unaNave.secciones()
-				.iterator();
-		// iteradorDeSecciones.next(); no entiendo que hace esto, estaba bien?
-		while (iteradorDeSecciones.hasNext()) {
-			id = this.proximoCasillero(unCasillero, unaNave.direccion());
-			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
-			if (unCasillero == null) {
-				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
-				unCasillero = coleccionCasilleros.get(Arrays.toString(id));
-			}
-			SeccionDeNave valor = iteradorDeSecciones.next();
-			unCasillero.ponerSeccionDeNave(valor);
+	public void posicionarNaveEnTablero(Nave nave) {
+		
+		int [] posProa = this.buscarCasilleroParaProa(nave.largo());
+		int [] patronDePocicion = this.patronDeSumaParaUbicarNave(nave.direccion());
+		int [] posSeccion = posProa;
+		Casillero casillero;
+		
+		for (SeccionDeNave seccion : nave.secciones()){
+			casillero = coleccionCasilleros.get(Arrays.toString(posProa));
+			casillero.ponerSeccionDeNave(seccion);
+			
+			//Calcula la poiscion de la siguiente seccion.
+			posSeccion = this.sumarPatronDeSumaEId(posSeccion, patronDePocicion);
 		}
+		
+//
+//		Casillero unCasillero;
+//		int[] id = new int[2];
+//
+//		do {
+//			id[0] = (int) (Math.random() * 10);
+//			id[1] = (int) (Math.random() * 10);
+//
+//			// unCasillero = coleccionCasilleros.get(id); // REVISAR: no se
+//			// crean los casilleros, es una coleccion vac�a.
+//			unCasillero = this.obtenerCasillero(id);
+//		} while (!this.ubicarProaDeNave(unaNave, unCasillero));
+//
+//		Iterator<SeccionDeNave> iteradorDeSecciones = unaNave.secciones().iterator();
+//		// iteradorDeSecciones.next(); no entiendo que hace esto, estaba bien?
+//		while (iteradorDeSecciones.hasNext()) {
+//			id = this.proximoCasillero(unCasillero, unaNave.direccion());
+//			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
+//			if (unCasillero == null) {
+//				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
+//				unCasillero = coleccionCasilleros.get(Arrays.toString(id));
+//			}
+//			SeccionDeNave valor = iteradorDeSecciones.next();
+//			unCasillero.ponerSeccionDeNave(valor);
+//		}
 
 	}
 
@@ -337,7 +347,7 @@ public class Tablero implements Iterable {
 		return total;
 	}
 
-	private int[] patronDeSumaParaUbicarNave(Direccion direccionNave) {
+	private int[] patronDeSumaParaUbicarNave(Sentido sentido) {
 		// Devuelve un patron para sumarle al idCelda y ubicar las secciones de
 		// nave
 		int[] patronSur = { 0, -1 };
@@ -349,22 +359,22 @@ public class Tablero implements Iterable {
 		int[] patronSudOeste = { -1, -1 };
 		int[] patronNorOeste = { -1, -1 };
 
-		if (direccionNave.sentido() == Sentido.SUR)
+		if (sentido== Sentido.SUR)
 			return patronSur;
-		else if (direccionNave.sentido() == Sentido.NORTE)
+		else if (sentido== Sentido.NORTE)
 			return patronNorte;
-		else if (direccionNave.sentido() == Sentido.ESTE)
+		else if (sentido== Sentido.ESTE)
 			return patronEste;
-		else if (direccionNave.sentido() == Sentido.OESTE)
+		else if (sentido== Sentido.OESTE)
 			return patronOeste;
-		else if (direccionNave.sentido() == Sentido.NORESTE)
+		else if (sentido== Sentido.NORESTE)
 			return patronNorte;
-		else if (direccionNave.sentido() == Sentido.NOROESTE)
+		else if (sentido== Sentido.NOROESTE)
 			return patronNorOeste;
-		else if (direccionNave.sentido() == Sentido.SUDESTE)
+		else if (sentido== Sentido.SUDESTE)
 			return patronSudOeste;
 		else
-			// (direccionNave.sentido() == Sentido.SUDOESTE)
+			// (sentido== Sentido.SUDOESTE)
 			return patronSudOeste;
 	}
 

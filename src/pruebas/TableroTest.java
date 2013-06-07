@@ -28,6 +28,8 @@ public class TableroTest {
 	}
 	@Test
 	public void testPonerNavesAleatoriamente() {
+		//Se testea la existencia de las naves, y su tipo
+		//no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
         tablero.posicionarNavesAleatoriamente();
         assertTrue(tablero.cantidadTotalNaves() == 7);
