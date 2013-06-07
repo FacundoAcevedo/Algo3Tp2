@@ -55,6 +55,9 @@ public class Tablero implements Iterable {
 			
 		}
 	}
+	public LinkedList<Nave> devolverNaves(){
+		return this.naves;
+	}
 
 	private void crearCasilleros(
 			Hashtable<String, Casillero> coleccionCasilleros) {
