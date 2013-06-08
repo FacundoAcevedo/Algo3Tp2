@@ -93,6 +93,9 @@ public class Casillero {
 		Casillero.validarId(id[0], id[1]);
 	}
 	
+	public void quitarSeccion(SeccionDeNave seccion){
+		this.coleccionDeSeccionesDeNave.remove(seccion);
+	}
 //	public void efectuarImpacto(int indiceMunicion){
 //		/*Si hay naves*/
 //		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
