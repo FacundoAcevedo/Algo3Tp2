@@ -28,9 +28,9 @@ public class BatallaNavalgoTest {
 	}
 	
 	@Test
-	public void testTableroNoSeCreaVacio() {
+	public void testTableroSeCreaSinNaves() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertFalse(batallaNavalgo.tablero().estaVacio());
+		assertTrue(batallaNavalgo.tablero().estaVacio());
 	} 
 	
 	@Test
@@ -93,8 +93,15 @@ public class BatallaNavalgoTest {
 	}
 	
 	@Test
-	public void testCantidadDeNaves(){
+	public void testCantidadDeNavesAlCrear(){
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		assertTrue(batallaNavalgo.cantidadTotalNaves() == 0 );
+	}
+	
+	@Test
+	public void testCantidadDeNavesAlPosicionar(){
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		batallaNavalgo.posicionarNavesAleatoriamente();
 		assertTrue(batallaNavalgo.cantidadTotalNaves() == 7 );
 	}
 

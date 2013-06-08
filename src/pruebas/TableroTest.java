@@ -22,9 +22,9 @@ public class TableroTest {
 	}
 	
 	@Test
-	public void testNoSeCreaVacio() {
+	public void testSeCreaVacio() {
 		Tablero tablero = new Tablero();
-        assertFalse(tablero.estaVacio());
+        assertTrue(tablero.estaVacio());
 	}
 	@Test
 	public void testPonerNavesAleatoriamente() {
