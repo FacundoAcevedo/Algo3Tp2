@@ -262,21 +262,23 @@ public class Tablero implements Iterable {
 		
 		
 	}
-	private void avanzarNaves(){
-		int[] idCasillero, idPatronDeSuma, idCasilleroProximo;
+	public void avanzarNaves(){
+		int[] idCasillero, patronDeSuma, idCasilleroProximo;
+		List<SeccionDeNave> seccionesYaMovidas = new LinkedList<SeccionDeNave>();
 		for ( Casillero casillero : coleccionCasilleros.values()){
 			
 			idCasillero = casillero.id();
 			
 			for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
-				
+				if(!seccionesYaMovidas.contains(seccion)){
 				casillero.quitarSeccion(seccion);
-				idPatronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(seccion.sentido());
-				idCasilleroProximo = this.sumarPatronDeSumaEId(idCasillero, idPatronDeSuma);
+				patronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(seccion.sentido());
+				idCasilleroProximo = this.sumarPatronDeSumaEId(idCasillero, patronDeSuma);
 				Casillero casilleroProximo = this.obtenerCasillero(idCasilleroProximo);
 				
 				casilleroProximo.ponerSeccionDeNave(seccion);
-				
+				seccionesYaMovidas.add(seccion);
+				}
 			}
 		}
 		
