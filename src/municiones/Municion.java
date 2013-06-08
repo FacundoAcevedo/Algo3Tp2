@@ -13,6 +13,11 @@ public class Municion {
 		return miRetardo;
 	}
 	
+	public void disminuirRetardo(){
+		if (miRetardo <= 0) return;
+		miRetardo--;
+	}
+	
 	public int costo(){
 		return miCosto;
 	}

@@ -36,4 +36,19 @@ public class MunicionTest {
 		Municion municion = new Municion(0,3);
 		assertTrue(municion.retardo() == 3);
 	}
+	
+	@Test
+	public void testDisminuirRetardo(){
+		Municion municion = new Municion(0,3);
+		municion.disminuirRetardo();
+		assertTrue(municion.retardo() == 2);
+	}
+	
+	@Test
+	public void testDisminuirRetardo0(){
+		Municion municion = new Municion(0,0);
+		municion.disminuirRetardo();
+		assertTrue(municion.retardo() == 0);
+	}
+	
 }
