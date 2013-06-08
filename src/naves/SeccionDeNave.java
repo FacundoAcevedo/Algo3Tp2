@@ -33,6 +33,9 @@ public class SeccionDeNave {
 		}
 		
 	}
+	public Sentido sentido(){
+		return this.nave.direccion();
+	}
 	
 	public void invertirSentido(){
 		this.nave.invertirSentido();
