@@ -102,7 +102,7 @@ public class TableroTest {
 	public void buscarCasilleroParaProa() throws NoSuchMethodException,
 			IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
-
+		// pruebas por reflexion
 		// Se testea que este dentro de los limites de seguridad para la
 		// ubicacion de naves
 		Tablero tablero = new Tablero();
@@ -113,7 +113,7 @@ public class TableroTest {
 				.getDeclaredMethod("buscarCasilleroParaProa");
 		buscarCasilleroParaProa.setAccessible(true);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			int[] idCasillero = (int[]) buscarCasilleroParaProa.invoke(tablero);
 
 			assertTrue(idCasillero[0] > limiteInferior
@@ -122,5 +122,25 @@ public class TableroTest {
 					&& idCasillero[1] < limiteSuperior);
 		}
 	}
+	@Test
+	public void sumarPatronDeSumaEId() throws NoSuchMethodException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
+		// pruebas por reflexion
+		// Se testea que este dentro de los limites de seguridad para la
+		// ubicacion de naves
+		Tablero tablero = new Tablero();
+		int[] id = {1,0};
+		int[] patronDeSuma = {2,1};
+
+		Method sumarPatronDeSumaEId = Tablero.class
+				.getDeclaredMethod("sumarPatronDeSumaEId", int[].class, int[].class);
+		sumarPatronDeSumaEId.setAccessible(true);
+
+			int[] idResultante = (int[]) sumarPatronDeSumaEId.invoke(tablero, id, patronDeSuma);
+
+			assertTrue(idResultante[0] == 3 && idResultante[1] == 1 );
+		}
 
 }
+
