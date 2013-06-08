@@ -22,9 +22,9 @@ public class TableroTest {
 	}
 	
 	@Test
-	public void testSeCreaVacio() {
+	public void testSeCreaSinNaves() {
 		Tablero tablero = new Tablero();
-        assertTrue(tablero.estaVacio());
+        assertFalse(tablero.tieneNaves());
 	}
 	@Test
 	public void testPonerNavesAleatoriamente() {
@@ -45,7 +45,7 @@ public class TableroTest {
 		Tablero tablero = new Tablero();
 		int [] id = {0,0};
         Casillero casillero = tablero.obtenerCasillero(id);
-        assertTrue(casillero != null);
+        assertTrue(casillero instanceof Casillero);
 	}
 	
 	@Test(expected=ErrorIdCasilleroInvalido.class)
