@@ -30,11 +30,11 @@ public class BatallaNavalgoTest {
 	@Test
 	public void testTableroSeCreaSinNaves() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertTrue(batallaNavalgo.tablero().estaVacio());
+		assertTrue(batallaNavalgo.tablero().cantidadTotalNaves() == 0);
 	} 
 	
 	/*
-	 * Se sacó jugadorDispara de jugador, y por ende de batallaNavalgo.
+	 * Se sacï¿½ jugadorDispara de jugador, y por ende de batallaNavalgo.
 	@Test
 	public void testDispararConvencional(){
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
