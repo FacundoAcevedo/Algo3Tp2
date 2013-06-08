@@ -3,9 +3,12 @@ package tablero;
 import java.util.LinkedList;
 import java.util.List;
 
+import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import excepciones.ErrorIdCasilleroInvalido;
 
 import naves.SeccionDeNave;
+import municiones.DisparoConvencional;
+import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
 public class Casillero {
@@ -34,11 +37,28 @@ public class Casillero {
 	public List<SeccionDeNave> devolverSeccionesDeNave() {
 		return this.coleccionDeSeccionesDeNave;
 	}
+	
+	public boolean tieneMuniciones(){
+		return (this.coleccionMuniciones.size() > 0);
+	}
+	public boolean tieneSeccionesDeNave(){
+		return (this.coleccionMuniciones.size() > 0);
+	}
 
-	public void ponerMunicion(Municion municion) {
-		if (!this.coleccionMuniciones.contains(municion)) {
+	public void ponerMunicion(Municion municion) throws ErrorCasilleroOcupadoConOtraMunicion{
+		
+		if (municion instanceof DisparoConvencional
+				|| (municion instanceof MinaSubmarinaPorContacto && coleccionDeSeccionesDeNave.size() > 0)){
+			for (SeccionDeNave seccion : coleccionDeSeccionesDeNave){
+				seccion.recibirImpacto(municion);
+			}
+		}
+		
+		else if (!this.coleccionMuniciones.contains(municion)) {
 			this.coleccionMuniciones.add(municion);
 		}
+		else
+			throw new ErrorCasilleroOcupadoConOtraMunicion();
 
 	}
 
@@ -73,15 +93,15 @@ public class Casillero {
 		Casillero.validarId(id[0], id[1]);
 	}
 	
-	public void efectuarImpacto(int indiceMunicion){
-		/*Si hay naves*/
-		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
-			
-			int cantidadDeSeccionesDeNave = this.coleccionDeSeccionesDeNave.size();
-			for (int i = 0; i < cantidadDeSeccionesDeNave; i++){
-				(this.coleccionDeSeccionesDeNave.get(i)).recibirImpacto(coleccionMuniciones.get(indiceMunicion));
-				/*Acá falta borrar la munición que ya impactó del casillero*/
-			}
-		}
-	}
+//	public void efectuarImpacto(int indiceMunicion){
+//		/*Si hay naves*/
+//		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
+//			
+//			int cantidadDeSeccionesDeNave = this.coleccionDeSeccionesDeNave.size();
+//			for (int i = 0; i < cantidadDeSeccionesDeNave; i++){
+//				(this.coleccionDeSeccionesDeNave.get(i)).recibirImpacto(coleccionMuniciones.get(indiceMunicion));
+//				/*Acï¿½ falta borrar la municiï¿½n que ya impactï¿½ del casillero*/
+//			}
+//		}
+//	}
 }
