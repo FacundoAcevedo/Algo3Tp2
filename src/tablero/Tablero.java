@@ -107,50 +107,15 @@ public class Tablero implements Iterable {
 		return coleccionCasilleros.isEmpty();
 	}
 
-	private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
-		int[] id = new int[2];
-
-		for (int tmp = 0; tmp < unaNave.largo(); tmp++) {
-			id = this.proximoCasillero(unCasillero, unaNave.direccion());
-			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
-			try {
-				Casillero.validarId(id);
-			} catch (ErrorIdCasilleroInvalido e) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public int navesDestruidas() {
-
-		int navesDestruidas = 0;
-		Nave nave;
-		Iterator<Nave> iteradorDeNaves = naves.iterator();
-
-		if (iteradorDeNaves.hasNext()) {
-
-			nave = iteradorDeNaves.next();
-
-			if (nave.porcentajeVida() == 0) {
-				navesDestruidas = navesDestruidas++;
-			}
-		}
-
-		return navesDestruidas;
-
-	}
-
-	/* Cantidad de naves en el tablero, sin importar estado. */
-	public int cantidadTotalNaves() {
-		return this.naves.size();
-	}
-	
 	public boolean tieneNaves(){
 		if (this.cantidadTotalNaves() != 0)
 			return true;
 		return false;
+	}
+	
+	public int cantidadTotalNaves() {
+		//Cantidad total de naves, sin distincion de estado
+		return this.naves.size();
 	}
 	
 	public int cantidadDeNavesActivas(){
@@ -162,55 +127,14 @@ public class Tablero implements Iterable {
 		}
 		return totalNavesActivas;
 	}
+	
 	public int cantidadDeNavesDestruidas(){
 		int totalNaves = this.cantidadTotalNaves();
 		int totalNavesActivas = this.cantidadDeNavesActivas();
 		return (totalNaves - totalNavesActivas);
 	}
 
-	/*
-	 * Sirve para obtener el casillero proximo en la direccion
-	 */
-	public int[] proximoCasillero(Casillero c, Sentido s) {
-		int[] nuevoId = new int[2]; // nuevoId no sobrevive fuera del if.
-									// CORREGIR!!
-		// "Corregido": Creo que es un problema de como estaba declarado
-		// Hay que revisar que sea solo eso.
 
-		if (s == Sentido.NOROESTE) {
-			nuevoId[0] = c.id()[0] - 1;
-			nuevoId[1] = c.id()[1] - 1;
-		} else if (s == Sentido.NORTE) {
-			nuevoId[0] = c.id()[0];
-			nuevoId[1] = c.id()[1] - 1;
-		} else if (s == Sentido.NORESTE) {
-			nuevoId[0] = c.id()[0] + 1;
-			nuevoId[1] = c.id()[1] - 1;
-		} else if (s == Sentido.ESTE) {
-			nuevoId[0] = c.id()[0] + 1;
-			nuevoId[1] = c.id()[1];
-		} else if (s == Sentido.SUDESTE) {
-			nuevoId[0] = c.id()[0] + 1;
-			nuevoId[1] = c.id()[1] + 1;
-		} else if (s == Sentido.SUR) {
-			nuevoId[0] = c.id()[0];
-			nuevoId[1] = c.id()[1] + 1;
-		} else if (s == Sentido.SUDOESTE) {
-			nuevoId[0] = c.id()[0] - 1;
-			nuevoId[1] = c.id()[1] + 1;
-		} else if (s == Sentido.OESTE) {
-			nuevoId[0] = c.id()[0] - 1;
-			nuevoId[1] = c.id()[1];
-		}
-
-		return nuevoId;
-	}
-
-	/*
-	 * Mismo iterador que usa la clase Nave con sus secciones pero para las
-	 * naves. Hay que chequear la implementacion, tanto del iterator, como de
-	 * navesDestruidas
-	 */
 	@Override
 	public Iterator<Nave> iterator() {
 		Iterator<Nave> iterador = new Iterator<Nave>() {
@@ -235,10 +159,12 @@ public class Tablero implements Iterable {
 		return iterador;
 	}
 
+	
 	public void agregarCasilleroConMunicion(Casillero casillero) {
 		this.casillerosConMunicion.add(casillero);
 	}
 
+	
 	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo() {
 		Hashtable<Casillero, Integer> casilleros;
 		casilleros = new Hashtable<>();
@@ -332,7 +258,7 @@ public class Tablero implements Iterable {
 	}
 
 	private int[] buscarCasilleroParaProa() {
-		// Pone el barco en un area segura y devuelve el id
+		//Devuelve un id en un area segura y devuelve el id
 		boolean idXCorrecto = false;
 		boolean idYCorrecto = false;
 		int[] id = new int[2];
