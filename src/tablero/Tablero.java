@@ -34,12 +34,10 @@ public class Tablero implements Iterable {
 		this.casillerosConMunicion = new LinkedList<Casillero>();
 		this.naves = new LinkedList<Nave>();
 		
-		//this.crearCasilleros(coleccionCasilleros);
 		this.crearCasilleros();
 	}
 	
 	private void crearCasilleros(){
-		//Hashtable<String, Casillero> coleccionCasilleros) {
 
 	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 10; y++) {
@@ -112,14 +110,8 @@ public class Tablero implements Iterable {
 	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido {
 		Casillero.validarId(id);
 		String idString = this.estandarizarId(id);
-//		if (this.coleccionCasilleros.contains(idString )) {
 		return this.coleccionCasilleros.get(idString );
-//		}
 
-		//Casillero casillero = new Casillero(id);
-		//this.coleccionCasilleros.put(idString , casillero);
-
-		//return casillero;
 
 	}
 
@@ -221,7 +213,7 @@ public class Tablero implements Iterable {
 //		2-Se mueven las naves
 
 		
-		//0
+		
 		for (Casillero casillero : coleccionCasilleros.values()){
 			if( casillero.tieneMuniciones() ){
 				List<Municion> municiones = casillero.devolverMuniciones();
@@ -258,7 +250,7 @@ public class Tablero implements Iterable {
 
 	}
 	
-	private void moverTodasLasNaves(){
+	public void moverTodasLasNaves(){
 		
 		this.invertirSentidoDeNavesEnElBorde();
 		this.avanzarNaves();
