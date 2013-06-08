@@ -4,7 +4,11 @@ import java.util.Hashtable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
+import municiones.DisparoConvencional;
+import municiones.MinaSubmarinaPorContacto;
+import municiones.Municion;
 import naves.Buque;
 import naves.Destructor;
 import naves.Direccion;
@@ -19,21 +23,22 @@ import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero implements Iterable {
+	
 	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<Casillero> casillerosConMunicion;
 	private LinkedList<Nave> naves;
 
 	public Tablero() {
+		
 		this.coleccionCasilleros = new Hashtable<>();
-		this.crearCasilleros(coleccionCasilleros);
 		this.casillerosConMunicion = new LinkedList<Casillero>();
 		this.naves = new LinkedList<Nave>();
-
+		
+		this.crearCasilleros(coleccionCasilleros);
 	}
 
 	public void posicionarNavesAleatoriamente() {
 		
-		// Creo un objeto direccion por cada nave
 		Direccion[] arrayDeDirecciones = new Direccion[7];
 		Nave[] arrayDeNaves = new Nave[7];
 		
@@ -51,7 +56,8 @@ public class Tablero implements Iterable {
 		arrayDeNaves[6] = new RompeHielos(arrayDeDirecciones[6]);
 		
 		for (int i =0; i<7; i++){
-			this.posicionarNaveEnTablero(arrayDeNaves[i]);
+			int [] posProa = this.buscarCasilleroParaProa();
+			this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
 			this.naves.add(arrayDeNaves[i]);
 			
 		}
@@ -73,10 +79,10 @@ public class Tablero implements Iterable {
 
 	}
 
-	public void posicionarNaveEnTablero(Nave nave) {
+	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa) {
 		
-		int [] posProa = this.buscarCasilleroParaProa();
-		int [] patronDePocicion = this.patronDeSumaParaUbicarNave(nave.direccion());
+		int [] posProa = posicionDeProa;
+		int [] patronDeTrayectoria = this.patronDeSumaParaTrayectoriaDeNave(nave.direccion());
 		int [] posSeccion = posProa;
 		Casillero casillero;
 		
@@ -85,9 +91,8 @@ public class Tablero implements Iterable {
 			casillero.ponerSeccionDeNave(seccion);
 			
 			//Calcula la poiscion de la siguiente seccion.
-			posSeccion = this.sumarPatronDeSumaEId(posSeccion, patronDePocicion);
+			posSeccion = this.sumarPatronDeSumaEId(posSeccion, patronDeTrayectoria);
 		}
-
 
 	}
 
@@ -103,17 +108,14 @@ public class Tablero implements Iterable {
 
 	}
 
-	public boolean estaVacio() {
-		return coleccionCasilleros.isEmpty();
-	}
 
 	public boolean tieneNaves(){
-		if (this.cantidadTotalNaves() != 0)
+		if (this.cantidadTotalDeNaves() != 0)
 			return true;
 		return false;
 	}
 	
-	public int cantidadTotalNaves() {
+	public int cantidadTotalDeNaves() {
 		//Cantidad total de naves, sin distincion de estado
 		return this.naves.size();
 	}
@@ -129,7 +131,7 @@ public class Tablero implements Iterable {
 	}
 	
 	public int cantidadDeNavesDestruidas(){
-		int totalNaves = this.cantidadTotalNaves();
+		int totalNaves = this.cantidadTotalDeNaves();
 		int totalNavesActivas = this.cantidadDeNavesActivas();
 		return (totalNaves - totalNavesActivas);
 	}
@@ -163,6 +165,8 @@ public class Tablero implements Iterable {
 	public void agregarCasilleroConMunicion(Casillero casillero) {
 		this.casillerosConMunicion.add(casillero);
 	}
+	
+
 
 	
 	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo() {
@@ -198,25 +202,102 @@ public class Tablero implements Iterable {
 	}
 
 	public void actualizarTablero() {
-		Hashtable<Casillero, Integer> casilleros;
-		casilleros = this.casillerosConMunicionesSinRetardo();
-		/*
-		 * Ac� deber�a hacerce para todos los casilleros del hash,
-		 * casillero.efectuarImpacto(indiceMunicion). con indiceMunicion= valor
-		 * del casillero en el hash.
-		 */
+//		0-Estallan las minas que tengan retardo 0/  - hecho
+//		1-Se resta 1 al retardo de la municion  - hecho
+//		2-Se mueven las naves
 
-		/*
-		 * Este m�todo deber�a hacer retardo -= 1 de las municiones que quedan
-		 * en el tablero. Falta implementar
-		 */
-		this.restarRetardoDeMuniciones();
+		
+		//0
+		for (Casillero casillero : coleccionCasilleros.values()){
+			if( casillero.tieneMuniciones() ){
+				List<Municion> municiones = casillero.devolverMuniciones();
+				
+				for( Municion municion : municiones){
+					
+					if (municion.retardo() == 0){
+						
+						if(casillero.tieneSeccionesDeNave()){
+							//Quita las minas por contacto tambien
+							municiones.remove(municion);							
+						}
+						else if (!(municion instanceof MinaSubmarinaPorContacto)){
+							//Quita las minas que esten con retardo 0 pero que no sean por contacto
+							municiones.remove(municion);
+						}//if
+						
+						for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
+							seccion.recibirImpacto(municion);
+						}//for
+						
+					}//if
+					else
+						municion.disminuirRetardo();
+					
+				}//for
+				
+			}//if
+		}//for
+		
+		this.moverTodasLasNaves();
+		
+
+
+	}
+	
+	private void moverTodasLasNaves(){
+		
+		this.invertirSentidoDeNavesEnElBorde();
+		this.avanzarNaves();
+		
+		
+	}
+	private void avanzarNaves(){
+		int[] idCasillero, idPatronDeSuma, idCasilleroProximo;
+		for ( Casillero casillero : coleccionCasilleros.values()){
+			
+			idCasillero = casillero.id();
+			
+			for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
+				
+				casillero.quitarSeccion(seccion);
+				idPatronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(seccion.sentido());
+				idCasilleroProximo = this.sumarPatronDeSumaEId(idCasillero, idPatronDeSuma);
+				Casillero casilleroProximo = this.obtenerCasillero(idCasilleroProximo);
+				
+				casilleroProximo.ponerSeccionDeNave(seccion);
+				
+			}
+		}
+		
+	}
+	
+	private void invertirSentidoDeNavesEnElBorde() {
+		// Las naves afectadas son aquellas que estan en el borde
+
+		// Debido a nuestra manera de poner las naves aleatoreamente en una
+		// posicion segura
+		// Las naves nunca transitan tocando el borde de manera paralela
+
+		
+
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
+				int[] idDeBorde = { x, y };
+				Casillero casilleroDelBorde = coleccionCasilleros.get(Arrays
+						.toString(idDeBorde));
+				List<SeccionDeNave> seccionesDeNaveEnBorde = casilleroDelBorde
+						.devolverSeccionesDeNave();
+
+				for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
+					seccion.invertirSentido();
+					
+				}
+
+			}
+		}
+
 	}
 
-	private void restarRetardoDeMuniciones() {
-		// TODO Auto-generated method stub
-
-	}
 
 	private int[] sumarPatronDeSumaEId(int[] id, int[] patronDeSuma) {
 		int[] total = new int[2];
@@ -226,7 +307,7 @@ public class Tablero implements Iterable {
 		return total;
 	}
 
-	private int[] patronDeSumaParaUbicarNave(Sentido sentido) {
+	private int[] patronDeSumaParaTrayectoriaDeNave(Sentido sentido) {
 		// Devuelve un patron para sumarle al idCelda y ubicar las secciones de
 		// nave
 		int[] patronSur = { 0, -1 };
