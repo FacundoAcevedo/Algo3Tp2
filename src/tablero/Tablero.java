@@ -77,7 +77,7 @@ public class Tablero implements Iterable {
 		for (int i =0; i<7; i++){
 			int [] posProa = this.buscarCasilleroParaProa();
 			this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
-			this.naves.add(arrayDeNaves[i]);
+			
 			
 		}
 	}
@@ -95,6 +95,7 @@ public class Tablero implements Iterable {
 		int [] posSeccion = posProa;
 		Casillero casillero;
 		
+		this.naves.add(nave);
 		for (SeccionDeNave seccion : nave.secciones()){
 			casillero = coleccionCasilleros.get(this.estandarizarId(posSeccion));
 			casillero.ponerSeccionDeNave(seccion);
