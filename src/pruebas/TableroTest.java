@@ -127,8 +127,7 @@ public class TableroTest {
 			IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException {
 		// pruebas por reflexion
-		// Se testea que este dentro de los limites de seguridad para la
-		// ubicacion de naves
+	
 		Tablero tablero = new Tablero();
 		int[] id = {1,0};
 		int[] patronDeSuma = {2,1};
