@@ -1,5 +1,6 @@
 package juego;
 
+
 import municiones.Municion;
 import tablero.Casillero;
 import tablero.Tablero;
@@ -15,21 +16,27 @@ public class BatallaNavalgo {
 	}
 	
 	public void partida(){
+		this.posicionarNavesAleatoriamente();
 		while( ! this.juegoTerminado() ){
 			this.ronda();
 		}
 	}
 	
 	public void ronda(){
-		//juega el jugador
+		Municion municionElegida = this.jugador.eligeMunicion();
+		Casillero casilleroElegido = this.jugador.eligeCasillero(this.tablero);
 		
-		//this.jugadorDispara(municion, casillero);
-		this.avanzarTurno();
+		casilleroElegido.ponerMunicion(municionElegida);
+		
 		this.finDeTurno();
 	}
 	
+	public void posicionarNavesAleatoriamente() {
+		this.tablero.posicionarNavesAleatoriamente();
+	}
+
 	public boolean juegoTerminado() {
-		return ( this.navesDestruidas() == this.cantidadTotalNaves() );
+		return ( this.cantidadDeNavesDestruidas() == this.cantidadTotalNaves() );
 	}
 
 	public Jugador jugador(){
@@ -44,21 +51,20 @@ public class BatallaNavalgo {
 		return this.jugador.puntaje().puntos();
 	}
 	
-	private void avanzarTurno(){
-		this.tablero.actualizarTablero();
-	}
-	
 	private void finDeTurno(){
+		this.tablero.actualizarTablero();
 		this.jugador.descontarPuntos(10);
 	}
 
+	/* Se saco jugador.disparar de Jugador.
 	public void jugadorDispara(Municion municion, Casillero casillero){
 		this.jugador.disparar(municion, casillero);
 		this.tablero.agregarCasilleroConMunicion(casillero);
 	}
+	*/
 	
-	public int navesDestruidas(){
-		return this.tablero.navesDestruidas();
+	public int cantidadDeNavesDestruidas(){
+		return this.tablero.cantidadDeNavesDestruidas();
 	}
 	
 	/* Cantidad de naves en el tablero, sin importar estado. */

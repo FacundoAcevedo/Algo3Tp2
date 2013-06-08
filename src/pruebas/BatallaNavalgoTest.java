@@ -33,6 +33,8 @@ public class BatallaNavalgoTest {
 		assertTrue(batallaNavalgo.tablero().estaVacio());
 	} 
 	
+	/*
+	 * Se sacó jugadorDispara de jugador, y por ende de batallaNavalgo.
 	@Test
 	public void testDispararConvencional(){
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
@@ -91,6 +93,7 @@ public class BatallaNavalgoTest {
 		batallaNavalgo.jugadorDispara(minatriple,otroCasillero);
 		assertTrue (batallaNavalgo.puntosDelJugador() == 9575);
 	}
+	*/
 	
 	@Test
 	public void testCantidadDeNavesAlCrear(){
