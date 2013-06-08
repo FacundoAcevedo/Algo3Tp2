@@ -70,7 +70,7 @@ public class TableroTest {
 		int[] patronSur = { 0, -1 };
 
 		Method patronDeSuma = Tablero.class.getDeclaredMethod(
-				"patronDeSumaParaUbicarNave", Sentido.class);
+				"patronDeSumaParaTrayectoriaDeNave", Sentido.class);
 		patronDeSuma.setAccessible(true);
 
 		int[] patron = (int[]) patronDeSuma.invoke(tablero, unSentido);
@@ -89,7 +89,7 @@ public class TableroTest {
 		int[] patronNorEste = { 1, 1 };
 
 		Method patronDeSuma = Tablero.class.getDeclaredMethod(
-				"patronDeSumaParaUbicarNave", Sentido.class);
+				"patronDeSumaParaTrayectoriaDeNave", Sentido.class);
 		patronDeSuma.setAccessible(true);
 
 		int[] patron = (int[]) patronDeSuma.invoke(tablero, unSentido);
