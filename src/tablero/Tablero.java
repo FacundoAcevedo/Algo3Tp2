@@ -20,14 +20,11 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero implements Iterable {
 	private Casillero[][] casilleros;
-	private LinkedList<Casillero> casillerosConMunicion;
 	private LinkedList<Nave> naves;
 
 	public Tablero() {
 		this.crearCasilleros();
-		this.casillerosConMunicion = new LinkedList<Casillero>();
 		this.naves = new LinkedList<Nave>();
-
 	}
 	
 	public void crearCasilleros(){
@@ -272,11 +269,7 @@ public class Tablero implements Iterable {
 		 * casillero.efectuarImpacto(indiceMunicion). con indiceMunicion= valor
 		 * del casillero en el hash.
 		 */
-
-		/*
-		 * Este m�todo deber�a hacer retardo -= 1 de las municiones que quedan
-		 * en el tablero. Falta implementar
-		 */
+		
 		this.restarRetardoDeMuniciones();
 	}
 
