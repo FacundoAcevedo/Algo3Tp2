@@ -34,6 +34,10 @@ public class SeccionDeNave {
 		
 	}
 	
+	public void invertirSentido(){
+		this.nave.invertirSentido();
+	}
+	
 	
 	public EstadoDeSalud estado(){
 		return this.estado;
