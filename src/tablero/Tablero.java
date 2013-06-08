@@ -262,14 +262,21 @@ public class Tablero implements Iterable {
 	*/
 
 	public void actualizarTablero() {
-		//Hashtable<Casillero, Integer> casilleros;
-		//casilleros = this.casillerosConMunicionesSinRetardo();
-		/*
-		 * Ac� deber�a hacerce para todos los casilleros del hash,
-		 * casillero.efectuarImpacto(indiceMunicion). con indiceMunicion= valor
-		 * del casillero en el hash.
-		 */
-		
+		Casillero casillero;
+		for(int x = 0; x < 10; x++){
+			for(int y = 0; y < 10; y++){
+				int[] id = {x,y};
+				casillero = this.obtenerCasillero(id);
+				for( Municion municion : casillero.devolverMuniciones() ){
+					if( municion.retardo() == 0){
+						casillero.efectuarImpacto(0); 
+						// VER: aca arriba no va 0, hay que ver como implementarlo bien.
+						// podemos hacer casillero.efectuarImpacto(municion); y dsp
+						//casillero.borrarMunicion(municion);
+					}
+				}
+			}
+		}
 		this.restarRetardoDeMuniciones();
 	}
 
