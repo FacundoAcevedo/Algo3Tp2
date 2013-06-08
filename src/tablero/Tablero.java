@@ -1,10 +1,10 @@
 package tablero;
 
 import java.util.Hashtable;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import municiones.Municion;
 import naves.Buque;
 import naves.Destructor;
 import naves.Direccion;
@@ -19,28 +19,24 @@ import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
 public class Tablero implements Iterable {
-	private Casillero[][] casilleros;
+	private Hashtable<String, Casillero> coleccionCasilleros;
+	private LinkedList<Casillero> casillerosConMunicion;
 	private LinkedList<Nave> naves;
 
 	public Tablero() {
-		this.crearCasilleros();
+		this.coleccionCasilleros = new Hashtable<>();
+		this.crearCasilleros(coleccionCasilleros);
+		this.casillerosConMunicion = new LinkedList<Casillero>();
 		this.naves = new LinkedList<Nave>();
+
 	}
-	
-	public void crearCasilleros(){
-		this.casilleros = new Casillero[10][10];
-		for(int x = 0; x < 10; x++){
-			for(int y = 0; y < 10; y++){
-				this.casilleros[x][y] = new Casillero(x,y);
-			}
-		}
-	}
-	
+
 	public void posicionarNavesAleatoriamente() {
 		
 		// Creo un objeto direccion por cada nave
 		Direccion[] arrayDeDirecciones = new Direccion[7];
 		Nave[] arrayDeNaves = new Nave[7];
+		
 		for (int i = 0; i < 7; i++) {
 			arrayDeDirecciones[i] = new Direccion(null);
 			arrayDeDirecciones[i].random();
@@ -65,52 +61,50 @@ public class Tablero implements Iterable {
 		return this.naves;
 	}
 
-	public void posicionarNaveEnTablero(Nave nave) {
-		
-		Casillero unCasillero;
-		int[] id = new int[2];
+	private void crearCasilleros(
+			Hashtable<String, Casillero> coleccionCasilleros) {
 
-		do {
-			id[0] = (int) (Math.random() * 10);
-			id[1] = (int) (Math.random() * 10);
-
-			unCasillero = this.obtenerCasillero(id);
-		} while (!this.ubicarProaDeNave(nave, unCasillero));
-
-		Iterator<SeccionDeNave> iteradorDeSecciones = nave.secciones().iterator();
-		while (iteradorDeSecciones.hasNext()) {
-			id = this.proximoCasillero(unCasillero, nave.direccion());
-			unCasillero = this.obtenerCasillero(id);
-			SeccionDeNave valor = iteradorDeSecciones.next();
-			unCasillero.ponerSeccionDeNave(valor);
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
+				int[] id = { x, y };
+				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
+			}
 		}
 
 	}
 
-	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido{
-		Casillero.validarId(id);
-		return this.casilleros[id[0]][id[1]];
+	public void posicionarNaveEnTablero(Nave nave) {
+		
+		int [] posProa = this.buscarCasilleroParaProa();
+		int [] patronDePocicion = this.patronDeSumaParaUbicarNave(nave.direccion());
+		int [] posSeccion = posProa;
+		Casillero casillero;
+		
+		for (SeccionDeNave seccion : nave.secciones()){
+			casillero = coleccionCasilleros.get(Arrays.toString(posProa));
+			casillero.ponerSeccionDeNave(seccion);
+			
+			//Calcula la poiscion de la siguiente seccion.
+			posSeccion = this.sumarPatronDeSumaEId(posSeccion, patronDePocicion);
+		}
+
+
+	}
+
+	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido {
+		if (this.coleccionCasilleros.contains(id)) {
+			return this.coleccionCasilleros.get(Arrays.toString(id));
+		}
+
+		Casillero casillero = new Casillero(id);
+		this.coleccionCasilleros.put(Arrays.toString(id), casillero);
+
+		return casillero;
+
 	}
 
 	public boolean estaVacio() {
-		return naves.isEmpty();
-	}
-
-	public boolean ubicarProaDeNave(Nave unaNave, Casillero unCasillero) {
-		
-		if (!this.naveEntraEn(unaNave, unCasillero)) {
-			return false;
-		}
-
-		Casillero casilleroActual = unCasillero;
-
-		Iterator<SeccionDeNave> iteradorDeSeccionesDeNave = unaNave.iterator();
-		SeccionDeNave unaSeccionDeNave;
-		while (iteradorDeSeccionesDeNave.hasNext()) {
-			unaSeccionDeNave = iteradorDeSeccionesDeNave.next();
-			casilleroActual.ponerSeccionDeNave(unaSeccionDeNave);
-		}
-		return true;
+		return coleccionCasilleros.isEmpty();
 	}
 
 	private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
@@ -118,8 +112,9 @@ public class Tablero implements Iterable {
 
 		for (int tmp = 0; tmp < unaNave.largo(); tmp++) {
 			id = this.proximoCasillero(unCasillero, unaNave.direccion());
+			unCasillero = coleccionCasilleros.get(Arrays.toString(id));
 			try {
-				unCasillero = this.obtenerCasillero(id);
+				Casillero.validarId(id);
 			} catch (ErrorIdCasilleroInvalido e) {
 				return false;
 			}
@@ -128,7 +123,7 @@ public class Tablero implements Iterable {
 		return true;
 	}
 
-	public int cantidadDeNavesDestruidas() {
+	public int navesDestruidas() {
 
 		int navesDestruidas = 0;
 		Nave nave;
@@ -139,7 +134,7 @@ public class Tablero implements Iterable {
 			nave = iteradorDeNaves.next();
 
 			if (nave.porcentajeVida() == 0) {
-				navesDestruidas++;
+				navesDestruidas = navesDestruidas++;
 			}
 		}
 
@@ -152,21 +147,36 @@ public class Tablero implements Iterable {
 		return this.naves.size();
 	}
 	
-	/* Devuelve la cantidad de naves sanas y dañadas. */
+	public boolean tieneNaves(){
+		if (this.cantidadTotalNaves() != 0)
+			return true;
+		return false;
+	}
+	
 	public int cantidadDeNavesActivas(){
-		int totalNavesActivas = 0;
+		//Devuelve la cantidad de naves sanas y daÃ±adas
+		int totalNavesActivas =0;
 		for (Nave nave : this.naves){
-			if( nave.estado() != EstadoDeSalud.DESTRUIDO)
-				totalNavesActivas++;
+			if( nave.estado()== EstadoDeSalud.SANO || nave.estado()== EstadoDeSalud.DANADO)
+				totalNavesActivas +=1;
 		}
 		return totalNavesActivas;
 	}
-	
+	public int cantidadDeNavesDestruidas(){
+		int totalNaves = this.cantidadTotalNaves();
+		int totalNavesActivas = this.cantidadDeNavesActivas();
+		return (totalNaves - totalNavesActivas);
+	}
 
-	/* Sirve para obtener el casillero proximo en la direccion */
+	/*
+	 * Sirve para obtener el casillero proximo en la direccion
+	 */
 	public int[] proximoCasillero(Casillero c, Sentido s) {
-		int[] nuevoId = new int[2]; 
-		
+		int[] nuevoId = new int[2]; // nuevoId no sobrevive fuera del if.
+									// CORREGIR!!
+		// "Corregido": Creo que es un problema de como estaba declarado
+		// Hay que revisar que sea solo eso.
+
 		if (s == Sentido.NOROESTE) {
 			nuevoId[0] = c.id()[0] - 1;
 			nuevoId[1] = c.id()[1] - 1;
@@ -225,28 +235,29 @@ public class Tablero implements Iterable {
 		return iterador;
 	}
 
+	public void agregarCasilleroConMunicion(Casillero casillero) {
+		this.casillerosConMunicion.add(casillero);
+	}
 
-
-	// REVER ESTO
-	/*
 	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo() {
-		Hashtable<Casillero, Integer> unosCasilleros;
-		unosCasilleros = new Hashtable<>();
+		Hashtable<Casillero, Integer> casilleros;
+		casilleros = new Hashtable<>();
 
 		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); // devolverMunciones().size();
 
-		// Recorro la lista de casilleros con municiones
+		/* Recorro la lista de casilleros con municiones */
 		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
-			Casillero casillero = this.coleccionCasilleros.get(unosCasilleros.get(i));
+			Casillero casillero = this.coleccionCasilleros.get(casilleros
+					.get(i));
 
-			// Miro municiones que hay en cada casillero
+			/* Miro municiones que hay en cada casillero */
 			int cantidadDeMunicionesEnCasillero = casillero
 					.devolverMuniciones().size();
 			for (int x = 0; x < cantidadDeMunicionesEnCasillero; x++) {
 
-				// Me fijo si tienen retardo = 0 y agrego al Hashtable 
+				/* Me fijo si tienen retardo = 0 y agrego al Hashtable */
 				if (casillero.devolverMuniciones().get(x).retardo() == 0) {
-					unosCasilleros.put(casillero, x); // Aunque si tiene dos
+					casilleros.put(casillero, x); // Aunque si tiene dos
 													// municiones, una ret != 0
 													// y otra ret= 0, la agrega
 													// igual. hay qe verificar
@@ -257,38 +268,88 @@ public class Tablero implements Iterable {
 
 		}
 
-		return unosCasilleros;
+		return casilleros;
 	}
-	*/
 
 	public void actualizarTablero() {
-		Casillero casillero;
-		for(int x = 0; x < 10; x++){
-			for(int y = 0; y < 10; y++){
-				int[] id = {x,y};
-				casillero = this.obtenerCasillero(id);
-				for( Municion municion : casillero.devolverMuniciones() ){
-					if( municion.retardo() == 0){
-						casillero.efectuarImpacto(0); 
-						// VER: aca arriba no va 0, hay que ver como implementarlo bien.
-						// podemos hacer casillero.efectuarImpacto(municion); y dsp
-						//casillero.borrarMunicion(municion);
-					}
-				}
-			}
-		}
+		Hashtable<Casillero, Integer> casilleros;
+		casilleros = this.casillerosConMunicionesSinRetardo();
+		/*
+		 * Acï¿½ deberï¿½a hacerce para todos los casilleros del hash,
+		 * casillero.efectuarImpacto(indiceMunicion). con indiceMunicion= valor
+		 * del casillero en el hash.
+		 */
+
+		/*
+		 * Este mï¿½todo deberï¿½a hacer retardo -= 1 de las municiones que quedan
+		 * en el tablero. Falta implementar
+		 */
 		this.restarRetardoDeMuniciones();
 	}
 
 	private void restarRetardoDeMuniciones() {
-		for(int x = 0; x < 10; x++){
-			for(int y = 0; y < 10; y++){
-				int[] id = {x,y};
-				for( Municion municion : this.obtenerCasillero(id).devolverMuniciones() ){
-					municion.disminuirRetardo();
-				}
-			}
-		}
+		// TODO Auto-generated method stub
+
 	}
 
+	private int[] sumarPatronDeSumaEId(int[] id, int[] patronDeSuma) {
+		int[] total = new int[2];
+		total[0] = id[0] + patronDeSuma[0];
+		total[1] = id[1] + patronDeSuma[1];
+
+		return total;
+	}
+
+	private int[] patronDeSumaParaUbicarNave(Sentido sentido) {
+		// Devuelve un patron para sumarle al idCelda y ubicar las secciones de
+		// nave
+		int[] patronSur = { 0, -1 };
+		int[] patronNorte = { 0, 1 };
+		int[] patronOeste = { -1, 0 };
+		int[] patronEste = { 1, 0 };
+		int[] patronSudEste = { 1, -1 };
+		int[] patronNorEste = { 1, 1 };
+		int[] patronSudOeste = { -1, -1 };
+		int[] patronNorOeste = { -1, -1 };
+
+		if (sentido == Sentido.SUR)
+			return patronSur;
+		else if (sentido == Sentido.NORTE)
+			return patronNorte;
+		else if (sentido == Sentido.ESTE)
+			return patronEste;
+		else if (sentido == Sentido.OESTE)
+			return patronOeste;
+		else if (sentido == Sentido.NORESTE)
+			return patronNorEste;
+		else if (sentido == Sentido.NOROESTE)
+			return patronNorOeste;
+		else if (sentido == Sentido.SUDESTE)
+			return patronSudEste;
+		else
+			// (sentido== Sentido.SUDOESTE)
+			return patronSudOeste;
+	}
+
+	private int[] buscarCasilleroParaProa() {
+		// Pone el barco en un area segura y devuelve el id
+		boolean idXCorrecto = false;
+		boolean idYCorrecto = false;
+		int[] id = new int[2];
+		int MAX = 6, MIN = 3;
+
+		while (idXCorrecto == false) {
+			id[0] = (int) (Math.random() * 10);
+
+			if (id[0] < MAX && id[0] > MIN)
+				idXCorrecto = true;
+		}
+
+		while (idYCorrecto == false) {
+			id[1] = (int) (Math.random() * 10);
+			if (id[1] < MAX && id[1] > MIN)
+				idYCorrecto = true;
+		}
+		return id;
+	}
 }
