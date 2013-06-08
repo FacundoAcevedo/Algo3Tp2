@@ -110,35 +110,28 @@ public class TableroTest {
 	}
 
 	@Test
-	public void insertarUnaNaveYMoverlaCuatroVeces() {
+	public void moverNaveHastaQueRegreseALaPosicionInicial() {
 		// Se testea la existencia de las naves, y su tipo
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
-		int[] posicionDeProa = {0,5};
-		int[] posicionDeProaLuegoDeAvanzar = {0,1};
-		int[] posicionDePopaLuegoDeAvanzar = {0,2};
+		int[] posicionDeProa = {5,5};
 		Nave nave = new Lancha(new Direccion(Sentido.SUR));
 		Casillero casilleroLuegoDeAvanzar;
 		SeccionDeNave seccionDeProaLuegoDeAvanzar; 
 		
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.avanzarNaves();
-		tablero.avanzarNaves();
-		tablero.avanzarNaves();
-		tablero.avanzarNaves();
-
 		
-		casilleroLuegoDeAvanzar= tablero.obtenerCasillero(posicionDeProaLuegoDeAvanzar);
+		for (int i= 0; i<10; i++){
+			tablero.moverTodasLasNaves();
+		}
+		
+		casilleroLuegoDeAvanzar= tablero.obtenerCasillero(posicionDeProa);
 		seccionDeProaLuegoDeAvanzar = casilleroLuegoDeAvanzar.devolverSeccionesDeNave().get(0);	
 		
 		assertTrue(nave.secciones().get(0) == seccionDeProaLuegoDeAvanzar);
 		
-		//esto seria la parte de atras de la lancha
-		casilleroLuegoDeAvanzar= tablero.obtenerCasillero(posicionDePopaLuegoDeAvanzar);
-		seccionDeProaLuegoDeAvanzar = casilleroLuegoDeAvanzar.devolverSeccionesDeNave().get(0);	
-		
-		assertTrue(nave.secciones().get(1) == seccionDeProaLuegoDeAvanzar);
+		assertTrue(nave.direccion() == Sentido.NORTE);
 		
 	}
 	
