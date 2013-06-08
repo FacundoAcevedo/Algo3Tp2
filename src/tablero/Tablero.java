@@ -91,7 +91,10 @@ public class Tablero implements Iterable {
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa) {
 		
 		int [] posProa = posicionDeProa;
+		//invierto la direccion de la nave, para que se valla armando para atras
+		nave.invertirSentido();
 		int [] patronDeTrayectoria = this.patronDeSumaParaTrayectoriaDeNave(nave.direccion());
+		nave.invertirSentido();
 		int [] posSeccion = posProa;
 		Casillero casillero;
 		
@@ -281,10 +284,11 @@ public class Tablero implements Iterable {
 				}
 			}
 		}
+		seccionesYaMovidas.clear();
 		
 	}
 	
-	private void invertirSentidoDeNavesEnElBorde() {
+	public void invertirSentidoDeNavesEnElBorde() {
 		// Las naves afectadas son aquellas que estan en el borde
 
 		// Debido a nuestra manera de poner las naves aleatoreamente en una
@@ -310,18 +314,19 @@ public class Tablero implements Iterable {
 		for (int x = 0; x < 10; x++) {
 			for (int y = 0; y < 10; y++) {
 				int[] idDeBorde = { x, y };
-				
-				if( ((x==0) && (y>=1 || y<=9)) //C
-				 ||((x==9) && (y>=0 || y<=9)) //B
-				 ||((x>=0 || y<=8) || y == 0) //A
-				  ||((x>=1 || y<=9) || y == 9) ){//D
-					
-				Casillero casilleroDelBorde = this.obtenerCasillero(idDeBorde);
-				List<SeccionDeNave> seccionesDeNaveEnBorde = casilleroDelBorde
-						.devolverSeccionesDeNave();
 
-				for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
-					seccion.invertirSentido();
+				if (((x == 0) && (y >= 1 && y <= 9)) // C
+						|| ((x == 9) && (y >= 0 && y <= 9)) // B
+						|| ((x >= 0 && x <= 8) && y == 0) // A
+						|| ((x >= 1 && x <= 9) && y == 9)) {// D
+
+					Casillero casilleroDelBorde = this
+							.obtenerCasillero(idDeBorde);
+					List<SeccionDeNave> seccionesDeNaveEnBorde = casilleroDelBorde
+							.devolverSeccionesDeNave();
+
+					for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
+						seccion.invertirSentido();
 					}
 				}
 
