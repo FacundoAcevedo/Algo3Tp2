@@ -69,7 +69,7 @@ public class BatallaNavalgo {
 	
 	/* Cantidad de naves en el tablero, sin importar estado. */
 	public int cantidadTotalNaves(){
-		return this.tablero.cantidadTotalNaves();
+		return this.tablero.cantidadTotalDeNaves();
 	}
 	
 }

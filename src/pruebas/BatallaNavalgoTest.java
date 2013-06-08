@@ -30,7 +30,7 @@ public class BatallaNavalgoTest {
 	@Test
 	public void testTableroSeCreaSinNaves() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertTrue(batallaNavalgo.tablero().cantidadTotalNaves() == 0);
+		assertTrue(batallaNavalgo.tablero().cantidadTotalDeNaves() == 0);
 	} 
 	
 	/*

@@ -35,7 +35,7 @@ public class TableroTest {
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
 		tablero.posicionarNavesAleatoriamente();
-		assertTrue(tablero.cantidadTotalNaves() == 7);
+		assertTrue(tablero.cantidadTotalDeNaves() == 7);
 		LinkedList<Nave> naves = tablero.devolverNaves();
 
 		for (Nave nave : naves) {
