@@ -30,11 +30,30 @@ public class Tablero implements Iterable {
 
 	public Tablero() {
 		
-		this.coleccionCasilleros = new Hashtable<>();
+		this.coleccionCasilleros = new Hashtable<String,Casillero>();
 		this.casillerosConMunicion = new LinkedList<Casillero>();
 		this.naves = new LinkedList<Nave>();
 		
-		this.crearCasilleros(coleccionCasilleros);
+		//this.crearCasilleros(coleccionCasilleros);
+		this.crearCasilleros();
+	}
+	
+	private void crearCasilleros(){
+		//Hashtable<String, Casillero> coleccionCasilleros) {
+
+	for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < 10; y++) {
+			int[] id = { x, y };
+			String id_string = this.estandarizarId(id);
+			this.coleccionCasilleros.put(id_string, new Casillero(id));
+		}
+	}
+
+}
+	public  String estandarizarId(int[] id){
+		//Transforma el id de array al que se usa como llave en la tabla de casilleros
+		String id_string = Integer.toString(id[0]) + Integer.toString(id[1]);
+		return id_string;
 	}
 
 	public void posicionarNavesAleatoriamente() {
@@ -67,17 +86,7 @@ public class Tablero implements Iterable {
 		return this.naves;
 	}
 
-	private void crearCasilleros(
-			Hashtable<String, Casillero> coleccionCasilleros) {
 
-		for (int x = 0; x < 10; x++) {
-			for (int y = 0; y < 10; y++) {
-				int[] id = { x, y };
-				coleccionCasilleros.put(Arrays.toString(id), new Casillero(id));
-			}
-		}
-
-	}
 
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa) {
 		
@@ -87,7 +96,7 @@ public class Tablero implements Iterable {
 		Casillero casillero;
 		
 		for (SeccionDeNave seccion : nave.secciones()){
-			casillero = coleccionCasilleros.get(Arrays.toString(posProa));
+			casillero = coleccionCasilleros.get(this.estandarizarId(posSeccion));
 			casillero.ponerSeccionDeNave(seccion);
 			
 			//Calcula la poiscion de la siguiente seccion.
@@ -97,17 +106,18 @@ public class Tablero implements Iterable {
 	}
 
 	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido {
-		if (this.coleccionCasilleros.contains(id)) {
-			return this.coleccionCasilleros.get(Arrays.toString(id));
-		}
+		Casillero.validarId(id);
+		String idString = this.estandarizarId(id);
+//		if (this.coleccionCasilleros.contains(idString )) {
+		return this.coleccionCasilleros.get(idString );
+//		}
 
-		Casillero casillero = new Casillero(id);
-		this.coleccionCasilleros.put(Arrays.toString(id), casillero);
+		//Casillero casillero = new Casillero(id);
+		//this.coleccionCasilleros.put(idString , casillero);
 
-		return casillero;
+		//return casillero;
 
 	}
-
 
 	public boolean tieneNaves(){
 		if (this.cantidadTotalDeNaves() != 0)
@@ -277,20 +287,39 @@ public class Tablero implements Iterable {
 		// Debido a nuestra manera de poner las naves aleatoreamente en una
 		// posicion segura
 		// Las naves nunca transitan tocando el borde de manera paralela
+		
+		//Pequeño grafico para entender el if
+//		
+//		AAAAAAAAAB
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		CDDDDDDDDD
 
 		
 
 		for (int x = 0; x < 10; x++) {
 			for (int y = 0; y < 10; y++) {
 				int[] idDeBorde = { x, y };
-				Casillero casilleroDelBorde = coleccionCasilleros.get(Arrays
-						.toString(idDeBorde));
+				
+				if( ((x==0) && (y>=1 || y<=9)) //C
+				 ||((x==9) && (y>=0 || y<=9)) //B
+				 ||((x>=0 || y<=8) || y == 0) //A
+				  ||((x>=1 || y<=9) || y == 9) ){//D
+					
+				Casillero casilleroDelBorde = this.obtenerCasillero(idDeBorde);
 				List<SeccionDeNave> seccionesDeNaveEnBorde = casilleroDelBorde
 						.devolverSeccionesDeNave();
 
 				for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
 					seccion.invertirSentido();
-					
+					}
 				}
 
 			}
