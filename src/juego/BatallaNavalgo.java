@@ -1,6 +1,7 @@
 package juego;
 
 
+import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import municiones.Municion;
 import tablero.Casillero;
 import tablero.Tablero;
@@ -26,7 +27,11 @@ public class BatallaNavalgo {
 		Municion municionElegida = this.jugador.eligeMunicion();
 		Casillero casilleroElegido = this.jugador.eligeCasillero(this.tablero);
 		
-		casilleroElegido.ponerMunicion(municionElegida);
+		try {
+			casilleroElegido.ponerMunicion(municionElegida);
+		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
+			// Y aca lo mismo, ver que hace
+		}
 		
 		this.finDeTurno();
 	}

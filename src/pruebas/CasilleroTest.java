@@ -20,6 +20,7 @@ import naves.Sentido;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import excepciones.ErrorIdCasilleroInvalido;
 
 import tablero.Casillero;
@@ -124,8 +125,16 @@ public class CasilleroTest {
 		listadoMuniciones.add(minaSubmarinaDobleConRetardo);
 		listadoMuniciones.add(minaSubmarinaPuntualConRetardo);
 
-		casillero.ponerMunicion(minaSubmarinaDobleConRetardo);
-		casillero.ponerMunicion(minaSubmarinaPuntualConRetardo);
+		try {
+			casillero.ponerMunicion(minaSubmarinaDobleConRetardo);
+		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
+			// Ver que hacemos aca
+		}
+		try {
+			casillero.ponerMunicion(minaSubmarinaPuntualConRetardo);
+		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
+			// Ver que hacemos aca
+		}
 		// assertEquals(casillero.devolverMuniciones(), listadoMuniciones);
 		for (int i = 0; i < listadoMuniciones.size(); i++) {
 			assertTrue(casillero.devolverMuniciones().get(i) == listadoMuniciones
