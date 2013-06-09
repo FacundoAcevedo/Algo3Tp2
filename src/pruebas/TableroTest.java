@@ -38,13 +38,10 @@ public class TableroTest {
 		// Se testea la existencia de las naves, y su tipo
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
-		tablero.posicionarNavesAleatoriamente();
+		tablero.construirYPosicionarLasNavesAleatoriamente();
 		assertTrue(tablero.cantidadTotalDeNaves() == 7);
-		LinkedList<Nave> naves = tablero.devolverNaves();
+		
 
-		for (Nave nave : naves) {
-			assertTrue(nave instanceof Nave);
-		}
 	}
 	@Test
 	public void insertarUnaNaveYVerCantidad() {
