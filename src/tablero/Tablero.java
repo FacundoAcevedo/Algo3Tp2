@@ -54,7 +54,7 @@ public class Tablero implements Iterable {
 		return id_string;
 	}
 
-	public void posicionarNavesAleatoriamente() {
+	public void construirYPosicionarLasNavesAleatoriamente() {
 		
 		Direccion[] arrayDeDirecciones = new Direccion[7];
 		Nave[] arrayDeNaves = new Nave[7];
@@ -73,17 +73,91 @@ public class Tablero implements Iterable {
 		arrayDeNaves[6] = new RompeHielos(arrayDeDirecciones[6]);
 		
 		for (int i =0; i<7; i++){
-			int [] posProa = this.buscarCasilleroParaProa();
-			this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
+			//int [] posProa = this.buscarCasilleroParaProa();
+			//this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
+			posicionarNaveAleatoriamenteEnTablero(arrayDeNaves[i]);
+			
 			
 			
 		}
 	}
 	
+		public void posicionarNaveAleatoriamenteEnTablero(Nave nave) {
+			
+			this.naves.add(nave);
+			Casillero unCasillero;
+			int[] id = new int[2];
+		
+				do {
+					id[0] = (int) (Math.random() * 10);
+					id[1] = (int) (Math.random() * 10);
+		
+					unCasillero = this.obtenerCasillero(id);
+				} while (this.esIdDeCasilleroDeBorde(id) || !this.ubicarProaDeNave(nave, unCasillero));
+				//Deberia salir del while cuando da falso las dos condiciones.
+				for( SeccionDeNave seccion : nave.secciones()){
+					id = this.idProximoCasilleroParaPonerSeccionDeNave(unCasillero,nave);
+					unCasillero = this.obtenerCasillero(id);
+					unCasillero.ponerSeccionDeNave(seccion);
+				}
+		
+			}
+
+
+		public boolean ubicarProaDeNave(Nave unaNave, Casillero unCasillero) {
+			return naveEntraEn(unaNave, unCasillero);
+			
+			//ESTO PONIA LAS SECCIONES DE LA NAVE, PER CUANDO SALIA DE LA FUNCION
+			// EL METODO QUE LO LLAMABA, LAS VOLVIA A PONER
+			
+//				if (!this.naveEntraEn(unaNave, unCasillero)) {
+//					return false;
+//				}
+//		
+//				//Casillero casilleroActual = unCasillero;
+//		
+//				//for( SeccionDeNave seccion : unaNave.secciones()){
+//					//casilleroActual.ponerSeccionDeNave(seccion);
+//				//}
+//				
+//				return true;
+			}
+
+		private boolean naveEntraEn(Nave unaNave, Casillero casillero) {
+			int[] idProximo = new int[2];
+			Casillero unCasillero = casillero;
+			for (int tmp = 0; tmp <= unaNave.largo(); tmp++) {
+				
+					idProximo = this.idProximoCasilleroParaPonerSeccionDeNave(unCasillero, unaNave);
+					try {
+						unCasillero = this.obtenerCasillero(idProximo);
+					} catch (ErrorIdCasilleroInvalido e) {
+						return false;
+					}
+				}
+
+				return true;
+			}	
+			
+			
 	public LinkedList<Nave> devolverNaves(){
 		return this.naves;
 	}
-
+	
+	public int[] idProximoCasilleroParaPonerSeccionDeNave(Casillero casillero, Nave nave)
+	throws ErrorIdCasilleroInvalido{
+		int[] idCasillero = casillero.id();
+		
+		nave.invertirSentido();
+		Sentido sentidoInvetido = nave.direccion();
+		int[] patronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(sentidoInvetido);
+		nave.invertirSentido();
+		
+		int[] idProximoCasillero = this.sumarPatronDeSumaEId(idCasillero, patronDeSuma);
+		
+		return idProximoCasillero;		
+	
+	}
 
 
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa) {
@@ -285,32 +359,13 @@ public class Tablero implements Iterable {
 
 		// Debido a nuestra manera de poner las naves aleatoreamente en una
 		// posicion segura
-		// Las naves nunca transitan tocando el borde de manera paralela
-		
-		//Pequeño grafico para entender el if
-//		
-//		AAAAAAAAAB
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		C		 B
-//		CDDDDDDDDD
-
-		
+		// Las naves nunca transitan tocando el borde de manera paralela		
 
 		for (int x = 0; x < 10; x++) {
 			for (int y = 0; y < 10; y++) {
 				int[] idDeBorde = { x, y };
 
-				if (((x == 0) && (y >= 1 && y <= 9)) // C
-						|| ((x == 9) && (y >= 0 && y <= 9)) // B
-						|| ((x >= 0 && x <= 8) && y == 0) // A
-						|| ((x >= 1 && x <= 9) && y == 9)) {// D
+				if (this.esIdDeCasilleroDeBorde(x, y)) {// D
 
 					Casillero casilleroDelBorde = this
 							.obtenerCasillero(idDeBorde);
@@ -325,6 +380,36 @@ public class Tablero implements Iterable {
 			}
 		}
 
+	}
+	
+	public boolean esIdDeCasilleroDeBorde(int x, int y){
+		//Pequeño grafico para entender el if
+//		
+//		AAAAAAAAAB
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		C		 B
+//		CDDDDDDDDD
+
+		if (((x == 0) && (y >= 1 && y <= 9)) // C
+				|| ((x == 9) && (y >= 0 && y <= 9)) // B
+				|| ((x >= 0 && x <= 8) && y == 0) // A
+				|| ((x >= 1 && x <= 9) && y == 9))/*D*/ {
+			
+			return true;
+		}
+		return false;
+
+	}
+	
+	public boolean esIdDeCasilleroDeBorde(int[] idAProbar){
+		return esIdDeCasilleroDeBorde(idAProbar[0], idAProbar[1]);
 	}
 
 
@@ -388,4 +473,6 @@ public class Tablero implements Iterable {
 		}
 		return id;
 	}
+	
+
 }
