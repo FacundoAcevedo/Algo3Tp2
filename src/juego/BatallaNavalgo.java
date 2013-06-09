@@ -32,7 +32,7 @@ public class BatallaNavalgo {
 	}
 	
 	public void posicionarNavesAleatoriamente() {
-		this.tablero.posicionarNavesAleatoriamente();
+		this.tablero.construirYPosicionarLasNavesAleatoriamente();
 	}
 
 	public boolean juegoTerminado() {
