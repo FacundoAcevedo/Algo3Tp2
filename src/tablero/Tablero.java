@@ -74,7 +74,7 @@ public class Tablero implements Iterable {
 		arrayDeNaves[5] = new PortaAviones(arrayDeDirecciones[5]);
 		arrayDeNaves[6] = new RompeHielos(arrayDeDirecciones[6]);
 		
-		for (int i =5; i<7; i++){
+		for (int i =0; i<7; i++){
 			//int [] posProa = this.buscarCasilleroParaProa();
 			//this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
 			posicionarNaveAleatoriamenteEnTablero(arrayDeNaves[i]);
