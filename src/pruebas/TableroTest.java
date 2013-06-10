@@ -155,9 +155,6 @@ public class TableroTest {
 		Tablero tablero = new Tablero();
 		int[] posicionDeProa = {9,9};
 		Nave nave = new Lancha(new Direccion(Sentido.NORESTE));
-
-		SeccionDeNave seccionDeProaLuegoDeAvanzar; 
-		
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.invertirSentidoDeNavesEnElBorde();
@@ -167,19 +164,83 @@ public class TableroTest {
 		
 	}
 	
+	@Test
+	public void naveEncerrada() {
+		// Se pone una nave con sentido diagonal en una esquina del tablero
+		/* Gráfico:
+		 *  .......... 
+			.......... 
+			.......... 
+			.......... 
+			.......... 
+			.......... 
+			.......... 
+			.......... 
+			0......... 
+			.0........ 
+ 
+		 */
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		Nave nave = new Lancha(new Direccion(Sentido.NOROESTE));
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.invertirSentidoDeNavesEnElBorde();
+		
+		boolean exito;
+		try{
+			tablero.moverTodasLasNaves();
+			exito = true; //no hubo excepcion
+		}catch(Exception e){
+			exito = false;
+		}
+		//tablero.imprimirTablero();
+		//tablero.moverTodasLasNaves();
+		//tablero.imprimirTablero();
+		
+		assertTrue(exito);
 
+		
+	}
+	
+	@Test
+	public void movimientoNaveSentidoNoreste() {
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {7,9};
+		Nave nave = new Lancha(new Direccion(Sentido.NORESTE));
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.invertirSentidoDeNavesEnElBorde();
+		
+		assertTrue(nave.direccion() == Sentido.SUDOESTE);
 
+		
+	}
+	
+	@Test
+	public void movimientoNaveSentidoNoroeste() {
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {7,9};
+		Nave nave = new Lancha(new Direccion(Sentido.NOROESTE));
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.invertirSentidoDeNavesEnElBorde();
+		
+		assertTrue(nave.direccion() == Sentido.SUDESTE);
+
+		
+	}
+	
 	@Test
 	public void chocarUnaNaveContraUnBordeHorizontalDelTablero() {
 		// Se testea la existencia de las naves, y su tipo
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
-		int[] posicionDeProa = {8,5};
+		int[] posicionDeProa = {0,5};
 		Nave nave = new Lancha(new Direccion(Sentido.OESTE));
 
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.invertirSentidoDeNavesEnElBorde();
-
 		assertTrue(nave.direccion() == Sentido.ESTE);
 
 		
@@ -362,29 +423,5 @@ public class TableroTest {
 			assertTrue(idResultante[0] == 3 && idResultante[1] == 1 );
 		}
 	
-	/*
-	@Test
-	public void verBarcos(){
-		for(int x = 0; x< 1000; x++){
-			Tablero tablero = new Tablero();
-			tablero.construirYPosicionarLasNavesAleatoriamente();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-			tablero.moverTodasLasNaves();
-			tablero.imprimirTablero();
-		}
-		assertTrue(true);
-	}
-	*/
-
 }
 

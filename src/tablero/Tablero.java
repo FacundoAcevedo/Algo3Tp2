@@ -111,28 +111,28 @@ public class Tablero implements Iterable {
 			int[] nuevoId = new int[2]; 
 			
 			if (s == Sentido.NOROESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.NORTE) {
 				nuevoId[0] = c.id()[0];
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.NORESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.ESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1];
 			} else if (s == Sentido.SUDESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.SUR) {
 				nuevoId[0] = c.id()[0];
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.SUDOESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.OESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1];
 			}
 
@@ -144,28 +144,28 @@ public class Tablero implements Iterable {
 			int[] nuevoId = new int[2]; 
 			
 			if (s == Sentido.NOROESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.NORTE) {
 				nuevoId[0] = c.id()[0];
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.NORESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1] - 1;
 			} else if (s == Sentido.ESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1];
 			} else if (s == Sentido.SUDESTE) {
-				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[0] = c.id()[0] - 1;
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.SUR) {
 				nuevoId[0] = c.id()[0];
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.SUDOESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1] + 1;
 			} else if (s == Sentido.OESTE) {
-				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[0] = c.id()[0] + 1;
 				nuevoId[1] = c.id()[1];
 			}
 
@@ -481,7 +481,7 @@ public class Tablero implements Iterable {
 		int[] patronSudEste = { 1, -1 };
 		int[] patronNorEste = { 1, 1 };
 		int[] patronSudOeste = { -1, -1 };
-		int[] patronNorOeste = { -1, -1 };
+		int[] patronNorOeste = { -1, 1 };
 
 		if (sentido == Sentido.SUR)
 			return patronSur;
@@ -526,9 +526,9 @@ public class Tablero implements Iterable {
 	
 	public void imprimirTablero() {
 		
-		for (int x = 9; x >= 0; x--) {
-			for (int y = 9; y >= 0; y--) {
-				int[] id = { y, x };
+		for (int y = 9; y >= 0; y--) {
+			for (int x = 0; x < 10; x++) {
+				int[] id = { x, y };
 				if(this.obtenerCasillero(id).devolverSeccionesDeNave().isEmpty()){
 					System.out.print(".");
 				}else{
