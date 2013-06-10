@@ -139,12 +139,10 @@ public class TableroTest {
 		Tablero tablero = new Tablero();
 		int[] posicionDeProa = {1,0};
 		Nave nave = new Lancha(new Direccion(Sentido.SUR));
-		SeccionDeNave seccionDeProaLuegoDeAvanzar; 
-		
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.invertirSentidoDeNavesEnElBorde();
-		
+
 		assertTrue(nave.direccion() == Sentido.NORTE);
 
 		
@@ -176,22 +174,19 @@ public class TableroTest {
 		// Se testea la existencia de las naves, y su tipo
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
-		int[] posicionDeProa = {9,5};
-		Nave nave = new Lancha(new Direccion(Sentido.ESTE));
+		int[] posicionDeProa = {8,5};
+		Nave nave = new Lancha(new Direccion(Sentido.OESTE));
 
-		SeccionDeNave seccionDeProaLuegoDeAvanzar; 
-		
-		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.invertirSentidoDeNavesEnElBorde();
-		
-		assertTrue(nave.direccion() == Sentido.OESTE);
+
+		assertTrue(nave.direccion() == Sentido.ESTE);
 
 		
 	}
 	
 	@Test
-	public void moverUnaNaveYCocharContraUnBorde() {
+	public void moverUnaNaveYChocarContraUnBorde() {
 		// Se testea la existencia de las naves, y su tipo
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
@@ -366,6 +361,29 @@ public class TableroTest {
 
 			assertTrue(idResultante[0] == 3 && idResultante[1] == 1 );
 		}
+	
+	/*
+	@Test
+	public void verBarcos(){
+		Tablero tablero = new Tablero();
+		tablero.construirYPosicionarLasNavesAleatoriamente();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+		tablero.moverTodasLasNaves();
+		tablero.imprimirTablero();
+
+		assertTrue(false);
+	}
+	*/
 
 }
 

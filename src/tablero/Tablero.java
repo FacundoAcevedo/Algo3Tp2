@@ -88,56 +88,102 @@ public class Tablero implements Iterable {
 			Casillero unCasillero;
 			int[] id = new int[2];
 		
-				do {
-					id[0] = (int) (Math.random() * 10);
-					id[1] = (int) (Math.random() * 10);
-		
-					unCasillero = this.obtenerCasillero(id);
-				} while (this.esIdDeCasilleroDeBorde(id) || !this.ubicarProaDeNave(nave, unCasillero));
-				//Deberia salir del while cuando da falso las dos condiciones.
-				for( SeccionDeNave seccion : nave.secciones()){
-					id = this.idProximoCasilleroParaPonerSeccionDeNave(unCasillero,nave);
-					unCasillero = this.obtenerCasillero(id);
-					unCasillero.ponerSeccionDeNave(seccion);
-				}
-		
+			do {
+				id[0] = (int) (Math.random() * 10);
+				id[1] = (int) (Math.random() * 10);
+	
+				unCasillero = this.obtenerCasillero(id);
+			} while (!this.naveEntraEn(nave, unCasillero));
+			
+			for(SeccionDeNave unaSeccionDeNave : nave){
+				id = this.proximoCasilleroAlPosicionar(unCasillero, nave.direccion());
+				unCasillero = this.obtenerCasillero(id);
+				unCasillero.ponerSeccionDeNave(unaSeccionDeNave);
 			}
 
+		
+		}
 
-		public boolean ubicarProaDeNave(Nave unaNave, Casillero unCasillero) {
-			return naveEntraEn(unaNave, unCasillero);
+		/* Sirve para obtener el casillero proximo en la direccion */
+		public int[] proximoCasillero(Casillero c, Sentido s) {
+			int[] nuevoId = new int[2]; 
 			
-			//ESTO PONIA LAS SECCIONES DE LA NAVE, PER CUANDO SALIA DE LA FUNCION
-			// EL METODO QUE LO LLAMABA, LAS VOLVIA A PONER
-			
-//				if (!this.naveEntraEn(unaNave, unCasillero)) {
-//					return false;
-//				}
-//		
-//				//Casillero casilleroActual = unCasillero;
-//		
-//				//for( SeccionDeNave seccion : unaNave.secciones()){
-//					//casilleroActual.ponerSeccionDeNave(seccion);
-//				//}
-//				
-//				return true;
+			if (s == Sentido.NOROESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.NORTE) {
+				nuevoId[0] = c.id()[0];
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.NORESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.ESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1];
+			} else if (s == Sentido.SUDESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.SUR) {
+				nuevoId[0] = c.id()[0];
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.SUDOESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.OESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1];
 			}
 
-		private boolean naveEntraEn(Nave unaNave, Casillero casillero) {
-			int[] idProximo = new int[2];
-			Casillero unCasillero = casillero;
-			for (int tmp = 0; tmp <= unaNave.largo(); tmp++) {
-				
-					idProximo = this.idProximoCasilleroParaPonerSeccionDeNave(unCasillero, unaNave);
-					try {
-						unCasillero = this.obtenerCasillero(idProximo);
-					} catch (ErrorIdCasilleroInvalido e) {
-						return false;
-					}
-				}
+			return nuevoId;
+		}
+		
+		/* Sirve para posicionar la nave */
+		public int[] proximoCasilleroAlPosicionar(Casillero c, Sentido s) {
+			int[] nuevoId = new int[2]; 
+			
+			if (s == Sentido.NOROESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.NORTE) {
+				nuevoId[0] = c.id()[0];
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.NORESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1] - 1;
+			} else if (s == Sentido.ESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1];
+			} else if (s == Sentido.SUDESTE) {
+				nuevoId[0] = c.id()[0] + 1;
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.SUR) {
+				nuevoId[0] = c.id()[0];
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.SUDOESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1] + 1;
+			} else if (s == Sentido.OESTE) {
+				nuevoId[0] = c.id()[0] - 1;
+				nuevoId[1] = c.id()[1];
+			}
 
-				return true;
-			}	
+			return nuevoId;
+		}
+		
+		private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
+			int[] id = new int[2];
+
+			for (int tmp = 0; tmp < unaNave.largo(); tmp++) {
+				id = this.proximoCasilleroAlPosicionar(unCasillero, unaNave.direccion());
+				try {
+					unCasillero = this.obtenerCasillero(id);
+				} catch (ErrorIdCasilleroInvalido e) {
+					return false;
+				}
+			}
+
+			return true;
+		}	
 			
 			
 	public LinkedList<Nave> devolverNaves(){
@@ -184,7 +230,7 @@ public class Tablero implements Iterable {
 	public Casillero obtenerCasillero(int[] id) throws ErrorIdCasilleroInvalido {
 		Casillero.validarId(id);
 		String idString = this.estandarizarId(id);
-		return this.coleccionCasilleros.get(idString );
+		return this.coleccionCasilleros.get(idString);
 
 
 	}
@@ -328,21 +374,18 @@ public class Tablero implements Iterable {
 		
 		this.invertirSentidoDeNavesEnElBorde();
 		this.avanzarNaves();
-		
-		
 	}
+	
 	public void avanzarNaves(){
-		int[] idCasillero, patronDeSuma, idCasilleroProximo;
+		int[] idCasilleroProximo;
 		List<SeccionDeNave> seccionesYaMovidas = new LinkedList<SeccionDeNave>();
 		for ( Casillero casillero : coleccionCasilleros.values()){
 			
-			idCasillero = casillero.id();
 			
 			for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
 				if(!seccionesYaMovidas.contains(seccion)){
 				casillero.quitarSeccion(seccion);
-				patronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(seccion.sentido());
-				idCasilleroProximo = this.sumarPatronDeSumaEId(idCasillero, patronDeSuma);
+				idCasilleroProximo = this.proximoCasillero(casillero, seccion.sentido());
 				Casillero casilleroProximo = this.obtenerCasillero(idCasilleroProximo);
 				
 				casilleroProximo.ponerSeccionDeNave(seccion);
@@ -357,23 +400,24 @@ public class Tablero implements Iterable {
 	public void invertirSentidoDeNavesEnElBorde() {
 		// Las naves afectadas son aquellas que estan en el borde
 
-		// Debido a nuestra manera de poner las naves aleatoreamente en una
-		// posicion segura
-		// Las naves nunca transitan tocando el borde de manera paralela		
-
 		for (int x = 0; x < 10; x++) {
 			for (int y = 0; y < 10; y++) {
 				int[] idDeBorde = { x, y };
 
 				if (this.esIdDeCasilleroDeBorde(x, y)) {// D
-
 					Casillero casilleroDelBorde = this
 							.obtenerCasillero(idDeBorde);
 					List<SeccionDeNave> seccionesDeNaveEnBorde = casilleroDelBorde
 							.devolverSeccionesDeNave();
 
 					for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
-						seccion.invertirSentido();
+						int[] siguienteId = this.proximoCasillero(casilleroDelBorde, seccion.sentido());
+						try{
+							this.obtenerCasillero(siguienteId);
+						} catch (ErrorIdCasilleroInvalido e){
+							//el siguiente casillero se fue del mapa
+							seccion.invertirSentido();
+						}
 					}
 				}
 
@@ -474,5 +518,21 @@ public class Tablero implements Iterable {
 		return id;
 	}
 	
-
+	public void imprimirTablero() {
+		
+		for (int x = 9; x >= 0; x--) {
+			for (int y = 9; y >= 0; y--) {
+				int[] id = { y, x };
+				if(this.obtenerCasillero(id).devolverSeccionesDeNave().isEmpty()){
+					System.out.print(".");
+				}else{
+					System.out.print("0");
+				}
+			}
+			System.out.println(" ");
+		}
+		System.out.println(" ");
+	}
+	
+	
 }
