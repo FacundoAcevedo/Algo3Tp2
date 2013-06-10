@@ -37,7 +37,7 @@ public class Direccion {
 			return;
 		}
 		else if (this.miSentido == Sentido.NOROESTE){
-			this.miSentido = Sentido.SUDOESTE;
+			this.miSentido = Sentido.SUDESTE;
 			return;
 		}
 		else if (this.miSentido == Sentido.NORESTE){
