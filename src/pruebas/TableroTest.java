@@ -165,6 +165,29 @@ public class TableroTest {
 	}
 	
 	@Test
+	public void movimientoNavePegadaAlBorde() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,5};
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.moverTodasLasNaves();
+		tablero.moverTodasLasNaves();
+		tablero.moverTodasLasNaves();
+		
+		int[] nuevaPosicionProa = {0,8};
+		int[] nuevaPosicionPopa = {0,7};
+		boolean exito = (!tablero.obtenerCasillero(nuevaPosicionProa).estaVacio()) &&
+						(!tablero.obtenerCasillero(nuevaPosicionPopa).estaVacio());
+		
+		assertTrue(exito);
+
+		
+	}
+	
+	@Test
 	public void naveEncerrada() {
 		// Se pone una nave con sentido diagonal en una esquina del tablero
 		/* Gráfico:
@@ -200,7 +223,6 @@ public class TableroTest {
 		
 		assertTrue(exito);
 
-		
 	}
 	
 	@Test
