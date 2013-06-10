@@ -365,23 +365,24 @@ public class TableroTest {
 	/*
 	@Test
 	public void verBarcos(){
-		Tablero tablero = new Tablero();
-		tablero.construirYPosicionarLasNavesAleatoriamente();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-		tablero.moverTodasLasNaves();
-		tablero.imprimirTablero();
-
-		assertTrue(false);
+		for(int x = 0; x< 1000; x++){
+			Tablero tablero = new Tablero();
+			tablero.construirYPosicionarLasNavesAleatoriamente();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+			tablero.moverTodasLasNaves();
+			tablero.imprimirTablero();
+		}
+		assertTrue(true);
 	}
 	*/
 

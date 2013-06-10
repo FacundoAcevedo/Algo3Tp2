@@ -1,5 +1,7 @@
 package tablero;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -72,7 +74,7 @@ public class Tablero implements Iterable {
 		arrayDeNaves[5] = new PortaAviones(arrayDeDirecciones[5]);
 		arrayDeNaves[6] = new RompeHielos(arrayDeDirecciones[6]);
 		
-		for (int i =0; i<7; i++){
+		for (int i =5; i<7; i++){
 			//int [] posProa = this.buscarCasilleroParaProa();
 			//this.posicionarNaveEnTablero(arrayDeNaves[i], posProa);
 			posicionarNaveAleatoriamenteEnTablero(arrayDeNaves[i]);
@@ -382,7 +384,11 @@ public class Tablero implements Iterable {
 		for ( Casillero casillero : coleccionCasilleros.values()){
 			
 			
+			List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
 			for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
+				secciones.add(seccion);
+			}
+			for (SeccionDeNave seccion : secciones){
 				if(!seccionesYaMovidas.contains(seccion)){
 				casillero.quitarSeccion(seccion);
 				idCasilleroProximo = this.proximoCasillero(casillero, seccion.sentido());
