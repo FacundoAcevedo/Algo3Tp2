@@ -72,7 +72,7 @@ public class DireccionTest {
 	public void testInvertirSentidoNoroeste() {
 		Direccion direccion = new Direccion(Sentido.NOROESTE);
 		direccion.invertirSentido();
-		assertEquals(direccion.sentido() , Sentido.SUDOESTE);
+		assertEquals(direccion.sentido() , Sentido.SUDESTE);
 	
 	}
 	@Test
