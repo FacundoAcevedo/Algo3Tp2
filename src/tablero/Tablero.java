@@ -24,7 +24,7 @@ import naves.Sentido;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
-public class Tablero implements Iterable {
+public class Tablero implements Iterable, TableroComunicable {
 	
 	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<Casillero> casillerosConMunicion;
