@@ -1,13 +1,15 @@
 package juego;
 
 
+import java.util.Observable;
+
 import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import municiones.Municion;
 import tablero.Casillero;
 import tablero.Tablero;
 
 
-public class BatallaNavalgo {
+public class BatallaNavalgo extends Observable {
 	private Jugador jugador;
 	private Tablero tablero;
 	
@@ -75,6 +77,12 @@ public class BatallaNavalgo {
 	/* Cantidad de naves en el tablero, sin importar estado. */
 	public int cantidadTotalNaves(){
 		return this.tablero.cantidadTotalDeNaves();
+	}
+	
+	public void ActualizarObservadores()
+	{
+		setChanged();
+		notifyObservers();		
 	}
 	
 }
