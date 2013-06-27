@@ -190,7 +190,7 @@ public class TableroTest {
 	@Test
 	public void naveEncerrada() {
 		// Se pone una nave con sentido diagonal en una esquina del tablero
-		/* Gráfico:
+		/* Grï¿½fico:
 		 *  .......... 
 			.......... 
 			.......... 
@@ -402,30 +402,7 @@ public class TableroTest {
 				&& patron[1] == patronNorEste[1]);
 	}
 
-	@Test
-	public void buscarCasilleroParaProa() throws NoSuchMethodException,
-			IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException {
-		// pruebas por reflexion
-		// Se testea que este dentro de los limites de seguridad para la
-		// ubicacion de naves
-		Tablero tablero = new Tablero();
-		int limiteInferior = 3;
-		int limiteSuperior = 6;
-
-		Method buscarCasilleroParaProa = Tablero.class
-				.getDeclaredMethod("buscarCasilleroParaProa");
-		buscarCasilleroParaProa.setAccessible(true);
-
-		for (int i = 0; i < 100; i++) {
-			int[] idCasillero = (int[]) buscarCasilleroParaProa.invoke(tablero);
-
-			assertTrue(idCasillero[0] > limiteInferior
-					&& idCasillero[0] < limiteSuperior
-					&& idCasillero[1] > limiteInferior
-					&& idCasillero[1] < limiteSuperior);
-		}
-	}
+	
 	@Test
 	public void sumarPatronDeSumaEId() throws NoSuchMethodException,
 			IllegalAccessException, IllegalArgumentException,
