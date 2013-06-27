@@ -24,7 +24,7 @@ import naves.Sentido;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
-public class Tablero implements Iterable, TableroComunicable {
+public class Tablero implements  TableroComunicable {
 	
 	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<Casillero> casillerosConMunicion;
@@ -107,66 +107,66 @@ public class Tablero implements Iterable, TableroComunicable {
 		}
 
 		/* Sirve para obtener el casillero proximo en la direccion */
-		public int[] proximoCasillero(Casillero c, Sentido s) {
+		public int[] proximoCasillero(Casillero casillero, Sentido sentido) {
 			int[] nuevoId = new int[2]; 
 			
-			if (s == Sentido.NOROESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.NORTE) {
-				nuevoId[0] = c.id()[0];
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.NORESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.ESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1];
-			} else if (s == Sentido.SUDESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.SUR) {
-				nuevoId[0] = c.id()[0];
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.SUDOESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.OESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1];
+			if (sentido == Sentido.NOROESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.NORTE) {
+				nuevoId[0] = casillero.id()[0];
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.NORESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.ESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1];
+			} else if (sentido == Sentido.SUDESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.SUR) {
+				nuevoId[0] = casillero.id()[0];
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.SUDOESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.OESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1];
 			}
 
 			return nuevoId;
 		}
 		
 		/* Sirve para posicionar la nave */
-		public int[] proximoCasilleroAlPosicionar(Casillero c, Sentido s) {
+		public int[] proximoCasilleroAlPosicionar(Casillero casillero, Sentido sentido) {
 			int[] nuevoId = new int[2]; 
 			
-			if (s == Sentido.NOROESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.NORTE) {
-				nuevoId[0] = c.id()[0];
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.NORESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1] - 1;
-			} else if (s == Sentido.ESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1];
-			} else if (s == Sentido.SUDESTE) {
-				nuevoId[0] = c.id()[0] - 1;
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.SUR) {
-				nuevoId[0] = c.id()[0];
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.SUDOESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1] + 1;
-			} else if (s == Sentido.OESTE) {
-				nuevoId[0] = c.id()[0] + 1;
-				nuevoId[1] = c.id()[1];
+			if (sentido == Sentido.NOROESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.NORTE) {
+				nuevoId[0] = casillero.id()[0];
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.NORESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1] - 1;
+			} else if (sentido == Sentido.ESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1];
+			} else if (sentido == Sentido.SUDESTE) {
+				nuevoId[0] = casillero.id()[0] - 1;
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.SUR) {
+				nuevoId[0] = casillero.id()[0];
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.SUDOESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1] + 1;
+			} else if (sentido == Sentido.OESTE) {
+				nuevoId[0] = casillero.id()[0] + 1;
+				nuevoId[1] = casillero.id()[1];
 			}
 
 			return nuevoId;
@@ -192,20 +192,20 @@ public class Tablero implements Iterable, TableroComunicable {
 		return this.naves;
 	}
 	
-	public int[] idProximoCasilleroParaPonerSeccionDeNave(Casillero casillero, Nave nave)
-	throws ErrorIdCasilleroInvalido{
-		int[] idCasillero = casillero.id();
-		
-		nave.invertirSentido();
-		Sentido sentidoInvetido = nave.direccion();
-		int[] patronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(sentidoInvetido);
-		nave.invertirSentido();
-		
-		int[] idProximoCasillero = this.sumarPatronDeSumaEId(idCasillero, patronDeSuma);
-		
-		return idProximoCasillero;		
-	
-	}
+//	public int[] idProximoCasilleroParaPonerSeccionDeNave(Casillero casillero, Nave nave)
+//	throws ErrorIdCasilleroInvalido{
+//		int[] idCasillero = casillero.id();
+//		
+//		nave.invertirSentido();
+//		Sentido sentidoInvetido = nave.direccion();
+//		int[] patronDeSuma = this.patronDeSumaParaTrayectoriaDeNave(sentidoInvetido);
+//		nave.invertirSentido();
+//		
+//		int[] idProximoCasillero = this.sumarPatronDeSumaEId(idCasillero, patronDeSuma);
+//		
+//		return idProximoCasillero;		
+//	
+//	}
 
 
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa) {
@@ -265,29 +265,29 @@ public class Tablero implements Iterable, TableroComunicable {
 	}
 
 
-	@Override
-	public Iterator<Nave> iterator() {
-		Iterator<Nave> iterador = new Iterator<Nave>() {
-
-			private Iterator<Nave> iteradorDeNaves = naves.iterator();
-
-			@Override
-			public boolean hasNext() {
-				return iteradorDeNaves.hasNext();
-			}
-
-			@Override
-			public Nave next() {
-				return iteradorDeNaves.next();
-			}
-
-			@Override
-			public void remove() {
-				// no hace nada pero me obliga a definirlo.
-			}
-		};
-		return iterador;
-	}
+//	@Override
+//	public Iterator<Nave> iterator() {
+//		Iterator<Nave> iterador = new Iterator<Nave>() {
+//
+//			private Iterator<Nave> iteradorDeNaves = naves.iterator();
+//
+//			@Override
+//			public boolean hasNext() {
+//				return iteradorDeNaves.hasNext();
+//			}
+//
+//			@Override
+//			public Nave next() {
+//				return iteradorDeNaves.next();
+//			}
+//
+//			@Override
+//			public void remove() {
+//				// no hace nada pero me obliga a definirlo.
+//			}
+//		};
+//		return iterador;
+//	}
 
 	
 	public void agregarCasilleroConMunicion(Casillero casillero) {
@@ -297,38 +297,38 @@ public class Tablero implements Iterable, TableroComunicable {
 
 
 	
-	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo() {
-		Hashtable<Casillero, Integer> casilleros;
-		casilleros = new Hashtable<>();
-
-		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); // devolverMunciones().size();
-
-		/* Recorro la lista de casilleros con municiones */
-		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
-			Casillero casillero = this.coleccionCasilleros.get(casilleros
-					.get(i));
-
-			/* Miro municiones que hay en cada casillero */
-			int cantidadDeMunicionesEnCasillero = casillero
-					.devolverMuniciones().size();
-			for (int x = 0; x < cantidadDeMunicionesEnCasillero; x++) {
-
-				/* Me fijo si tienen retardo = 0 y agrego al Hashtable */
-				if (casillero.devolverMuniciones().get(x).retardo() == 0) {
-					casilleros.put(casillero, x); // Aunque si tiene dos
-													// municiones, una ret != 0
-													// y otra ret= 0, la agrega
-													// igual. hay qe verificar
-													// despu�s que solo se
-													// accionen las ret=0
-				}
-			}
-
-		}
-
-		return casilleros;
-	}
-
+//	private Hashtable<Casillero, Integer> casillerosConMunicionesSinRetardo() {
+//		Hashtable<Casillero, Integer> casilleros;
+//		casilleros = new Hashtable<>();
+//
+//		int cantidadDeCasillerosConMunicion = this.casillerosConMunicion.size(); // devolverMunciones().size();
+//
+//		/* Recorro la lista de casilleros con municiones */
+//		for (int i = 0; i < cantidadDeCasillerosConMunicion; i++) {
+//			Casillero casillero = this.coleccionCasilleros.get(casilleros
+//					.get(i));
+//
+//			/* Miro municiones que hay en cada casillero */
+//			int cantidadDeMunicionesEnCasillero = casillero
+//					.devolverMuniciones().size();
+//			for (int x = 0; x < cantidadDeMunicionesEnCasillero; x++) {
+//
+//				/* Me fijo si tienen retardo = 0 y agrego al Hashtable */
+//				if (casillero.devolverMuniciones().get(x).retardo() == 0) {
+//					casilleros.put(casillero, x); // Aunque si tiene dos
+//													// municiones, una ret != 0
+//													// y otra ret= 0, la agrega
+//													// igual. hay qe verificar
+//													// despu�s que solo se
+//													// accionen las ret=0
+//				}
+//			}
+//
+//		}
+//
+//		return casilleros;
+//	}
+	//queda
 	public void actualizarTablero() {
 //		0-Estallan las minas que tengan retardo 0/  - hecho
 //		1-Se resta 1 al retardo de la municion  - hecho
@@ -371,13 +371,13 @@ public class Tablero implements Iterable, TableroComunicable {
 
 
 	}
-	
+	//queda
 	public void moverTodasLasNaves(){
 		
 		this.invertirSentidoDeNavesEnElBorde();
 		this.avanzarNaves();
 	}
-	
+	//queda
 	public void avanzarNaves(){
 		int[] idCasilleroProximo;
 		List<SeccionDeNave> seccionesYaMovidas = new LinkedList<SeccionDeNave>();
@@ -402,7 +402,7 @@ public class Tablero implements Iterable, TableroComunicable {
 		seccionesYaMovidas.clear();
 		
 	}
-	
+	//queda
 	public void invertirSentidoDeNavesEnElBorde() {
 		// Las naves afectadas son aquellas que estan en el borde
 
@@ -431,7 +431,7 @@ public class Tablero implements Iterable, TableroComunicable {
 		}
 
 	}
-	
+	//queda
 	public boolean esIdDeCasilleroDeBorde(int x, int y){
 		//Pequeño grafico para entender el if
 //		
@@ -457,12 +457,12 @@ public class Tablero implements Iterable, TableroComunicable {
 		return false;
 
 	}
-	
+	//queda
 	public boolean esIdDeCasilleroDeBorde(int[] idAProbar){
 		return esIdDeCasilleroDeBorde(idAProbar[0], idAProbar[1]);
 	}
 
-
+	//queda
 	private int[] sumarPatronDeSumaEId(int[] id, int[] patronDeSuma) {
 		int[] total = new int[2];
 		total[0] = id[0] + patronDeSuma[0];
@@ -471,6 +471,7 @@ public class Tablero implements Iterable, TableroComunicable {
 		return total;
 	}
 
+	//queda
 	private int[] patronDeSumaParaTrayectoriaDeNave(Sentido sentido) {
 		// Devuelve un patron para sumarle al idCelda y ubicar las secciones de
 		// nave
@@ -502,28 +503,28 @@ public class Tablero implements Iterable, TableroComunicable {
 			return patronSudOeste;
 	}
 
-	private int[] buscarCasilleroParaProa() {
-		//Devuelve un id en un area segura y devuelve el id
-		boolean idXCorrecto = false;
-		boolean idYCorrecto = false;
-		int[] id = new int[2];
-		int MAX = 6, MIN = 3;
-
-		while (idXCorrecto == false) {
-			id[0] = (int) (Math.random() * 10);
-
-			if (id[0] < MAX && id[0] > MIN)
-				idXCorrecto = true;
-		}
-
-		while (idYCorrecto == false) {
-			id[1] = (int) (Math.random() * 10);
-			if (id[1] < MAX && id[1] > MIN)
-				idYCorrecto = true;
-		}
-		return id;
-	}
-	
+//	private int[] buscarCasilleroParaProa() {
+//		//Devuelve un id en un area segura y devuelve el id
+//		boolean idXCorrecto = false;
+//		boolean idYCorrecto = false;
+//		int[] id = new int[2];
+//		int MAX = 6, MIN = 3;
+//
+//		while (idXCorrecto == false) {
+//			id[0] = (int) (Math.random() * 10);
+//
+//			if (id[0] < MAX && id[0] > MIN)
+//				idXCorrecto = true;
+//		}
+//
+//		while (idYCorrecto == false) {
+//			id[1] = (int) (Math.random() * 10);
+//			if (id[1] < MAX && id[1] > MIN)
+//				idYCorrecto = true;
+//		}
+//		return id;
+//	}
+//	
 	public void imprimirTablero() {
 		
 		for (int y = 9; y >= 0; y--) {
