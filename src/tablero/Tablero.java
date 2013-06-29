@@ -105,6 +105,7 @@ public class Tablero implements  TableroComunicable {
 
 		
 		}
+		
 
 		/* Sirve para obtener el casillero proximo en la direccion */
 		public int[] proximoCasillero(Casillero casillero, Sentido sentido) {
@@ -173,9 +174,11 @@ public class Tablero implements  TableroComunicable {
 		}
 		
 		private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
-			int[] id = new int[2];
+			//Verifica que la nave entre, y que tenga un casillero al frente 
+			//y detras, para moverse, esto impide que la nave quede bloqueada
+			int[] id = this.proximoCasillero(unCasillero, unaNave.direccion());
 
-			for (int tmp = 0; tmp < unaNave.largo(); tmp++) {
+			for (int tmp = 0; tmp < (unaNave.largo()+1); tmp++) {
 				id = this.proximoCasilleroAlPosicionar(unCasillero, unaNave.direccion());
 				try {
 					unCasillero = this.obtenerCasillero(id);
