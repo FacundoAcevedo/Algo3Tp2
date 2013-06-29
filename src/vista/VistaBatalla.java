@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -34,7 +35,7 @@ public class VistaBatalla implements Observer {
         private JPanel panelPuntaje = new JPanel(); //creamos el panel que contiene el puntaje
         private Label labelPuntos = new Label("Puntos"); //etiqueta de "Puntos"
 		private TextField textoPuntos = new TextField(); //texto que mostrara el puntaje
-        private JPanel panelTablero = new JPanel(); //creamos el panel que contiene el tablero
+        private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private JList listaMuniciones = new JList();//listado de municiones
         
@@ -101,6 +102,9 @@ public class VistaBatalla implements Observer {
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:5dlu"),}));
+	        
+	        
+	        
 	        
 	        JButton botonCasillero_A1 = new JButton();
 	        panelTablero.add(botonCasillero_A1, "2, 2");
@@ -401,6 +405,14 @@ public class VistaBatalla implements Observer {
 	        
 	        JButton botonCasillero_J10 = new JButton();
 	        panelTablero.add(botonCasillero_J10, "11, 11");
+	    
+	        
+	        //Hace que los botones de casillero sean transparentes
+	        Component[] componentes =panelTablero.getComponents(); 
+	        for(int i=0; i<componentes.length;i++) 
+	        { 
+	        	((JButton)componentes[i]).setContentAreaFilled(false);
+	        } 
 	        
 	        
 	        
