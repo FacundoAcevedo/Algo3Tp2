@@ -2,8 +2,10 @@ package vista;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.TextField;
@@ -26,6 +28,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import controlador.Controlador;
 
 import juego.BatallaNavalgo;
+import java.awt.event.*;
 
 public class VistaBatalla implements Observer {
 
@@ -38,6 +41,8 @@ public class VistaBatalla implements Observer {
         private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private JList listaMuniciones = new JList();//listado de municiones
+        private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
+        private JPanel panelBotones = new JPanel(); //Panel de "botones"
         
 		//Constructor de la vista
 		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
@@ -50,7 +55,33 @@ public class VistaBatalla implements Observer {
 	        frameBatalla.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 	        frameBatalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        frameBatalla.getContentPane().setLayout(new BoxLayout(frameBatalla.getContentPane(), BoxLayout.X_AXIS));
-	        
+	          
+	       
+	        panelBotones.setLayout(new GridLayout(0, 1));
+		  	  
+	        // crear y agregar botones
+	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este botón debería posicionar las naves. (sería partida() de batalla navalgo)
+	        JButton botonIniciar = botones[ 0 ];
+            panelBotones.add( botonIniciar);
+
+            
+	        botones[ 1 ] = new JButton ("Salir del Juego");
+	        JButton botonSalir = botones [ 1 ];
+            panelBotones.add( botonSalir );
+            
+
+	        botonSalir.addActionListener(new ActionListener ()
+	        {
+	        	   public void actionPerformed (ActionEvent e)
+	        	   {
+	        		   if (e.getSource()== botones [ 1 ]) {
+	        	            System.exit(0);
+	        	   } 
+	        	}
+	        });
+
+	        frameBatalla.getContentPane().add( panelBotones);
+	      
 			
 	        frameBatalla.getContentPane().add(panelPuntaje);
 	        GridBagLayout gbl_panel = new GridBagLayout();
@@ -74,6 +105,8 @@ public class VistaBatalla implements Observer {
 	        gbc_textField.gridx = 2;
 	        gbc_textField.gridy = 2;
 	        panelPuntaje.add(textoPuntos, gbc_textField);
+	    
+	        
 	        
 	        frameBatalla.getContentPane().add(panelTablero);
 	        panelTablero.setLayout(new FormLayout(new ColumnSpec[] {
@@ -415,7 +448,6 @@ public class VistaBatalla implements Observer {
 	        } 
 	        
 	        
-	        
 	        frameBatalla.getContentPane().add(panelLista);
 	        GridBagLayout gbl_panel_2 = new GridBagLayout();
 	        gbl_panel_2.columnWidths = new int[]{0, 89, 22, 0};
@@ -447,6 +479,14 @@ public class VistaBatalla implements Observer {
 	        panelLista.add(listaMuniciones, gbc_list);
 	        
 	        frameBatalla.pack();
+	        
+	        
+
+	      
+	        
+	        
+	        
+	       
 	        
 	        //DEJO LA SIGUIENTE LINEA COMENTADA PARA QUE NO ME ROMPA LOS HUEVOS EL COMPILADOR
 	        //listaMuniciones.addListSelectionListener(control.getListenerLista());
