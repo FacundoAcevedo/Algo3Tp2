@@ -7,11 +7,12 @@ import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import municiones.Municion;
 import tablero.Casillero;
 import tablero.Tablero;
+import tablero.TableroComunicable;
 
 
 public class BatallaNavalgo extends Observable {
 	private Jugador jugador;
-	private Tablero tablero;
+	private TableroComunicable tablero;
 	
 	public BatallaNavalgo(){
 		this.jugador = new Jugador();
@@ -26,16 +27,16 @@ public class BatallaNavalgo extends Observable {
 	}
 	
 	public void ronda(){
-		Municion municionElegida = this.jugador.eligeMunicion();
-		Casillero casilleroElegido = this.jugador.eligeCasillero(this.tablero);
-		
-		try {
-			casilleroElegido.ponerMunicion(municionElegida);
-		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
-			// Y aca lo mismo, ver que hace
-		}
-		
-		this.finDeTurno();
+//		Municion municionElegida = this.jugador.eligeMunicion();
+//		Casillero casilleroElegido = this.jugador.eligeCasillero(this.tablero);
+//		
+//		try {
+//			casilleroElegido.ponerMunicion(municionElegida);
+//		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
+//			// Y aca lo mismo, ver que hace
+//		}
+//		
+//		this.finDeTurno();
 	}
 	
 	public void posicionarNavesAleatoriamente() {
@@ -50,7 +51,7 @@ public class BatallaNavalgo extends Observable {
 		return this.jugador;
 	}
 	
-	public Tablero tablero(){
+	public TableroComunicable tablero(){
 		return this.tablero;
 	}
 	
