@@ -8,6 +8,7 @@ import excepciones.ErrorIdCasilleroInvalido;
 
 import naves.SeccionDeNave;
 import municiones.DisparoConvencional;
+import municiones.MinaSubmarinaConRetardo;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
@@ -33,7 +34,20 @@ public class Casillero {
 		}
 
 	}
-
+//	public void actualizarContenidos(){
+//		//Verifica que las minas que deban estallar, estallen
+//		if (tieneMuniciones()){
+//			for( Municion municion : coleccionMuniciones){
+//				if ( municion instanceof MinaSubmarinaConRetardo && municion.retardo() == 0){
+//					for (SeccionDeNave seccion : coleccionDeSeccionesDeNave)
+//						seccion.recibirImpacto(municion);
+//					coleccionMuniciones.remove(municion);
+//						
+//					
+//				}
+//			}
+//		}
+//	}
 	public List<SeccionDeNave> devolverSeccionesDeNave() {
 		return this.coleccionDeSeccionesDeNave;
 	}
@@ -45,7 +59,7 @@ public class Casillero {
 		return (this.coleccionMuniciones.size() > 0);
 	}
 
-	public void ponerMunicion(Municion municion) throws ErrorCasilleroOcupadoConOtraMunicion{
+	public void ponerMunicion(Municion municion){// throws ErrorCasilleroOcupadoConOtraMunicion{
 		
 		if (municion instanceof DisparoConvencional
 				|| (municion instanceof MinaSubmarinaPorContacto && coleccionDeSeccionesDeNave.size() > 0)){
@@ -54,11 +68,10 @@ public class Casillero {
 			}
 		}
 		
-		else if (!this.coleccionMuniciones.contains(municion)) {
+		else {
 			this.coleccionMuniciones.add(municion);
 		}
-		else
-			throw new ErrorCasilleroOcupadoConOtraMunicion();
+		
 
 	}
 
@@ -95,6 +108,9 @@ public class Casillero {
 	
 	public void quitarSeccion(SeccionDeNave seccion){
 		this.coleccionDeSeccionesDeNave.remove(seccion);
+	}
+	public void quitarMina(Municion mina){
+		this.coleccionMuniciones.remove(mina);
 	}
 //	public void efectuarImpacto(int indiceMunicion){
 //		/*Si hay naves*/
