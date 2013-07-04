@@ -258,9 +258,10 @@ public class Tablero implements  TableroComunicable {
 	}
 	
 	public void actualizarTablero() {
-//		0-Se resta 1 al retardo de la municion  
+//		0-Se mueven las naves
 //		1-Estallan las minas que tengan retardo 0
-//		2-Se mueven las naves
+//		2-Se resta 1 al retardo de la municion  
+
 
 		
 		this.moverTodasLasNaves();
