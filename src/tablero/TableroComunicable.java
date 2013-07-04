@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import excepciones.ErrorIdCasilleroInvalido;
 
+import municiones.Municion;
 import naves.Nave;
 
 public interface TableroComunicable {
@@ -17,6 +18,8 @@ public interface TableroComunicable {
 	public int cantidadDeNavesActivas();
 	public int cantidadDeNavesDestruidas();
 	public void actualizarTablero();
-	
+	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa);
+	public void ponerMuncion(Municion municion, int[] id);
+	public void imprimirTablero();
 
 }
