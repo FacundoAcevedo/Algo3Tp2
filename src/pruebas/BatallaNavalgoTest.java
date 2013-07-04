@@ -4,10 +4,17 @@ import static org.junit.Assert.*;
 import juego.BatallaNavalgo;
 
 import municiones.DisparoConvencional;
+import municiones.MinaSubmarina;
 import municiones.MinaSubmarinaDobleConRetardo;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.MinaSubmarinaPuntualConRetardo;
 import municiones.MinaSubmarinaTripleConRetardo;
+import municiones.Municion;
+import naves.Direccion;
+import naves.EstadoDeSalud;
+import naves.Lancha;
+import naves.Nave;
+import naves.Sentido;
 
 import org.junit.Test;
 
@@ -32,6 +39,26 @@ public class BatallaNavalgoTest {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
 		assertTrue(batallaNavalgo.tablero().cantidadTotalDeNaves() == 0);
 	} 
+	
+	@Test
+	public void naveChocaContraMinaDeContacto() {
+		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
+		Direccion direccion = new Direccion(Sentido.NORTE);
+		Nave lancha = new Lancha(direccion);
+		int[] posProa = {5,5};
+		Municion minaContacto = new MinaSubmarinaPorContacto();
+		int[] posMina = {5,6};
+		batallaNavalgo.tablero().posicionarNaveEnTablero(lancha, posProa);
+		batallaNavalgo.tablero().ponerMuncion(minaContacto, posMina);
+//		batallaNavalgo.tablero().imprimirTablero();
+		assertTrue(lancha.estado() == EstadoDeSalud.SANO);
+		batallaNavalgo.tablero().actualizarTablero();
+//		batallaNavalgo.tablero().imprimirTablero();
+		assertTrue(lancha.estado() != EstadoDeSalud.SANO);
+
+	} 
+	
+	
 	
 	/*
 	 * Se sac� jugadorDispara de jugador, y por ende de batallaNavalgo.
