@@ -125,17 +125,10 @@ public class CasilleroTest {
 		listadoMuniciones.add(minaSubmarinaDobleConRetardo);
 		listadoMuniciones.add(minaSubmarinaPuntualConRetardo);
 
-		try {
 			casillero.ponerMunicion(minaSubmarinaDobleConRetardo);
-		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
-			// Ver que hacemos aca
-		}
-		try {
+
+
 			casillero.ponerMunicion(minaSubmarinaPuntualConRetardo);
-		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
-			// Ver que hacemos aca
-		}
-		// assertEquals(casillero.devolverMuniciones(), listadoMuniciones);
 		for (int i = 0; i < listadoMuniciones.size(); i++) {
 			assertTrue(casillero.devolverMuniciones().get(i) == listadoMuniciones
 					.get(i));
