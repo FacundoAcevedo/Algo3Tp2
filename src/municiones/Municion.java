@@ -14,8 +14,8 @@ public class Municion {
 	}
 	
 	public void disminuirRetardo(){
-		if (miRetardo <= 0) return;
-		miRetardo--;
+		if (miRetardo > 0)
+			miRetardo -=1;
 	}
 	
 	public int costo(){
