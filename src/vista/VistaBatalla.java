@@ -36,10 +36,11 @@ public class VistaBatalla implements Observer {
 		private BatallaNavalgo modelo; //referencia al modelo
 		private JFrame frameBatalla = new JFrame("Batalla Navalgo"); //creamos el marco
         private JPanel panelPuntaje = new JPanel(); //creamos el panel que contiene el puntaje
-        private Label labelPuntos = new Label("Puntos"); //etiqueta de "Puntos"
+        private Label labelPuntos = new Label("Puntos:"); //etiqueta de "Puntos"
 		private TextField textoPuntos = new TextField(); //texto que mostrara el puntaje
         private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
+        private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Puntos"
         private JList listaMuniciones = new JList();//listado de municiones
         private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
@@ -51,7 +52,7 @@ public class VistaBatalla implements Observer {
 
 
 	        frameBatalla.setVisible(true);
-	        frameBatalla.setAlwaysOnTop(true);
+	        frameBatalla.setAlwaysOnTop(false); //En false para poder minimizar la pantalla
 	        frameBatalla.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 	        frameBatalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        frameBatalla.getContentPane().setLayout(new BoxLayout(frameBatalla.getContentPane(), BoxLayout.X_AXIS));
@@ -60,9 +61,9 @@ public class VistaBatalla implements Observer {
 	        panelBotones.setLayout(new GridLayout(0, 1));
 		  	  
 	        // crear y agregar botones
-	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este botón debería posicionar las naves. (sería partida() de batalla navalgo)
+	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este botï¿½n deberï¿½a posicionar las naves. (serï¿½a partida() de batalla navalgo)
 	        JButton botonIniciar = botones[ 0 ];
-            panelBotones.add( botonIniciar);
+            panelBotones.add( botonIniciar );
 
             
 	        botones[ 1 ] = new JButton ("Salir del Juego");
