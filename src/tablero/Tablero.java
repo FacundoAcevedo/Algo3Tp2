@@ -252,19 +252,18 @@ public class Tablero implements  TableroComunicable {
 		return (totalNaves - totalNavesActivas);
 	}
 
-
-	
-	public void agregarCasilleroConMunicion(Casillero casillero) {
-		this.casillerosConMunicion.add(casillero);
+	public void ponerMuncion(Municion municion, int[] id) {
+		Casillero casillero = this.obtenerCasillero(id);
+		casillero.ponerMunicion(municion);
 	}
 	
 	public void actualizarTablero() {
-//		0-Estallan las minas que tengan retardo 0/  - hecho
-//		1-Se resta 1 al retardo de la municion  - hecho
+//		0-Se resta 1 al retardo de la municion  
+//		1-Estallan las minas que tengan retardo 0
 //		2-Se mueven las naves
 
 		
-		
+		this.moverTodasLasNaves();
 		for (Casillero casillero : coleccionCasilleros.values()){
 			if( casillero.tieneMuniciones() ){
 				List<Municion> municiones = casillero.devolverMuniciones();
@@ -274,17 +273,17 @@ public class Tablero implements  TableroComunicable {
 					if (municion.retardo() == 0){
 						
 						if(casillero.tieneSeccionesDeNave()){
-							//Quita las minas por contacto tambien
-							municiones.remove(municion);							
+							for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave())
+								seccion.recibirImpacto(municion);
+						
+							casillero.quitarMina(municion);
 						}
 						else if (!(municion instanceof MinaSubmarinaPorContacto)){
 							//Quita las minas que esten con retardo 0 pero que no sean por contacto
-							municiones.remove(municion);
+							casillero.quitarMina(municion);
 						}//if
 						
-						for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave()){
-							seccion.recibirImpacto(municion);
-						}//for
+						
 						
 					}//if
 					else
@@ -295,7 +294,7 @@ public class Tablero implements  TableroComunicable {
 			}//if
 		}//for
 		
-		this.moverTodasLasNaves();
+		
 		
 
 
@@ -437,11 +436,14 @@ public class Tablero implements  TableroComunicable {
 		for (int y = 9; y >= 0; y--) {
 			for (int x = 0; x < 10; x++) {
 				int[] id = { x, y };
-				if(this.obtenerCasillero(id).devolverSeccionesDeNave().isEmpty()){
+				if(this.obtenerCasillero(id).tieneMuniciones()){
+					System.out.print("*");
+				}else if (this.obtenerCasillero(id).devolverSeccionesDeNave().isEmpty()){
 					System.out.print(".");
-				}else{
-					System.out.print("0");
 				}
+				else
+					System.out.print("0");
+
 			}
 			System.out.println(" ");
 		}

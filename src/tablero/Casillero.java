@@ -56,7 +56,7 @@ public class Casillero {
 		return (this.coleccionMuniciones.size() > 0);
 	}
 	public boolean tieneSeccionesDeNave(){
-		return (this.coleccionMuniciones.size() > 0);
+		return (this.coleccionDeSeccionesDeNave.size() > 0);
 	}
 
 	public void ponerMunicion(Municion municion){// throws ErrorCasilleroOcupadoConOtraMunicion{
