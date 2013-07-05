@@ -114,10 +114,8 @@ public class VistaBatalla implements Observer {
 	        
 	        
 	        frameBatalla.getContentPane().add(panelTablero);
-	        //esas dos columnas y filas de mas son bonitas, 
-	        //pero se complica para la identificacion los casilleros
 	        panelTablero.setLayout(new FormLayout(new ColumnSpec[] {
-	        		//ColumnSpec.decode("5dlu"),
+	        		
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
@@ -128,10 +126,10 @@ public class VistaBatalla implements Observer {
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
-	        		//ColumnSpec.decode("5dlu"),
+	        		
 	        		},
 	        	new RowSpec[] {
-	        		//RowSpec.decode("fill:5dlu"),
+	        		
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
@@ -550,6 +548,7 @@ public class VistaBatalla implements Observer {
 	        panelTablero.add(botonCasillero_99, " 10, 1");
 	        botonCasillero_99.putClientProperty("id", "9,9");
 
+	        
 	    
 	        
 	        //Hace que los botones de casillero sean transparentes
