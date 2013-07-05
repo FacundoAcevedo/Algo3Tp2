@@ -41,15 +41,16 @@ public class Tablero implements  TableroComunicable {
 	
 	private void crearCasilleros(){
 
-	for (int x = 0; x < 10; x++) {
-		for (int y = 0; y < 10; y++) {
-			int[] id = { x, y };
-			String id_string = this.estandarizarId(id);
-			this.coleccionCasilleros.put(id_string, new Casillero(id));
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
+				int[] id = { x, y };
+				String id_string = this.estandarizarId(id);
+				this.coleccionCasilleros.put(id_string, new Casillero(id));
+			}
 		}
-	}
 
-}
+	}
+	
 	public  String estandarizarId(int[] id){
 		//Transforma el id de array al que se usa como llave en la tabla de casilleros
 		String id_string = Integer.toString(id[0]) + Integer.toString(id[1]);
@@ -84,113 +85,113 @@ public class Tablero implements  TableroComunicable {
 		}
 	}
 	
-		public void posicionarNaveAleatoriamenteEnTablero(Nave nave) {
-			
-			this.naves.add(nave);
-			Casillero unCasillero;
-			int[] id = new int[2];
+	public void posicionarNaveAleatoriamenteEnTablero(Nave nave) {
 		
-			do {
-				id[0] = (int) (Math.random() * 10);
-				id[1] = (int) (Math.random() * 10);
+		this.naves.add(nave);
+		Casillero unCasillero;
+		int[] id = new int[2];
 	
+		do {
+			id[0] = (int) (Math.random() * 10);
+			id[1] = (int) (Math.random() * 10);
+
+			unCasillero = this.obtenerCasillero(id);
+		} while (!this.naveEntraEn(nave, unCasillero));
+		
+		for(SeccionDeNave unaSeccionDeNave : nave){
+			id = this.proximoCasilleroAlPosicionar(unCasillero, nave.direccion());
+			unCasillero = this.obtenerCasillero(id);
+			unCasillero.ponerSeccionDeNave(unaSeccionDeNave);
+		}
+
+	
+	}
+	
+
+	/* Sirve para obtener el casillero proximo en la direccion */
+	public int[] proximoCasillero(Casillero casillero, Sentido sentido) {
+		int[] nuevoId = new int[2]; 
+		
+		if (sentido == Sentido.NOROESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.NORTE) {
+			nuevoId[0] = casillero.id()[0];
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.NORESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.ESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1];
+		} else if (sentido == Sentido.SUDESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.SUR) {
+			nuevoId[0] = casillero.id()[0];
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.SUDOESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.OESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1];
+		}
+
+		return nuevoId;
+	}
+	
+	/* Sirve para posicionar la nave */
+	public int[] proximoCasilleroAlPosicionar(Casillero casillero, Sentido sentido) {
+		int[] nuevoId = new int[2]; 
+		
+		if (sentido == Sentido.NOROESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.NORTE) {
+			nuevoId[0] = casillero.id()[0];
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.NORESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1] - 1;
+		} else if (sentido == Sentido.ESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1];
+		} else if (sentido == Sentido.SUDESTE) {
+			nuevoId[0] = casillero.id()[0] - 1;
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.SUR) {
+			nuevoId[0] = casillero.id()[0];
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.SUDOESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1] + 1;
+		} else if (sentido == Sentido.OESTE) {
+			nuevoId[0] = casillero.id()[0] + 1;
+			nuevoId[1] = casillero.id()[1];
+		}
+
+		return nuevoId;
+	}
+	
+	private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
+		//Verifica que la nave entre, y que tenga un casillero al frente 
+		//y detras, para moverse, esto impide que la nave quede bloqueada
+		int[] id = this.proximoCasillero(unCasillero, unaNave.direccion());
+
+		for (int tmp = 0; tmp < (unaNave.largo()+1); tmp++) {
+			id = this.proximoCasilleroAlPosicionar(unCasillero, unaNave.direccion());
+			try {
 				unCasillero = this.obtenerCasillero(id);
-			} while (!this.naveEntraEn(nave, unCasillero));
-			
-			for(SeccionDeNave unaSeccionDeNave : nave){
-				id = this.proximoCasilleroAlPosicionar(unCasillero, nave.direccion());
-				unCasillero = this.obtenerCasillero(id);
-				unCasillero.ponerSeccionDeNave(unaSeccionDeNave);
+			} catch (ErrorIdCasilleroInvalido e) {
+				return false;
 			}
-
-		
 		}
+
+		return true;
+	}	
 		
-
-		/* Sirve para obtener el casillero proximo en la direccion */
-		public int[] proximoCasillero(Casillero casillero, Sentido sentido) {
-			int[] nuevoId = new int[2]; 
-			
-			if (sentido == Sentido.NOROESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.NORTE) {
-				nuevoId[0] = casillero.id()[0];
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.NORESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.ESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1];
-			} else if (sentido == Sentido.SUDESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.SUR) {
-				nuevoId[0] = casillero.id()[0];
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.SUDOESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.OESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1];
-			}
-
-			return nuevoId;
-		}
 		
-		/* Sirve para posicionar la nave */
-		public int[] proximoCasilleroAlPosicionar(Casillero casillero, Sentido sentido) {
-			int[] nuevoId = new int[2]; 
-			
-			if (sentido == Sentido.NOROESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.NORTE) {
-				nuevoId[0] = casillero.id()[0];
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.NORESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1] - 1;
-			} else if (sentido == Sentido.ESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1];
-			} else if (sentido == Sentido.SUDESTE) {
-				nuevoId[0] = casillero.id()[0] - 1;
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.SUR) {
-				nuevoId[0] = casillero.id()[0];
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.SUDOESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1] + 1;
-			} else if (sentido == Sentido.OESTE) {
-				nuevoId[0] = casillero.id()[0] + 1;
-				nuevoId[1] = casillero.id()[1];
-			}
-
-			return nuevoId;
-		}
-		
-		private boolean naveEntraEn(Nave unaNave, Casillero unCasillero) {
-			//Verifica que la nave entre, y que tenga un casillero al frente 
-			//y detras, para moverse, esto impide que la nave quede bloqueada
-			int[] id = this.proximoCasillero(unCasillero, unaNave.direccion());
-
-			for (int tmp = 0; tmp < (unaNave.largo()+1); tmp++) {
-				id = this.proximoCasilleroAlPosicionar(unCasillero, unaNave.direccion());
-				try {
-					unCasillero = this.obtenerCasillero(id);
-				} catch (ErrorIdCasilleroInvalido e) {
-					return false;
-				}
-			}
-
-			return true;
-		}	
-			
-			
 	public LinkedList<Nave> devolverNaves(){
 		return this.naves;
 	}
