@@ -3,6 +3,7 @@ package vista;
 import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -26,6 +27,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import controlador.Controlador;
+import controlador.ControladorBotonesTablero;
 
 import juego.BatallaNavalgo;
 import java.awt.event.*;
@@ -45,8 +47,10 @@ public class VistaBatalla implements Observer {
         private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
         
+        
+        
 		//Constructor de la vista
-		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
+		public VistaBatalla(BatallaNavalgo modelo, Controlador control, ControladorBotonesTablero controladorBotonesTablero)
 		{	
 			//armado de la ventana
 
@@ -545,15 +549,16 @@ public class VistaBatalla implements Observer {
 	        JButton botonCasillero_99 = new JButton();
 	        panelTablero.add(botonCasillero_99, " 10, 1");
 	        botonCasillero_99.putClientProperty("id", "9,9");
-	        //
-	        
+
 	    
 	        
 	        //Hace que los botones de casillero sean transparentes
+	        //y les agregro su listener
 	        Component[] componentes =panelTablero.getComponents(); 
 	        for(int i=0; i<componentes.length;i++) 
 	        { 
 	        	((JButton)componentes[i]).setContentAreaFilled(false);
+				((JButton)componentes[i]).addActionListener(controladorBotonesTablero);
 	        } 
 	        
 	        
