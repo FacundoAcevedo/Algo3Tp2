@@ -1,5 +1,8 @@
 package municiones;
 
+import tablero.Casillero;
+import tablero.Tablero;
+
 public class Municion {
 	private int miCosto;
 	private int miRetardo;
@@ -20,6 +23,10 @@ public class Municion {
 	
 	public int costo(){
 		return miCosto;
+	}
+	
+	public void impactar(Tablero tablero, Casillero miCasillero){
+		
 	}
 	
 }
