@@ -3,12 +3,10 @@ package tablero;
 import java.util.LinkedList;
 import java.util.List;
 
-import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import excepciones.ErrorIdCasilleroInvalido;
 
 import naves.SeccionDeNave;
 import municiones.DisparoConvencional;
-import municiones.MinaSubmarinaConRetardo;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
