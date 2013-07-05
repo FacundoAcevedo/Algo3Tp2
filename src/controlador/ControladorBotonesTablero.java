@@ -9,14 +9,14 @@ import vista.VistaBatalla;
 
 public class ControladorBotonesTablero implements ActionListener{
 	private VistaBatalla vista;
-	public ControladorBotonesTablero(VistaBatalla vistaBatalla){
-		vista = vistaBatalla;
+	public ControladorBotonesTablero(){
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton boton = (JButton) arg0.getSource();
-		//String nombreMunicion = vista.
+
 		
 		System.out.print(boton.getClientProperty("id"));
 		
