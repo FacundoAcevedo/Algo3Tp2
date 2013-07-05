@@ -225,6 +225,57 @@ public class Tablero implements  TableroComunicable {
 
 
 	}
+	
+	public List<Casillero> obtenerAledanyos(Casillero casillero, int rango){
+		//Devuelve lista con los casilleros cercanos al casillero(el inclusive).
+		// Rango indica la distancia maxima de los casilleros buscados.
+		
+		List<Casillero> casilleros = new LinkedList<Casillero>();
+		
+		if (rango < 1){
+			casilleros.add(casillero);
+			return casilleros;
+		}
+		
+		List<Casillero> casillerosTmp;
+		
+		Casillero casilleroObtenido;
+		int[] id = casillero.id();
+		int x = id[0];
+		int y = id[1];
+		int[] idObtenido = new int[2];
+		
+		int dx, dy;
+		
+		for (dx = x-1; dx <= x+1; ++dx) {
+			for (dy = y-1; dy <= y+1; ++dy) {
+				idObtenido[0] = dx;
+				idObtenido[1] = dy; 
+				try{
+					casilleroObtenido = this.obtenerCasillero(idObtenido);
+					if(!casilleros.contains(casilleroObtenido)){
+						casilleros.add(casilleroObtenido);
+						
+						//busca a los aledanyos al casilleroObtenido, en caso de tener rango>1.
+						//si los tiene, los agrega a casilleros.
+						casillerosTmp = obtenerAledanyos(casilleroObtenido, rango-1);
+						for (Casillero casilleroTmp : casillerosTmp){
+							if(!casilleros.contains(casilleroTmp)){
+								casilleros.add(casilleroTmp);
+							}
+						}
+						
+					}
+					
+					
+				}catch (ErrorIdCasilleroInvalido e){
+					//fuera de mapa, no hay problema
+				}
+			}
+		}
+		
+		return casilleros;
+	}
 
 	public boolean tieneNaves(){
 		if (this.cantidadTotalDeNaves() != 0)
@@ -274,16 +325,16 @@ public class Tablero implements  TableroComunicable {
 					
 					if (municion.retardo() == 0){
 						
-						if(casillero.tieneSeccionesDeNave()){
-							for (SeccionDeNave seccion : casillero.devolverSeccionesDeNave())
-								seccion.recibirImpacto(municion);
+						municion.impactar(this, casillero);
 						
-							casillero.quitarMina(municion);
-						}
-						else if (!(municion instanceof MinaSubmarinaPorContacto)){
+						if (municion instanceof MinaSubmarinaPorContacto){
+							if(casillero.tieneSeccionesDeNave()){ //mina por contacto detonada
+								casillero.quitarMunicion(municion);
+							}
+						}else{
 							//Quita las minas que esten con retardo 0 pero que no sean por contacto
-							casillero.quitarMina(municion);
-						}//if
+							casillero.quitarMunicion(municion);
+						}
 						
 						
 						
