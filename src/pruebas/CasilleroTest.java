@@ -4,32 +4,25 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import municiones.DisparoConvencional;
 import municiones.MinaSubmarinaDobleConRetardo;
-import municiones.MinaSubmarinaPorContacto;
 import municiones.MinaSubmarinaPuntualConRetardo;
-import municiones.MinaSubmarinaTripleConRetardo;
 import municiones.Municion;
 import naves.Destructor;
 import naves.Direccion;
 import naves.Lancha;
-import naves.Nave;
 import naves.SeccionDeNave;
 import naves.Sentido;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
 import excepciones.ErrorIdCasilleroInvalido;
 
 import tablero.Casillero;
 
 public class CasilleroTest {
-	private MinaSubmarinaTripleConRetardo minaSubmarinaTripleConRetardo;
 	private MinaSubmarinaPuntualConRetardo minaSubmarinaPuntualConRetardo;
 	private MinaSubmarinaDobleConRetardo minaSubmarinaDobleConRetardo;
-	private MinaSubmarinaPorContacto minaSubmarinaPorContacto;
 	private Destructor destructor;
 	private Lancha lancha;
 
@@ -37,8 +30,6 @@ public class CasilleroTest {
 	public void preparaObjetos() {
 		minaSubmarinaDobleConRetardo = new MinaSubmarinaDobleConRetardo();
 		minaSubmarinaPuntualConRetardo = new MinaSubmarinaPuntualConRetardo();
-		minaSubmarinaTripleConRetardo = new MinaSubmarinaTripleConRetardo();
-		minaSubmarinaPorContacto = new MinaSubmarinaPorContacto();
 		Direccion direccion = new Direccion(Sentido.SUR);
 		destructor = new Destructor(direccion);
 		lancha = new Lancha(direccion);

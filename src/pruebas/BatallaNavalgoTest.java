@@ -3,12 +3,7 @@ package pruebas;
 import static org.junit.Assert.*;
 import juego.BatallaNavalgo;
 
-import municiones.DisparoConvencional;
-import municiones.MinaSubmarina;
-import municiones.MinaSubmarinaDobleConRetardo;
 import municiones.MinaSubmarinaPorContacto;
-import municiones.MinaSubmarinaPuntualConRetardo;
-import municiones.MinaSubmarinaTripleConRetardo;
 import municiones.Municion;
 import naves.Direccion;
 import naves.EstadoDeSalud;
@@ -17,8 +12,6 @@ import naves.Nave;
 import naves.Sentido;
 
 import org.junit.Test;
-
-import tablero.Casillero;
 
 public class BatallaNavalgoTest {
 

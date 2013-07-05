@@ -3,9 +3,6 @@ package juego;
 
 import java.util.Observable;
 
-import excepciones.ErrorCasilleroOcupadoConOtraMunicion;
-import municiones.Municion;
-import tablero.Casillero;
 import tablero.Tablero;
 import tablero.TableroComunicable;
 
