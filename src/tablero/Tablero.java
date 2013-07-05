@@ -1,14 +1,10 @@
 package tablero;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Hashtable;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import municiones.DisparoConvencional;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 import naves.Buque;
@@ -307,6 +303,14 @@ public class Tablero implements  TableroComunicable {
 	public void ponerMuncion(Municion municion, int[] id) {
 		Casillero casillero = this.obtenerCasillero(id);
 		casillero.ponerMunicion(municion);
+		this.casillerosConMunicion.add(casillero);
+	}
+	
+	public void quitarMunicion(Casillero casillero, Municion municion){
+		casillero.quitarMunicion(municion);
+		if(!casillero.tieneMuniciones()){
+			this.casillerosConMunicion.remove(municion);
+		}
 	}
 	
 	public void actualizarTablero() {
@@ -317,34 +321,29 @@ public class Tablero implements  TableroComunicable {
 
 		
 		this.moverTodasLasNaves();
-		for (Casillero casillero : coleccionCasilleros.values()){
-			if( casillero.tieneMuniciones() ){
-				List<Municion> municiones = casillero.devolverMuniciones();
+		for (Casillero casillero : this.casillerosConMunicion){
+			List<Municion> municiones = casillero.devolverMuniciones();
+			
+			for( Municion municion : municiones){
 				
-				for( Municion municion : municiones){
+				if (municion.retardo() == 0){
 					
-					if (municion.retardo() == 0){
-						
-						municion.impactar(this, casillero);
-						
-						if (municion instanceof MinaSubmarinaPorContacto){
-							if(casillero.tieneSeccionesDeNave()){ //mina por contacto detonada
-								casillero.quitarMunicion(municion);
-							}
-						}else{
-							//Quita las minas que esten con retardo 0 pero que no sean por contacto
-							casillero.quitarMunicion(municion);
+					municion.impactar(this, casillero);
+					
+					if (municion instanceof MinaSubmarinaPorContacto){
+						if(casillero.tieneSeccionesDeNave()){ //mina por contacto detonada
+							this.quitarMunicion(casillero, municion);
 						}
-						
-						
-						
-					}//if
-					else
-						municion.disminuirRetardo();
-					
-				}//for
-				
-			}//if
+					}else{
+						//Quita las minas que esten con retardo 0 pero que no sean por contacto
+						this.quitarMunicion(casillero, municion);
+					}
+
+				}//if
+				else
+					municion.disminuirRetardo();
+			}//for
+			
 		}//for
 		
 		
