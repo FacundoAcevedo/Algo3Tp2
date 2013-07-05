@@ -317,10 +317,12 @@ public class Tablero implements  TableroComunicable {
 //		0-Se mueven las naves
 //		1-Estallan las minas que tengan retardo 0
 //		2-Se resta 1 al retardo de la municion  
-
-
-		
+	
 		this.moverTodasLasNaves();
+		this.actualizarMuniciones();
+	}
+	
+	private void actualizarMuniciones(){
 		for (Casillero casillero : this.casillerosConMunicion){
 			List<Municion> municiones = casillero.devolverMuniciones();
 			
@@ -345,15 +347,9 @@ public class Tablero implements  TableroComunicable {
 			}//for
 			
 		}//for
-		
-		
-		
-
-
 	}
 	
-	public void moverTodasLasNaves(){
-		
+	public void moverTodasLasNaves(){	
 		this.invertirSentidoDeNavesEnElBorde();
 		this.avanzarNaves();
 	}
