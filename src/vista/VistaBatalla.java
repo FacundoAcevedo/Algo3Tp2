@@ -43,7 +43,7 @@ public class VistaBatalla implements Observer {
         private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Puntos"
-        private JList listaMuniciones = new JList();//listado de municiones
+        private JList<String> listaMuniciones = new JList<String>();//listado de municiones
         private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
         
@@ -57,6 +57,7 @@ public class VistaBatalla implements Observer {
 
 	        frameBatalla.setVisible(true);
 	        frameBatalla.setAlwaysOnTop(false); //En false para poder minimizar la pantalla
+	        frameBatalla.setResizable(false);
 	        frameBatalla.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 	        frameBatalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        frameBatalla.getContentPane().setLayout(new BoxLayout(frameBatalla.getContentPane(), BoxLayout.X_AXIS));
@@ -573,7 +574,10 @@ public class VistaBatalla implements Observer {
 	        listaMuniciones.setSelectedIndex(0);
 	        listaMuniciones.setModel(new AbstractListModel() {
 	        	private static final long serialVersionUID = 1L;
-				String[] values = new String[] {"Disparo Convencional", "Mina Por Contacto","Mina Puntual Con Retardo", "Mina Doble Con Retardo", "Mina Triple Con Retardo"};
+				String[] values = new String[] {"Disparo Convencional",
+						"Mina Por Contacto","Mina Puntual Con Retardo",
+						"Mina Doble Con Retardo", "Mina Triple Con Retardo"};
+				
 	        	Municion municionElegida = new Municion(0, 0);
 	        	
 	        	public int getSize() {
@@ -584,6 +588,7 @@ public class VistaBatalla implements Observer {
 	        		return values[index];
 	        	}
 	        });
+
 	        listaMuniciones.setSelectedIndex(0);
 	        GridBagConstraints gbc_list = new GridBagConstraints();
 	        gbc_list.insets = new Insets(0, 0, 5, 5);
@@ -593,6 +598,7 @@ public class VistaBatalla implements Observer {
 	        panelLista.add(listaMuniciones, gbc_list);
 	        
 	        frameBatalla.pack();
+	        
 	        
 	        
 
