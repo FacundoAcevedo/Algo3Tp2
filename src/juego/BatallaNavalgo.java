@@ -3,6 +3,9 @@ package juego;
 
 import java.util.Observable;
 
+import municiones.Municion;
+
+import tablero.Casillero;
 import tablero.Tablero;
 import tablero.TableroComunicable;
 
@@ -16,24 +19,20 @@ public class BatallaNavalgo extends Observable {
 		this.tablero = new Tablero();
 	}
 	
+	// Esto supongo que o va en el controlador, o habría
+	// que modificarlo para que se puedan pasar los 
+	// parametros the this.ronda(Municion, Casillero)
+	/*
 	public void partida(){
 		this.posicionarNavesAleatoriamente();
 		while( ! this.juegoTerminado() ){
 			this.ronda();
 		}
-	}
+	}*/
 	
-	public void ronda(){
-//		Municion municionElegida = this.jugador.eligeMunicion();
-//		Casillero casilleroElegido = this.jugador.eligeCasillero(this.tablero);
-//		
-//		try {
-//			casilleroElegido.ponerMunicion(municionElegida);
-//		} catch (ErrorCasilleroOcupadoConOtraMunicion e) {
-//			// Y aca lo mismo, ver que hace
-//		}
-//		
-//		this.finDeTurno();
+	public void ronda(Municion municionElegida, Casillero casilleroElegido){
+		this.tablero.ponerMuncion(municionElegida, casilleroElegido.id());
+		this.finDeTurno();
 	}
 	
 	public void posicionarNavesAleatoriamente() {
