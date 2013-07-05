@@ -10,7 +10,7 @@ import municiones.Municion;
 public class InstanciadorMuniciones {
 	//Clase encargada de devolver un objeto a partir de una cadena
 	
-	public Municion instanciardor(String nombreDelObjeto){
+	final public Municion instanciardor(String nombreDelObjeto){
 		if(nombreDelObjeto == "Disparo Convencional"){
 			return new DisparoConvencional();
 			
