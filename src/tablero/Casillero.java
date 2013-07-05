@@ -109,9 +109,11 @@ public class Casillero {
 	public void quitarSeccion(SeccionDeNave seccion){
 		this.coleccionDeSeccionesDeNave.remove(seccion);
 	}
-	public void quitarMina(Municion mina){
-		this.coleccionMuniciones.remove(mina);
+	
+	public void quitarMunicion(Municion municion){
+		this.coleccionMuniciones.remove(municion);
 	}
+	
 //	public void efectuarImpacto(int indiceMunicion){
 //		/*Si hay naves*/
 //		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
