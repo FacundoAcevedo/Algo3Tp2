@@ -42,7 +42,7 @@ public class VistaBatalla implements Observer {
 		private TextField textoPuntos = new TextField(); //texto que mostrara el puntaje
         private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
-        private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Puntos"
+        private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
         private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
@@ -66,7 +66,7 @@ public class VistaBatalla implements Observer {
 	        panelBotones.setLayout(new GridLayout(0, 1));
 		  	  
 	        // crear y agregar botones
-	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este bot�n deber�a posicionar las naves. (ser�a partida() de batalla navalgo)
+	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
 	        JButton botonIniciar = botones[ 0 ];
             panelBotones.add( botonIniciar );
 
@@ -89,12 +89,15 @@ public class VistaBatalla implements Observer {
 	        frameBatalla.getContentPane().add( panelBotones);
 	      
 			
-	        frameBatalla.getContentPane().add(panelPuntaje);
+	        frameBatalla.getContentPane().add(panelPuntaje); //agrega una nueva columna para los puntos
+	        //se setean los tamanyos de esta nueva columna
 	        GridBagLayout gbl_panel = new GridBagLayout();
 	        gbl_panel.columnWidths = new int[]{0, 62, 80, 0};
 	        gbl_panel.rowHeights = new int[]{22, 0, 0, 0};
 	        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 	        gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+	        // se "aplican" los cambios de la coluna (con la 1ra linea ya se dibuja,
+	        // pero no se aplican los tamanyos asignados)
 	        panelPuntaje.setLayout(gbl_panel);
 	        
 	        GridBagConstraints gbc_label = new GridBagConstraints();
