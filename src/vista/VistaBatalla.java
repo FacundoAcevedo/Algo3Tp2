@@ -86,7 +86,7 @@ public class VistaBatalla implements Observer {
 	        	}
 	        });
 
-	        frameBatalla.getContentPane().add( panelBotones);
+	        frameBatalla.getContentPane().add(panelBotones);
 	      
 			
 	        frameBatalla.getContentPane().add(panelPuntaje); //agrega una nueva columna para los puntos
@@ -100,15 +100,15 @@ public class VistaBatalla implements Observer {
 	        // pero no se aplican los tamanyos asignados)
 	        panelPuntaje.setLayout(gbl_panel);
 	        
+	        // Escribe "Puntos"
 	        GridBagConstraints gbc_label = new GridBagConstraints();
 	        gbc_label.anchor = GridBagConstraints.NORTHWEST;
 	        gbc_label.insets = new Insets(0, 0, 0, 5);
 	        gbc_label.gridx = 1;
 	        gbc_label.gridy = 2;
 	        panelPuntaje.add(labelPuntos, gbc_label);
-
-	        textoPuntos.setEnabled(true);
-	        textoPuntos.setEditable(false);
+	        
+	        // Crea y dibuja caja con los puntos
 	        GridBagConstraints gbc_textField = new GridBagConstraints();
 	        gbc_textField.fill = GridBagConstraints.BOTH;
 	        gbc_textField.gridx = 2;
@@ -117,12 +117,15 @@ public class VistaBatalla implements Observer {
 	    
 	        
 	        
-	        frameBatalla.getContentPane().add(panelTablero);
+	        frameBatalla.getContentPane().add(panelTablero); //agrega la "matriz" del tablero a la ventana
+	        //Se asigna la disposicion de los botones.
 	        panelTablero.setLayout(new FormLayout(new ColumnSpec[] {
 	        		
-	        		ColumnSpec.decode("30dlu"),
-	        		ColumnSpec.decode("30dlu"),
-	        		ColumnSpec.decode("30dlu"),
+	        		//asigna ancho a las 10 columnas
+	        		//30dlu es la medida del ancho
+	        		ColumnSpec.decode("30dlu"), //1ra col
+	        		ColumnSpec.decode("30dlu"), //2da col
+	        		ColumnSpec.decode("30dlu"), //etc..
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
 	        		ColumnSpec.decode("30dlu"),
@@ -134,6 +137,7 @@ public class VistaBatalla implements Observer {
 	        		},
 	        	new RowSpec[] {
 	        		
+	        		//Asigna alto a las 10 filas
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
@@ -144,7 +148,6 @@ public class VistaBatalla implements Observer {
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
 	        		RowSpec.decode("fill:30dlu"),
-	        		//RowSpec.decode("fill:5dlu"),
 	        		}));
 	        
 	        
@@ -152,6 +155,8 @@ public class VistaBatalla implements Observer {
 	        
 	        //Parece alrevez, pero nuestro tablero comienza en la esquina
 	        //inferior izquierda
+	        
+	        //Crea todos los Botones
 	        JButton botonCasillero_00 = new JButton();
 	        panelTablero.add(botonCasillero_00, "1, 10");
 	        botonCasillero_00.putClientProperty("id", "0,0");
@@ -565,15 +570,29 @@ public class VistaBatalla implements Observer {
 	        } 
 	        
 	        
+	        
+	       
+	        
+	     
+	        // Crea panel para lista de municiones.
 	        frameBatalla.getContentPane().add(panelLista);
+	        // Agrega lista con municiones
 	        GridBagLayout gbl_panel_2 = new GridBagLayout();
 	        gbl_panel_2.columnWidths = new int[]{0, 89, 22, 0};
 	        gbl_panel_2.rowHeights = new int[]{23, 21, 0, 0, 0, 0};
 	        gbl_panel_2.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 	        gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 	        panelLista.setLayout(gbl_panel_2);
+	      
+	        // Escribe "Municiones"
+	        GridBagConstraints gbc_label_2 = new GridBagConstraints();
+	        gbc_label_2.anchor = GridBagConstraints.NORTHWEST;
+	        gbc_label_2.insets = new Insets(0,0,0,5);
+	        gbc_label_2.gridx = 0;
+	        gbc_label_2.gridy = 1;
+	        panelLista.add(labelMuniciones, gbc_label_2);
 	        
-	        //Municiones
+	        // Crea lista con Municiones
 	        listaMuniciones.setSelectedIndex(0);
 	        listaMuniciones.setModel(new AbstractListModel<String>() {
 	        	private static final long serialVersionUID = 1L;
@@ -601,16 +620,9 @@ public class VistaBatalla implements Observer {
 	        gbc_list.gridy = 1;
 	        panelLista.add(listaMuniciones, gbc_list);
 	        
-	        frameBatalla.pack();
+	        // Asigna el tamanyo correcto a la ventana para que entre todo
+	        frameBatalla.pack(); 
 	        
-	        
-	        
-
-	      
-	        
-	        
-	        
-	       
 	        
 	        //DEJO LA SIGUIENTE LINEA COMENTADA PARA QUE NO ME ROMPA LOS HUEVOS EL COMPILADOR
 	        //listaMuniciones.addListSelectionListener(control.getListenerLista());
