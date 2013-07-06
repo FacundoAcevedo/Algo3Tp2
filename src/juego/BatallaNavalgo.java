@@ -19,7 +19,7 @@ public class BatallaNavalgo extends Observable {
 		this.tablero = new Tablero();
 	}
 	
-	// Esto supongo que o va en el controlador, o habría
+	// Esto supongo que o va en el controlador, o habra
 	// que modificarlo para que se puedan pasar los 
 	// parametros the this.ronda(Municion, Casillero)
 	/*

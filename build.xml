@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="iso-8859-1" ?> 
+<?xml version="1.0" encoding="UTF-8" ?> 
 <project name="ProyectoBaseAlgo3" default="ayuda" basedir=".">
   
   	<property name="build.dir" value="bin/" /> 
   	<property name="src.dir" value="src/" /> 
   	<property name="lib.dir" value="lib/" />
+  	<property name="estaticos.dir" value="estaticos/" />
   	<property name="doc.dir" value="documentacion/javadoc" />
   	<property name="zip.name" value="Entrega.zip" />
 	
@@ -13,9 +14,23 @@
 		<delete file= "${zip.name}" />
 	</target>
 	
-	<target name="compilar" depends="limpiar">
+	<target name="crearDirectorios">
 		<mkdir dir="${build.dir}" />
-			<javac srcdir="${src.dir}" destdir="${build.dir}">
+	</target>
+	
+	<target name="copiarEstaticos">
+    <copy todir="${build.dir}/estaticos/">
+      <fileset dir="${estaticos.dir}">
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.png"/>
+      </fileset>
+   	</copy>
+	</target>
+
+	
+	<target name="compilar" depends="limpiar,crearDirectorios,copiarEstaticos">
+			<javac srcdir="${src.dir}" destdir="${build.dir}" encoding="UTF-8" >
 				<classpath>
 					<pathelement path="${build.dir}" />
 					<fileset dir="${lib.dir}">
@@ -23,11 +38,12 @@
 					</fileset>
 				</classpath>
 			</javac>
+
 	</target>
 
 
 	<target name="correr" depends="compilar">
-		<java fork="yes" classname="juego.BatallaNavalgo">
+		<java fork="yes" classname="main.Principal">
 			<classpath>
 				<pathelement path="${build.dir}" />
 				<fileset dir="lib">
@@ -39,20 +55,20 @@
 
 
 	
-	<target name="corrertests" depends="compilar">	
-		<junit>
-			<classpath>	
-				<pathelement path="${build.dir}" />
-				<fileset dir="${lib.dir}">
-					<include name="**/*.jar"/>
-				</fileset>
-			</classpath>
-			<formatter type="brief" usefile="false" />
-			<batchtest>
-				<fileset dir="${build.dir}" includes="**/*Test.class" />
-			</batchtest>
-		</junit>
-  	</target>
+		<target name="corrertests" depends="compilar">	
+			<junit>
+				<classpath>	
+					<pathelement path="${build.dir}" />
+					<fileset dir="${lib.dir}">
+						<include name="**/*.jar"/>
+					</fileset>
+				</classpath>
+				<formatter type="brief" usefile="false" />
+				<batchtest>
+					<fileset dir="${build.dir}" includes="*/*Test.class" />
+				</batchtest>
+			</junit>
+	  	</target>
 
 	<target name="generarjavadocs" depends="limpiar">	
 	  <javadoc packagenames="*"
@@ -62,8 +78,8 @@
 	           author="true"
 	           version="true"
 	           use="true"
-	           windowtitle="Proyecto Base Algo3">
-	    <doctitle><![CDATA[<h1>Proyecto Base Algo3</h1>]]></doctitle>
+	           windowtitle="Batalla Navalgo Algoritmos 3">
+	    <doctitle><![CDATA[<h1>Batalla Navalgo Algoritmos 3</h1>]]></doctitle>
 	  </javadoc>
 	</target>
 	
