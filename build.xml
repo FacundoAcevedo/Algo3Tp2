@@ -62,8 +62,8 @@
 	           author="true"
 	           version="true"
 	           use="true"
-	           windowtitle="Proyecto Base Algo3">
-	    <doctitle><![CDATA[<h1>Proyecto Base Algo3</h1>]]></doctitle>
+	           windowtitle="Batalla Navalgo Algoritmos 3">
+	    <doctitle><![CDATA[<h1>Batalla Navalgo Algoritmos 3</h1>]]></doctitle>
 	  </javadoc>
 	</target>
 	
