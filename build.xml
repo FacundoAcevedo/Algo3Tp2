@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1" ?> 
+<?xml version="1.0" encoding="UTF-8" ?> 
 <project name="ProyectoBaseAlgo3" default="ayuda" basedir=".">
   
   	<property name="build.dir" value="bin/" /> 
@@ -15,7 +15,7 @@
 	
 	<target name="compilar" depends="limpiar">
 		<mkdir dir="${build.dir}" />
-			<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<javac srcdir="${src.dir}" destdir="${build.dir}" encoding="UTF-8" >
 				<classpath>
 					<pathelement path="${build.dir}" />
 					<fileset dir="${lib.dir}">
@@ -27,7 +27,7 @@
 
 
 	<target name="correr" depends="compilar">
-		<java fork="yes" classname="juego.BatallaNavalgo">
+		<java fork="yes" classname="main.Principal">
 			<classpath>
 				<pathelement path="${build.dir}" />
 				<fileset dir="lib">
@@ -39,20 +39,20 @@
 
 
 	
-	<target name="corrertests" depends="compilar">	
-		<junit>
-			<classpath>	
-				<pathelement path="${build.dir}" />
-				<fileset dir="${lib.dir}">
-					<include name="**/*.jar"/>
-				</fileset>
-			</classpath>
-			<formatter type="brief" usefile="false" />
-			<batchtest>
-				<fileset dir="${build.dir}" includes="**/*Test.class" />
-			</batchtest>
-		</junit>
-  	</target>
+		<target name="corrertests" depends="compilar">	
+			<junit>
+				<classpath>	
+					<pathelement path="${build.dir}" />
+					<fileset dir="${lib.dir}">
+						<include name="**/*.jar"/>
+					</fileset>
+				</classpath>
+				<formatter type="brief" usefile="false" />
+				<batchtest>
+					<fileset dir="${build.dir}" includes="*/*Test.class" />
+				</batchtest>
+			</junit>
+	  	</target>
 
 	<target name="generarjavadocs" depends="limpiar">	
 	  <javadoc packagenames="*"
