@@ -6,7 +6,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 
+import municiones.DisparoConvencional;
+import municiones.MinaSubmarinaDobleConRetardo;
+import municiones.MinaSubmarinaPorContacto;
+import municiones.MinaSubmarinaPuntualConRetardo;
+import municiones.MinaSubmarinaTripleConRetardo;
+import naves.Buque;
 import naves.Direccion;
+import naves.EstadoDeSalud;
 import naves.Lancha;
 import naves.Nave;
 import naves.SeccionDeNave;
@@ -421,5 +428,161 @@ public class TableroTest {
 			assertTrue(idResultante[0] == 3 && idResultante[1] == 1 );
 		}
 	
+	@Test
+	public void dispararoConvencionalACasilleroVacio() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionVacia = {9,9};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		DisparoConvencional disparoConvencional = new DisparoConvencional();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(disparoConvencional, posicionVacia);
+		assertTrue(nave.estado() == EstadoDeSalud.SANO);
+	}
+	
+	@Test
+	public void dispararoConvencionalANave() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+					
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		DisparoConvencional disparoConvencional = new DisparoConvencional();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(disparoConvencional, posicionDeProa);
+		
+		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
+	}
+	
+	@Test
+	public void naveNoPisaMinaDeContacto() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionDeMina = {0,2};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		MinaSubmarinaPorContacto mina = new MinaSubmarinaPorContacto();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		//todavia no se movieron las naves.
+		assertTrue(nave.estado() == EstadoDeSalud.SANO);
+	}
+	
+	@Test
+	public void navePisaMinaDeContacto() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionDeMina = {0,2};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		MinaSubmarinaPorContacto mina = new MinaSubmarinaPorContacto();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		tablero.actualizarTablero();
+		
+		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
+	}
+	
+	@Test
+	public void minaConRetardoNoExplotaAntesDeTiempo() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionDeMina = {0,3};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		tablero.actualizarTablero();
+		tablero.actualizarTablero(); //todavia no explota
+		
+		assertTrue(nave.estado() == EstadoDeSalud.SANO);
+	}
+	
+	@Test
+	public void naveDanadaPorMinaConRetardo() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionDeMina = {0,3};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		tablero.actualizarTablero();
+		tablero.actualizarTablero();
+		tablero.actualizarTablero(); //explota
+		
+		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
+	}
+	
+	@Test
+	public void naveDestruidaPorMinaSubmarinaDobleConRetardo() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProa = {0,1};
+		int[] posicionDeMina = {0,4};
+		
+		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
+		MinaSubmarinaDobleConRetardo mina = new MinaSubmarinaDobleConRetardo();
+		
+		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		tablero.actualizarTablero();
+		tablero.actualizarTablero();
+		tablero.actualizarTablero(); //explota
+		
+		assertTrue(nave.estado() == EstadoDeSalud.DESTRUIDO);
+	}
+	
+	@Test
+	public void minaSubmarinaTripeConRetardoDanaVariasNaves() {
+		// Se testea la existencia de las naves, y su tipo
+		// no la aleatoreidad de sus posiciones.
+		Tablero tablero = new Tablero();
+		int[] posicionDeProaLancha = {0,1};
+		int[] posicionDeProaBuque = {3,4};
+		int[] posicionDeMina = {1,4};
+		
+		Nave lancha = new Lancha(new Direccion(Sentido.NORTE));
+		Nave buque = new Buque(new Direccion(Sentido.NORTE));
+		MinaSubmarinaTripleConRetardo mina = new MinaSubmarinaTripleConRetardo();
+		
+		tablero.posicionarNaveEnTablero(lancha, posicionDeProaLancha);
+		tablero.posicionarNaveEnTablero(buque, posicionDeProaBuque);
+		tablero.ponerMuncion(mina, posicionDeMina);
+		
+		tablero.actualizarTablero();
+		tablero.actualizarTablero();
+		tablero.actualizarTablero(); //explota
+		
+		boolean todasLasNavesDestruidas = (lancha.estado() == EstadoDeSalud.DESTRUIDO) && (buque.estado() == EstadoDeSalud.DESTRUIDO);
+		
+		assertTrue(todasLasNavesDestruidas);
+	}
 }
 
