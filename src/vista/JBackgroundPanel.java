@@ -12,7 +12,9 @@ public class JBackgroundPanel extends JPanel {
     private Image imagen;
  
     public JBackgroundPanel(){
-    imagen = new ImageIcon(getClass().getResource("water.jpg")).getImage();
+//    imagen = new ImageIcon(getClass().getResource("./estaticos/fondoAgua.jpg")).getImage();
+    imagen = new ImageIcon("estaticos/fondoAgua.jpg").getImage();
+
     }
     
     @Override

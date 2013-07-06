@@ -4,6 +4,7 @@
   	<property name="build.dir" value="bin/" /> 
   	<property name="src.dir" value="src/" /> 
   	<property name="lib.dir" value="lib/" />
+  	<property name="estaticos.dir" value="estaticos/" />
   	<property name="doc.dir" value="documentacion/javadoc" />
   	<property name="zip.name" value="Entrega.zip" />
 	
@@ -13,8 +14,22 @@
 		<delete file= "${zip.name}" />
 	</target>
 	
-	<target name="compilar" depends="limpiar">
+	<target name="crearDirectorios">
 		<mkdir dir="${build.dir}" />
+	</target>
+	
+	<target name="copiarEstaticos">
+    <copy todir="${build.dir}/estaticos/">
+      <fileset dir="${estaticos.dir}">
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.png"/>
+      </fileset>
+   	</copy>
+	</target>
+
+	
+	<target name="compilar" depends="limpiar,crearDirectorios,copiarEstaticos">
 			<javac srcdir="${src.dir}" destdir="${build.dir}" encoding="UTF-8" >
 				<classpath>
 					<pathelement path="${build.dir}" />
@@ -23,6 +38,7 @@
 					</fileset>
 				</classpath>
 			</javac>
+
 	</target>
 
 
