@@ -328,6 +328,7 @@ public class Tablero implements  TableroComunicable {
 			
 			for( Municion municion : municiones){
 				
+				municion.disminuirRetardo();
 				if (municion.retardo() == 0){
 					
 					municion.impactar(this, casillero);
@@ -342,8 +343,7 @@ public class Tablero implements  TableroComunicable {
 					}
 
 				}//if
-				else
-					municion.disminuirRetardo();
+
 			}//for
 			
 		}//for
