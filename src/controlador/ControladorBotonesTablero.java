@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import vista.VistaBatalla;
 
 public class ControladorBotonesTablero implements ActionListener{
-	private VistaBatalla vista;
 	public ControladorBotonesTablero(){
 
 	}
