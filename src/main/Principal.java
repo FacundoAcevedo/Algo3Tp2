@@ -9,6 +9,9 @@ public class Principal {
 	public static void main(String[] args) {
 		// creamos el modelo
 		BatallaNavalgo modelo = new BatallaNavalgo();
+		
+		//Posiciono las naves
+		modelo.posicionarNavesAleatoriamente();
 		// creamos el controlador que atiende a la vista
 		Controlador control = new Controlador();
 		control.cargarModelo(modelo);
