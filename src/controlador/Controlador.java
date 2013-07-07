@@ -24,7 +24,7 @@ public class Controlador {
 	
 	public Controlador(BatallaNavalgo batalla)
 	{
-		this.modelo = modelo;
+		this.modelo = batalla;
 		
 	}
 	
@@ -40,7 +40,9 @@ public class Controlador {
 			Municion municion = InstanciadorMuniciones.instanciar(municionSeleccionada);
 			
 			//Pasarle al tablero el id del casillero y la municionSeleccionada
-			modelo.obtenerTablero().ponerMuncion(municion, id);
+			TableroComunicable tablero = modelo.obtenerTablero();
+
+			tablero.ponerMuncion(municion, id);
 		}
 	}
 	
