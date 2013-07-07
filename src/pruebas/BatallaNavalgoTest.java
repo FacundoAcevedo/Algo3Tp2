@@ -30,7 +30,7 @@ public class BatallaNavalgoTest {
 	@Test
 	public void testTableroSeCreaSinNaves() {
 		BatallaNavalgo batallaNavalgo = new BatallaNavalgo();
-		assertTrue(batallaNavalgo.tablero().cantidadTotalDeNaves() == 0);
+		assertTrue(batallaNavalgo.obtenerTablero().cantidadTotalDeNaves() == 0);
 	} 
 	
 	@Test
@@ -41,11 +41,11 @@ public class BatallaNavalgoTest {
 		int[] posProa = {5,5};
 		Municion minaContacto = new MinaSubmarinaPorContacto();
 		int[] posMina = {5,6};
-		batallaNavalgo.tablero().posicionarNaveEnTablero(lancha, posProa);
-		batallaNavalgo.tablero().ponerMuncion(minaContacto, posMina);
+		batallaNavalgo.obtenerTablero().posicionarNaveEnTablero(lancha, posProa);
+		batallaNavalgo.obtenerTablero().ponerMuncion(minaContacto, posMina);
 //		batallaNavalgo.tablero().imprimirTablero();
 		assertTrue(lancha.estado() == EstadoDeSalud.SANO);
-		batallaNavalgo.tablero().actualizarTablero();
+		batallaNavalgo.obtenerTablero().actualizarTablero();
 //		batallaNavalgo.tablero().imprimirTablero();
 		assertTrue(lancha.estado() != EstadoDeSalud.SANO);
 

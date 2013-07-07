@@ -43,11 +43,11 @@ public class BatallaNavalgo extends Observable {
 		return ( this.cantidadDeNavesDestruidas() == this.cantidadTotalNaves() );
 	}
 
-	public Jugador jugador(){
+	public Jugador obtenerJugador(){
 		return this.jugador;
 	}
 	
-	public TableroComunicable tablero(){
+	public TableroComunicable obtenerTablero(){
 		return this.tablero;
 	}
 	
