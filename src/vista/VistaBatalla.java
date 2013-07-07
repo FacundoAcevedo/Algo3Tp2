@@ -155,8 +155,7 @@ public class VistaBatalla implements Observer {
 	        
 	        
 	        
-	        //Parece alrevez, pero nuestro tablero comienza en la esquina
-	        //inferior izquierda
+
 	        
 	        
 	        //este hash seria para guardar los botones que vamos creando, de ser necesario

@@ -19,7 +19,7 @@ import juego.BatallaNavalgo;
 public class Controlador {
 
 	private BatallaNavalgo modelo;
-	private String municionSeleccionada;
+	private String municionSeleccionada = "Disparo Convencional" ; //seteado por defecto
 	
 	
 	public Controlador(BatallaNavalgo batalla)
@@ -35,12 +35,12 @@ public class Controlador {
 		public void actionPerformed(ActionEvent e)
 		{	
 			JButton boton = (JButton) e.getSource();
-			boton.getClientProperty("id");
+			int [] id = (int[]) boton.getClientProperty("id");
 			
 			Municion municion = InstanciadorMuniciones.instanciar(municionSeleccionada);
 			
 			//Pasarle al tablero el id del casillero y la municionSeleccionada
-			//modelo.obtenerTablero().ponerMuncion(municion, id);
+			modelo.obtenerTablero().ponerMuncion(municion, id);
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class Controlador {
 		public void mouseClicked(MouseEvent e) {
 			JList<String> listaMuniciones = (JList<String>) e.getSource();
 
-			municionSeleccionada = listaMuniciones.getSelectedValue();
+			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
 			
 		}
 
