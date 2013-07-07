@@ -44,9 +44,8 @@ public class Controlador {
 			Municion municion = InstanciadorMuniciones.instanciar(municionSeleccionada);
 			
 			//Pasarle al tablero el id del casillero y la municionSeleccionada
-			TableroComunicable tablero = modelo.obtenerTablero();
-
-			tablero.ponerMuncion(municion, id);
+			
+			modelo.ponerMunicion(municion, id);
 		}
 	}
 	
