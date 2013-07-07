@@ -8,13 +8,16 @@ public class Principal {
 
 	public static void main(String[] args) {
 		// creamos el modelo
-		BatallaNavalgo batalla = new BatallaNavalgo();
+		BatallaNavalgo modelo = new BatallaNavalgo();
 		// creamos el controlador que atiende a la vista
-		Controlador control = new Controlador(batalla);
+		Controlador control = new Controlador();
+		control.cargarModelo(modelo);
 		// creamos la vista
-		new VistaBatalla(batalla, control);
+		VistaBatalla vista = new VistaBatalla(modelo, control);
+		//cargo la vista en el controlado
+		control.cargarVista(vista);
 		// esto es necesario para que la vista se actualice la 1ra vez
-		batalla.ActualizarObservadores();
+		modelo.ActualizarObservadores();
 	}
 
 }

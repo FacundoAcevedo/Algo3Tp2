@@ -6,11 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.Visibility;
 
 import javax.swing.JButton;
 import javax.swing.JList;
 
 import tablero.TableroComunicable;
+import vista.VistaBatalla;
 
 import municiones.Municion;
 
@@ -19,13 +21,15 @@ import juego.BatallaNavalgo;
 public class Controlador {
 
 	private BatallaNavalgo modelo;
+	private VistaBatalla vista;
 	private String municionSeleccionada = "Disparo Convencional" ; //seteado por defecto
 	
+	public void cargarModelo(BatallaNavalgo modeloRecibido){
+		this.modelo = modeloRecibido;
+	}
 	
-	public Controlador(BatallaNavalgo batalla)
-	{
-		this.modelo = batalla;
-		
+	public void cargarVista(VistaBatalla vistaRecibida){
+		this.vista = vistaRecibida;
 	}
 	
 	
