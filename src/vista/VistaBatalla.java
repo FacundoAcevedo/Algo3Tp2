@@ -213,14 +213,12 @@ public class VistaBatalla implements Observer {
 	        
 	        // Crea lista con Municiones
 	        listaMuniciones.setSelectedIndex(0);
-	        listaMuniciones.setModel(new AbstractListModel() {
+	        listaMuniciones.setModel(new AbstractListModel<String>() {
 	        	private static final long serialVersionUID = 1L;
 				String[] values = new String[] {"Disparo Convencional",
 						"Mina Por Contacto","Mina Puntual Con Retardo",
 						"Mina Doble Con Retardo", "Mina Triple Con Retardo"};
-				
-	        	Municion municionElegida = new Municion(0, 0);
-	        	
+					        	
 	        	public int getSize() {
 	        		return values.length;
 	        	}
@@ -228,9 +226,12 @@ public class VistaBatalla implements Observer {
 	        	public String getElementAt(int index) {
 	        		return values[index];
 	        	}
+	        	
 	        });
-
 	        listaMuniciones.setSelectedIndex(0);
+	        listaMuniciones.addMouseListener(control.obtenerListenerListadoMuniciones());
+	        
+	        //
 	        GridBagConstraints gbc_list = new GridBagConstraints();
 	        gbc_list.insets = new Insets(0, 0, 5, 5);
 	        gbc_list.fill = GridBagConstraints.BOTH;
