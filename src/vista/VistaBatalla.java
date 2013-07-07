@@ -21,9 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import tablero.Casillero;
-
-import municiones.Municion;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -46,9 +43,10 @@ public class VistaBatalla implements Observer {
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
-        private JButton botones[] = new JButton[ 2 ]; //Botones de iniciar y salir
+        private JButton botonesIniciarYSalir[] = new JButton[ 2 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
         
+        private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
         
 		//Constructor de la vista
@@ -68,13 +66,13 @@ public class VistaBatalla implements Observer {
 	        panelBotones.setLayout(new GridLayout(0, 1));
 		  	  
 	        // crear y agregar botones
-	        botones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
-	        JButton botonIniciar = botones[ 0 ];
+	        botonesIniciarYSalir[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
+	        JButton botonIniciar = botonesIniciarYSalir[ 0 ];
             panelBotones.add( botonIniciar );
 
             
-	        botones[ 1 ] = new JButton ("Salir del Juego");
-	        JButton botonSalir = botones [ 1 ];
+	        botonesIniciarYSalir[ 1 ] = new JButton ("Salir del Juego");
+	        JButton botonSalir = botonesIniciarYSalir [ 1 ];
             panelBotones.add( botonSalir );
             
 
@@ -82,7 +80,7 @@ public class VistaBatalla implements Observer {
 	        {
 	        	   public void actionPerformed (ActionEvent e)
 	        	   {
-	        		   if (e.getSource()== botones [ 1 ]) {
+	        		   if (e.getSource()== botonesIniciarYSalir [ 1 ]) {
 	        	            System.exit(0);
 	        	   } 
 	        	}
@@ -153,15 +151,6 @@ public class VistaBatalla implements Observer {
 	        		}));
 	        
 	        
-	        
-	        
-
-	        
-	        
-	        //este hash seria para guardar los botones que vamos creando, de ser necesario
-	        // recordar que un int[] no sirve como clave!
-	        //Hashtable<String, JButton> botones = new Hashtable<String, JButton>();
-	        
 	        //Crea todos los Botones
 	        int xVista, yVista;
 	        for(int x = 0; x < 10; x++){
@@ -172,7 +161,9 @@ public class VistaBatalla implements Observer {
 	        		panelTablero.add(botonCasillero, ""+xVista+","+yVista);
 	    	        int[] id = {x, y};
 	    	        botonCasillero.putClientProperty("id", id);
-	    	        //botones.guardarEnHash de ser necesario..
+	    	        // Guarda en el hash
+	    	        String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+	    	        botonesTablero.put(idComoString, botonCasillero);
 	        	}
 	        }
 	    
