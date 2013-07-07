@@ -16,8 +16,9 @@ public class ControladorBotonesTablero implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		JButton boton = (JButton) arg0.getSource();
 
-		
-		System.out.print(boton.getClientProperty("id")+"\n");
+		int x = ((int[])boton.getClientProperty("id"))[0];
+		int y = ((int[])boton.getClientProperty("id"))[1];
+		System.out.print(x+","+y+"\n");
 		
 	}
 
