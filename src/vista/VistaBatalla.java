@@ -27,7 +27,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import controlador.Controlador;
-import controlador.ControladorBotonesTablero;
 
 import juego.BatallaNavalgo;
 import java.awt.event.*;
@@ -50,7 +49,7 @@ public class VistaBatalla implements Observer {
         
         
 		//Constructor de la vista
-		public VistaBatalla(BatallaNavalgo modelo, Controlador control, ControladorBotonesTablero controladorBotonesTablero)
+		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
 		{	
 			//armado de la ventana
 
@@ -566,7 +565,7 @@ public class VistaBatalla implements Observer {
 	        for(int i=0; i<componentes.length;i++) 
 	        { 
 	        	((JButton)componentes[i]).setContentAreaFilled(false);
-				((JButton)componentes[i]).addActionListener(controladorBotonesTablero);
+				((JButton)componentes[i]).addActionListener(control.obtenerListenerBotonesTablero());
 	        } 
 	        
 	        

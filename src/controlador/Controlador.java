@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JList;
 
+import tablero.TableroComunicable;
+
 import municiones.Municion;
 
 import juego.BatallaNavalgo;
@@ -38,6 +40,7 @@ public class Controlador {
 			Municion municion = InstanciadorMuniciones.instanciar(municionSeleccionada);
 			
 			//Pasarle al tablero el id del casillero y la municionSeleccionada
+			//modelo.obtenerTablero().ponerMuncion(municion, id);
 		}
 	}
 	
