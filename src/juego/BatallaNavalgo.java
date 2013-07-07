@@ -37,6 +37,7 @@ public class BatallaNavalgo extends Observable {
 	
 	public void posicionarNavesAleatoriamente() {
 		this.tablero.construirYPosicionarLasNavesAleatoriamente();
+		this.ActualizarObservadores();
 	}
 
 	public boolean juegoTerminado() {
@@ -46,9 +47,15 @@ public class BatallaNavalgo extends Observable {
 	public Jugador obtenerJugador(){
 		return this.jugador;
 	}
-	
+
+	//Tablero
 	public TableroComunicable obtenerTablero(){
 		return this.tablero;
+	}
+	
+	public void ponerMunicion(Municion municion, int[] id){
+		this.tablero.ponerMuncion(municion, id);
+		this.ActualizarObservadores();
 	}
 	
 	public int puntosDelJugador(){
@@ -59,13 +66,6 @@ public class BatallaNavalgo extends Observable {
 		this.tablero.actualizarTablero();
 		this.jugador.descontarPuntos(10);
 	}
-
-	/* Se saco jugador.disparar de Jugador.
-	public void jugadorDispara(Municion municion, Casillero casillero){
-		this.jugador.disparar(municion, casillero);
-		this.tablero.agregarCasilleroConMunicion(casillero);
-	}
-	*/
 	
 	public int cantidadDeNavesDestruidas(){
 		return this.tablero.cantidadDeNavesDestruidas();
