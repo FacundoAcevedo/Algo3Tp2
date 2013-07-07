@@ -230,11 +230,7 @@ public class VistaBatalla implements Observer {
 	        
 	        // Asigna el tamanyo correcto a la ventana para que entre todo
 	        frameBatalla.pack(); 
-	        
-	        
-	        //DEJO LA SIGUIENTE LINEA COMENTADA PARA QUE NO ME ROMPA LOS HUEVOS EL COMPILADOR
-	        //listaMuniciones.addListSelectionListener(control.getListenerLista());
-	        
+	        	        
 			// Conectamos esta vista con el modelo
 			this.modelo = modelo;
 			this.modelo.addObserver(this); 
@@ -243,6 +239,12 @@ public class VistaBatalla implements Observer {
 		//Metodo que es llamado por el modelo al actualizarse el mismo
 		public void update(Observable t, Object o){
 			setTextoPuntos(Integer.toString(modelo.puntosDelJugador()));
+			
+		}
+		private void actualizarBotonesDelTablero(){
+			//TODO: Este metodo actualiza los botones moviendo las imagenes de las naves
+			
+			
 		}
 
 		public void setTextoPuntos(String s){
