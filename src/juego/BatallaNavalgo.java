@@ -19,19 +19,14 @@ public class BatallaNavalgo extends Observable {
 		this.tablero = new Tablero();
 	}
 	
-	// Esto supongo que o va en el controlador, o habra
-	// que modificarlo para que se puedan pasar los 
-	// parametros the this.ronda(Municion, Casillero)
-	/*
-	public void partida(){
+
+	public void iniciarPartida(){
 		this.posicionarNavesAleatoriamente();
-		while( ! this.juegoTerminado() ){
-			this.ronda();
-		}
-	}*/
+	}
 	
-	public void ronda(Municion municionElegida, Casillero casilleroElegido){
-		this.tablero.ponerMuncion(municionElegida, casilleroElegido.id());
+	
+	public void ronda(Municion municionElegida, int[] idCasillero){
+		this.tablero.ponerMuncion(municionElegida, idCasillero);
 		this.finDeTurno();
 	}
 	
