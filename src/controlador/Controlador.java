@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Visibility;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -24,6 +25,8 @@ public class Controlador {
 	private VistaBatalla vista;
 	private String municionSeleccionada = "Disparo Convencional" ; //seteado por defecto
 	
+	private Hashtable<String, String> informacionDeMuniciones = new Hashtable<String, String>();
+
 	public void cargarModelo(BatallaNavalgo modeloRecibido){
 		this.modelo = modeloRecibido;
 	}
@@ -74,6 +77,13 @@ public class Controlador {
 
 			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
 			
+			informacionDeMuniciones.put("Disparo Convencional","Impacta en una posición en el mismo momento del disparo" + "\n" + "Costo: 200 puntos");
+			informacionDeMuniciones.put("Mina Por Contacto","El impacto se realiza cuando una nave pasa por esa posición. Costo: 150 puntos");
+			informacionDeMuniciones.put("Mina Puntual Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición. Costo: 50 puntos");
+			informacionDeMuniciones.put("Mina Doble Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición. Destruye la posición actual y las posiciones adyacentes con radio 1. Costo: 100 puntos");
+			informacionDeMuniciones.put("Mina Triple Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición. Destruye la posición actual y las posiciones adyacentes con radio 2. Costo: 150 puntos");
+			
+			vista.informacionMunicion.setText((String)informacionDeMuniciones.get(municionSeleccionada));
 		}
 
 		@Override

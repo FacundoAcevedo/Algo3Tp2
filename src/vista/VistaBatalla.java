@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -43,8 +44,11 @@ public class VistaBatalla implements Observer {
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
-        private JButton botonesIniciarYSalir[] = new JButton[ 4 ]; //Botones de iniciar y salir
-        private JPanel panelBotones = new JPanel(); //Panel de "botones"
+        private JButton botonesIniciarYSalir[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
+        private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
+        
+        public JTextArea informacionMunicion = new JTextArea();
+        private JPanel panelMuniciones = new JPanel();
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
@@ -183,8 +187,21 @@ public class VistaBatalla implements Observer {
 	        	}
 	        }
 
+	        panelMuniciones.setLayout(new GridLayout(0, 1));
+	        panelMuniciones.add(panelLista);
+	        panelMuniciones.add(informacionMunicion);
+	        informacionMunicion.setEditable(false);
+	        informacionMunicion.setLineWrap(true);
+	        informacionMunicion.setWrapStyleWord(true);
+	        //informacionMunicion.setHorizontalAlignment(4); 
+	        frameBatalla.getContentPane().add(panelMuniciones);
+	        
+
+	        
+	        
+	        
 	        // Crea panel para lista de municiones.
-	        frameBatalla.getContentPane().add(panelLista);
+	        //frameBatalla.getContentPane().add(panelLista);
 	        // Agrega lista con municiones
 	        GridBagLayout gbl_panel_2 = new GridBagLayout();
 	        gbl_panel_2.columnWidths = new int[]{0, 89, 22, 0};
