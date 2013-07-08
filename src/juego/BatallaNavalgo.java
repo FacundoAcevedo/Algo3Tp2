@@ -27,6 +27,7 @@ public class BatallaNavalgo extends Observable {
 	public void ronda(Municion municionElegida, int[] idCasillero){
 		this.tablero.ponerMuncion(municionElegida, idCasillero);
 		this.finDeTurno();
+		this.ActualizarObservadores();
 	}
 	
 	public void posicionarNavesAleatoriamente() {
