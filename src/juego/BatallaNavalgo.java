@@ -49,7 +49,7 @@ public class BatallaNavalgo extends Observable {
 		return this.tablero;
 	}
 	
-	public void ponerMunicion(Municion municion, int[] id){
+	private void ponerMunicion(Municion municion, int[] id){
 		this.tablero.ponerMunicion(municion, id);
 		this.jugador.descontarPuntos(municion.costo());
 		this.ActualizarObservadores();
