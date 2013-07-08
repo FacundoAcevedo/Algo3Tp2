@@ -20,6 +20,7 @@ public class BatallaNavalgo extends Observable {
 	
 
 	public void iniciarPartida(){
+		this.reset();
 		this.posicionarNavesAleatoriamente();
 	}
 	
