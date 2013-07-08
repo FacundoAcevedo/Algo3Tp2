@@ -125,6 +125,7 @@ public class VistaBatalla implements Observer {
 	        gbc_textField.gridx = 2;
 	        gbc_textField.gridy = 2;
 	        panelPuntaje.add(textoPuntos, gbc_textField);
+	        textoPuntos.setEditable(false);
 	    
 	        
 	        
