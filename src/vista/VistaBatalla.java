@@ -238,9 +238,16 @@ public class VistaBatalla implements Observer {
 		
 		//Metodo que es llamado por el modelo al actualizarse el mismo
 		public void update(Observable t, Object o){
-			setTextoPuntos(Integer.toString(modelo.puntosDelJugador()));
+			this.actualizarPuntaje();
 			this.actualizarBotonesDelTablero();
 		}
+		private void actualizarPuntaje() {
+			int puntaje = this.modelo.puntosDelJugador();
+			setTextoPuntos(Integer.toString(puntaje));
+			
+			
+		}
+
 		private void actualizarBotonesDelTablero(){
 			//TODO: Este metodo actualiza los botones moviendo las imagenes de las naves
 
