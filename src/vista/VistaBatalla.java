@@ -69,6 +69,7 @@ public class VistaBatalla implements Observer {
 	        // crear y agregar botones
 	        botonesIniciarYSalir[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
 	        JButton botonIniciar = botonesIniciarYSalir[ 0 ];
+            botonIniciar.addActionListener(control.obtenerListenerBotonIniciarPartida());
             panelBotones.add( botonIniciar );
 
             botonesIniciarYSalir[ 1 ] = new JButton ("Guardar Juego");
