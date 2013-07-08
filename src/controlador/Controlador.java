@@ -45,7 +45,7 @@ public class Controlador {
 			
 			//Pasarle al tablero el id del casillero y la municionSeleccionada
 			
-			modelo.ponerMunicion(municion, id);
+			modelo.ronda(municion, id);
 		}
 	}
 	
