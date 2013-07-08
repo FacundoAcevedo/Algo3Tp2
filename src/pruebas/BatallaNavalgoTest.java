@@ -42,7 +42,7 @@ public class BatallaNavalgoTest {
 		Municion minaContacto = new MinaSubmarinaPorContacto();
 		int[] posMina = {5,6};
 		batallaNavalgo.obtenerTablero().posicionarNaveEnTablero(lancha, posProa);
-		batallaNavalgo.obtenerTablero().ponerMuncion(minaContacto, posMina);
+		batallaNavalgo.obtenerTablero().ponerMunicion(minaContacto, posMina);
 //		batallaNavalgo.tablero().imprimirTablero();
 		assertTrue(lancha.estado() == EstadoDeSalud.SANO);
 		batallaNavalgo.obtenerTablero().actualizarTablero();
