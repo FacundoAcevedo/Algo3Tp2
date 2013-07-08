@@ -1,10 +1,11 @@
 package juego;
 
+import interfaces.Reseteable;
 import municiones.Municion;
 import tablero.Casillero;
 import tablero.Tablero;
 
-public class Jugador {
+public class Jugador implements Reseteable {
 	private Puntaje puntaje;
 	
 	public Jugador(){
@@ -19,17 +20,10 @@ public class Jugador {
 		puntaje.descontarPuntos(puntosPerdidos);
 	}
 
-
-	public Municion eligeMunicion() {
-		// TODO iteractua con el usuario para que elija una Municion y la devuelva
+	@Override
+	public void reset() {
+		this.puntaje.reset();
 		
-		//this.descontarPuntos(municion.costo());
-		return null;
 	}
 
-	public Casillero eligeCasillero(Tablero tablero) {
-		// TODO iteractua con el usuario para que elija un Casillero 
-		// del tablero y lo devuelva.
-		return null;
-	}
 }

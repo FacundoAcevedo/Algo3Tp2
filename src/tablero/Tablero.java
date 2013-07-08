@@ -1,6 +1,8 @@
 package tablero;
 
 
+import interfaces.Reseteable;
+
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +22,7 @@ import naves.Sentido;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
-public class Tablero implements  TableroComunicable {
+public class Tablero implements  TableroComunicable, Reseteable {
 	
 	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<Casillero> casillerosConMunicion;
@@ -496,6 +498,16 @@ public class Tablero implements  TableroComunicable {
 			System.out.println(" ");
 		}
 		System.out.println(" ");
+	}
+
+	@Override
+	public void reset(){
+		for (Casillero casillero : this.coleccionCasilleros.values()){
+			casillero.reset();
+		}
+		this.casillerosConMunicion.clear();
+		this.naves.clear();
+		
 	}
 	
 	

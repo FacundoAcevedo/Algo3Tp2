@@ -21,5 +21,6 @@ public interface TableroComunicable {
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa);
 	public void ponerMuncion(Municion municion, int[] id);
 	public void imprimirTablero();
+	public void reset();
 
 }

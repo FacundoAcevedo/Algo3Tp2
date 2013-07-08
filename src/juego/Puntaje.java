@@ -1,6 +1,8 @@
 package juego;
 
-public class Puntaje {
+import interfaces.Reseteable;
+
+public class Puntaje implements Reseteable {
 
     private int puntos;
 
@@ -15,5 +17,11 @@ public class Puntaje {
     public void descontarPuntos(int puntosPerdidos) {
             puntos -= puntosPerdidos;        
     }
+
+	@Override
+	public void reset() {
+		this.puntos();
+		
+	}
 
 }

@@ -1,5 +1,7 @@
 package tablero;
 
+import interfaces.Reseteable;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import municiones.DisparoConvencional;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
-public class Casillero {
+public class Casillero implements Reseteable {
 	protected int x, y;
 
 	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
@@ -32,20 +34,7 @@ public class Casillero {
 		}
 
 	}
-//	public void actualizarContenidos(){
-//		//Verifica que las minas que deban estallar, estallen
-//		if (tieneMuniciones()){
-//			for( Municion municion : coleccionMuniciones){
-//				if ( municion instanceof MinaSubmarinaConRetardo && municion.retardo() == 0){
-//					for (SeccionDeNave seccion : coleccionDeSeccionesDeNave)
-//						seccion.recibirImpacto(municion);
-//					coleccionMuniciones.remove(municion);
-//						
-//					
-//				}
-//			}
-//		}
-//	}
+
 	public List<SeccionDeNave> devolverSeccionesDeNave() {
 		return this.coleccionDeSeccionesDeNave;
 	}
@@ -111,16 +100,13 @@ public class Casillero {
 	public void quitarMunicion(Municion municion){
 		this.coleccionMuniciones.remove(municion);
 	}
-	
-//	public void efectuarImpacto(int indiceMunicion){
-//		/*Si hay naves*/
-//		if (this.coleccionDeSeccionesDeNave.isEmpty() == false ){
-//			
-//			int cantidadDeSeccionesDeNave = this.coleccionDeSeccionesDeNave.size();
-//			for (int i = 0; i < cantidadDeSeccionesDeNave; i++){
-//				(this.coleccionDeSeccionesDeNave.get(i)).recibirImpacto(coleccionMuniciones.get(indiceMunicion));
-//				/*Ac� falta borrar la munici�n que ya impact� del casillero*/
-//			}
-//		}
-//	}
+
+	@Override
+	public void reset() {
+		//Limpia el casillero y lo deja como nuevo...
+		this.coleccionDeSeccionesDeNave.clear();
+		this.coleccionDeSeccionesDeNave.clear();
+		
+	}
+
 }

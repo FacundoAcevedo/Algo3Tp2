@@ -76,6 +76,13 @@ public class BatallaNavalgo extends Observable {
 		setChanged();
 		notifyObservers();		
 	}
+
+
+	public void reset() {
+		this.tablero.reset();
+		this.jugador.reset();
+		
+	}
 	
 }
 
