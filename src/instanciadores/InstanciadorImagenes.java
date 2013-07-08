@@ -33,11 +33,11 @@ public class InstanciadorImagenes {
 		if (sentidoPreProcesado == Sentido.ESTE || sentidoPreProcesado == Sentido.OESTE){
 			sentido = "horizontal";
 		}
-		else if (sentidoPreProcesado == Sentido.NORESTE || sentidoPreProcesado == Sentido.SUDESTE){
-			sentido = "diagonalEste";
+		else if (sentidoPreProcesado == Sentido.NORESTE || sentidoPreProcesado == Sentido.SUDOESTE){
+			sentido = "diagonalSudoesteNoreste";
 		}
-		else if (sentidoPreProcesado == Sentido.NOROESTE || sentidoPreProcesado == Sentido.SUDOESTE){
-			sentido = "diagonalOeste";
+		else if (sentidoPreProcesado == Sentido.NOROESTE || sentidoPreProcesado == Sentido.SUDESTE){
+			sentido = "diagonalNoroesteSudeste";
 		}
 		else{
 			// norte o sur
