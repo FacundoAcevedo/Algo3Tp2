@@ -5,7 +5,6 @@ import java.util.Observable;
 
 import municiones.Municion;
 
-import tablero.Casillero;
 import tablero.Tablero;
 import tablero.TableroComunicable;
 
