@@ -53,8 +53,7 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{		
-			modelo.reset();
-			modelo.iniciarPartida();
+			modelo.iniciarPartidaNueva();
 		}
 	}
 	
