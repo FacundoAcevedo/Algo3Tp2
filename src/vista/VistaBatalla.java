@@ -43,7 +43,7 @@ public class VistaBatalla implements Observer {
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
-        private JButton botonesIniciarYSalir[] = new JButton[ 2 ]; //Botones de iniciar y salir
+        private JButton botonesIniciarYSalir[] = new JButton[ 4 ]; //Botones de iniciar y salir
         private JPanel panelBotones = new JPanel(); //Panel de "botones"
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
@@ -70,9 +70,18 @@ public class VistaBatalla implements Observer {
 	        JButton botonIniciar = botonesIniciarYSalir[ 0 ];
             panelBotones.add( botonIniciar );
 
+            botonesIniciarYSalir[ 1 ] = new JButton ("Guardar Juego");
+	        JButton botonGuardar = botonesIniciarYSalir [ 1 ];
+	        botonGuardar.setEnabled(false); //Deshabilitado temporalmente
+            panelBotones.add( botonGuardar );
             
-	        botonesIniciarYSalir[ 1 ] = new JButton ("Salir del Juego");
-	        JButton botonSalir = botonesIniciarYSalir [ 1 ];
+            botonesIniciarYSalir[ 2 ] = new JButton ("Cargar Juego");
+	        JButton botonCargar = botonesIniciarYSalir [ 2 ];
+	        botonCargar.setEnabled(false); //Deshabilitado temporalmente
+            panelBotones.add( botonCargar );
+            
+	        botonesIniciarYSalir[ 3 ] = new JButton ("Salir del Juego");
+	        JButton botonSalir = botonesIniciarYSalir [ 3 ];
             panelBotones.add( botonSalir );
             
 
@@ -80,7 +89,7 @@ public class VistaBatalla implements Observer {
 	        {
 	        	   public void actionPerformed (ActionEvent e)
 	        	   {
-	        		   if (e.getSource()== botonesIniciarYSalir [ 1 ]) {
+	        		   if (e.getSource()== botonesIniciarYSalir [ 3 ]) {
 	        	            System.exit(0);
 	        	   } 
 	        	}
