@@ -13,6 +13,8 @@ public class Nave implements Iterable<SeccionDeNave>{
 	protected EstadoDeSalud estado;
 	protected List<SeccionDeNave> secciones = new LinkedList<SeccionDeNave>();
 	protected int porcentajeDeVida;
+	protected SeccionDeNave proa; //parte de adelante
+	protected SeccionDeNave popa; //parde de atras
 
 	public Nave(int largoNave, Direccion direccionNave) {
 		this.largo = largoNave;
@@ -21,12 +23,20 @@ public class Nave implements Iterable<SeccionDeNave>{
 		porcentajeDeVida = 100;
 
 		// Genero las secciones de la nave
-		for (int i = 0; i < this.largo; i++) {
-			SeccionDeNave seccion = new SeccionDeNave(this);
-			this.secciones.add(seccion);
+		agregarSeccion(TipoDeSeccion.PROA);
+		for (int i = 1; i < this.largo-1; i++) {
+			agregarSeccion(TipoDeSeccion.SECCIONMEDIA);
 		}
+		agregarSeccion(TipoDeSeccion.POPA);
+		
+		this.proa = this.secciones.get(0);
+		this.popa = this.secciones.get(this.secciones.size()-1);
 	}
-
+	
+	private void agregarSeccion(TipoDeSeccion tipoDeSeccion){
+		SeccionDeNave seccion = new SeccionDeNave(this, tipoDeSeccion);
+		this.secciones.add(seccion);
+	}
 	public Sentido direccion() {
 		return this.direccion.sentido();
 	}
@@ -87,10 +97,20 @@ public class Nave implements Iterable<SeccionDeNave>{
 	
 	public void invertirSentido(){
 		this.direccion.invertirSentido();
+		SeccionDeNave tmp = this.popa;
+		this.popa = this.proa;
+		this.proa = tmp;
+		
+		this.popa.invertirPopaProa();
+		this.proa.invertirPopaProa();
 	}
 	
 	public SeccionDeNave proa(){
-		return secciones.get(0);
+		return this.proa;
+	}
+	
+	public SeccionDeNave popa(){
+		return this.popa;
 	}
 	
 	@Override
