@@ -48,6 +48,7 @@ public class VistaBatalla implements Observer {
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
+        private Component[] componentes;
         
 		//Constructor de la vista
 		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
@@ -160,7 +161,7 @@ public class VistaBatalla implements Observer {
 	        		}));
 	        
 	        
-	        //Crea todos los Botones
+	        //Crea todos los Botones del tablero y los configura
 	        int xVista, yVista;
 	        for(int x = 0; x < 10; x++){
 	        	for(int y = 0; y < 10; y++){
@@ -170,27 +171,16 @@ public class VistaBatalla implements Observer {
 	        		panelTablero.add(botonCasillero, ""+xVista+","+yVista);
 	    	        int[] id = {x, y};
 	    	        botonCasillero.putClientProperty("id", id);
+	    	        //Seteo la trasparencia en los botones
+	    	        botonCasillero.setContentAreaFilled(false);
+	    	        //Cargo su listener
+	    	        botonCasillero.addActionListener(control.obtenerListenerBotonesTablero());   
 	    	        // Guarda en el hash
 	    	        String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
 	    	        botonesTablero.put(idComoString, botonCasillero);
 	        	}
 	        }
-	    
-	        
-	        //Hace que los botones de casillero sean transparentes
-	        //y les agregro su listener
-	        Component[] componentes =panelTablero.getComponents(); 
-	        for(int i=0; i<componentes.length;i++) 
-	        { 
-	        	((JButton)componentes[i]).setContentAreaFilled(false);
-				((JButton)componentes[i]).addActionListener(control.obtenerListenerBotonesTablero());
-	        } 
-	        
-	        
-	        
-	       
-	        
-	     
+
 	        // Crea panel para lista de municiones.
 	        frameBatalla.getContentPane().add(panelLista);
 	        // Agrega lista con municiones
@@ -248,11 +238,11 @@ public class VistaBatalla implements Observer {
 		//Metodo que es llamado por el modelo al actualizarse el mismo
 		public void update(Observable t, Object o){
 			setTextoPuntos(Integer.toString(modelo.puntosDelJugador()));
-			
+			this.actualizarBotonesDelTablero();
 		}
 		private void actualizarBotonesDelTablero(){
 			//TODO: Este metodo actualiza los botones moviendo las imagenes de las naves
-			
+
 			
 		}
 
