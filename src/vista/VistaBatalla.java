@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -15,12 +16,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -187,13 +190,20 @@ public class VistaBatalla implements Observer {
 	        	}
 	        }
 
+	        Border border = BorderFactory.createLineBorder(Color.BLACK);
+
 	        panelMuniciones.setLayout(new GridLayout(0, 1));
 	        panelMuniciones.add(panelLista);
 	        panelMuniciones.add(informacionMunicion);
+	        panelMuniciones.setBorder(BorderFactory.createCompoundBorder(border, 
+	                BorderFactory.createEmptyBorder(20, 30, 20, 30)));
+	        
 	        informacionMunicion.setEditable(false);
 	        informacionMunicion.setLineWrap(true);
 	        informacionMunicion.setWrapStyleWord(true);
-	        //informacionMunicion.setHorizontalAlignment(4); 
+	        informacionMunicion.setBorder(BorderFactory.createCompoundBorder(border, 
+	                BorderFactory.createEmptyBorder(20, 20, 20, 20)));
+	        
 	        frameBatalla.getContentPane().add(panelMuniciones);
 	        
 
