@@ -26,7 +26,7 @@ public class BatallaNavalgo extends Observable {
 	
 	
 	public void ronda(Municion municionElegida, int[] idCasillero){
-		this.tablero.ponerMuncion(municionElegida, idCasillero);
+		this.ponerMunicion(municionElegida, idCasillero);
 		this.finDeTurno();
 		this.ActualizarObservadores();
 	}
@@ -50,7 +50,8 @@ public class BatallaNavalgo extends Observable {
 	}
 	
 	public void ponerMunicion(Municion municion, int[] id){
-		this.tablero.ponerMuncion(municion, id);
+		this.tablero.ponerMunicion(municion, id);
+		this.jugador.descontarPuntos(municion.costo());
 		this.ActualizarObservadores();
 	}
 	
