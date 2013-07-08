@@ -367,6 +367,7 @@ public class Tablero implements  TableroComunicable, Reseteable {
 				secciones.add(seccion);
 			}
 			for (SeccionDeNave seccion : secciones){
+				if (seccion.naveEstaDestruida()) continue; //no hay que moverla, esta detruida
 				if(!seccionesYaMovidas.contains(seccion)){
 				casillero.quitarSeccion(seccion);
 				idCasilleroProximo = this.proximoCasillero(casillero, seccion.sentido());
@@ -395,6 +396,10 @@ public class Tablero implements  TableroComunicable, Reseteable {
 							.devolverSeccionesDeNave();
 
 					for (SeccionDeNave seccion : seccionesDeNaveEnBorde) {
+						if(seccion.naveEstaDestruida()){
+							//la nave esta destruida, no se mueve.
+							continue;
+						}
 						int[] siguienteId = this.proximoCasillero(casilleroDelBorde, seccion.sentido());
 						try{
 							this.obtenerCasillero(siguienteId);

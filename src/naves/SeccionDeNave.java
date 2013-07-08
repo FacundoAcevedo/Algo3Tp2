@@ -69,6 +69,10 @@ public class SeccionDeNave {
 		return this.nave.getClass().getSimpleName();
 	}
 	
+	public boolean naveEstaDestruida(){
+		return (this.nave.estado() == EstadoDeSalud.DESTRUIDO);
+	}
+	
 	public TipoDeSeccion obtenerTipoDeSeccion(){
 		return this.tipoDeSeccion;
 	}
