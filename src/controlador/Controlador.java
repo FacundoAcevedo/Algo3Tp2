@@ -49,6 +49,18 @@ public class Controlador {
 		}
 	}
 	
+	public class ListenerBotonInicarPartida implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{		
+			modelo.iniciarPartida();
+		}
+	}
+	
+	public ActionListener obtenerListenerBotonIniciarPartida(){
+		return new ListenerBotonInicarPartida();
+	}
+	
 	public ActionListener obtenerListenerBotonesTablero(){
 		return new ListenerBotonesTablero();
 	}
