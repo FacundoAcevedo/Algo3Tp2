@@ -19,7 +19,7 @@ public interface TableroComunicable {
 	public int cantidadDeNavesDestruidas();
 	public void actualizarTablero();
 	public void posicionarNaveEnTablero(Nave nave, int[] posicionDeProa);
-	public void ponerMuncion(Municion municion, int[] id);
+	public void ponerMunicion(Municion municion, int[] id);
 	public void imprimirTablero();
 	public void reset();
 

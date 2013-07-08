@@ -302,7 +302,7 @@ public class Tablero implements  TableroComunicable, Reseteable {
 		return (totalNaves - totalNavesActivas);
 	}
 
-	public void ponerMuncion(Municion municion, int[] id) {
+	public void ponerMunicion(Municion municion, int[] id) {
 		Casillero casillero = this.obtenerCasillero(id);
 		casillero.ponerMunicion(municion);
 		this.casillerosConMunicion.add(casillero);

@@ -440,7 +440,7 @@ public class TableroTest {
 		DisparoConvencional disparoConvencional = new DisparoConvencional();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(disparoConvencional, posicionVacia);
+		tablero.ponerMunicion(disparoConvencional, posicionVacia);
 		assertTrue(nave.estado() == EstadoDeSalud.SANO);
 	}
 	
@@ -455,7 +455,7 @@ public class TableroTest {
 		DisparoConvencional disparoConvencional = new DisparoConvencional();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(disparoConvencional, posicionDeProa);
+		tablero.ponerMunicion(disparoConvencional, posicionDeProa);
 		
 		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
 	}
@@ -472,7 +472,7 @@ public class TableroTest {
 		MinaSubmarinaPorContacto mina = new MinaSubmarinaPorContacto();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		//todavia no se movieron las naves.
 		assertTrue(nave.estado() == EstadoDeSalud.SANO);
@@ -490,7 +490,7 @@ public class TableroTest {
 		MinaSubmarinaPorContacto mina = new MinaSubmarinaPorContacto();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		tablero.actualizarTablero();
 		
@@ -509,7 +509,7 @@ public class TableroTest {
 		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		tablero.actualizarTablero();
 		tablero.actualizarTablero(); //todavia no explota
@@ -529,7 +529,7 @@ public class TableroTest {
 		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		tablero.actualizarTablero();
 		tablero.actualizarTablero();
@@ -550,7 +550,7 @@ public class TableroTest {
 		MinaSubmarinaDobleConRetardo mina = new MinaSubmarinaDobleConRetardo();
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		tablero.actualizarTablero();
 		tablero.actualizarTablero();
@@ -574,7 +574,7 @@ public class TableroTest {
 		
 		tablero.posicionarNaveEnTablero(lancha, posicionDeProaLancha);
 		tablero.posicionarNaveEnTablero(buque, posicionDeProaBuque);
-		tablero.ponerMuncion(mina, posicionDeMina);
+		tablero.ponerMunicion(mina, posicionDeMina);
 		
 		tablero.actualizarTablero();
 		tablero.actualizarTablero();
