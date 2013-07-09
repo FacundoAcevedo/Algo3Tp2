@@ -41,11 +41,11 @@ public class SeccionDeNave {
 		return this.nave.direccion();
 	}
 	
-	private boolean esPopa(){
+	public boolean esPopa(){
 		return (this.tipoDeSeccion == TipoDeSeccion.POPA);
 	}
 	
-	private boolean esProa(){
+	public boolean esProa(){
 		return (this.tipoDeSeccion == TipoDeSeccion.PROA);
 	}
 	
