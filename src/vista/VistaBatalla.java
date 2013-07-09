@@ -7,6 +7,7 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,6 +31,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import naves.SeccionDeNave;
@@ -53,7 +55,7 @@ public class VistaBatalla implements Observer {
 		private JFrame frameBatalla = new JFrame("Batalla Navalgo"); //creamos el marco
         private JPanel panelPuntaje = new JPanel(); //creamos el panel que contiene el puntaje
         private Label labelPuntos = new Label("Puntos:"); //etiqueta de "Puntos"
-		private TextField textoPuntos = new TextField(); //texto que mostrara el puntaje
+		private JTextField textoPuntos = new JTextField(); //texto que mostrara el puntaje
         private JBackgroundPanel panelTablero = new JBackgroundPanel(); //creamos el panel que contiene el tablero
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
@@ -61,8 +63,21 @@ public class VistaBatalla implements Observer {
         private JButton botonesIniciarYSalir[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
         private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
         
-        public JTextArea informacionMunicion = new JTextArea();
         private JPanel panelMuniciones = new JPanel();
+        final ImageIcon imageIcon = new ImageIcon("estaticos/fondoMuniciones.jpg");
+        public JTextArea informacionMunicion = new JTextArea(){
+        	private static final long serialVersionUID = 1L;
+			Image image = imageIcon.getImage();
+            {
+              setOpaque(false);
+            }
+
+            public void paint(Graphics g) {
+              g.drawImage(image, 0, 0, this);
+              super.paint(g);
+            }
+          };
+        
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
@@ -117,6 +132,8 @@ public class VistaBatalla implements Observer {
 
 	        frameBatalla.getContentPane().add(panelBotones);
 	      
+	        panelPuntaje.setBackground(Color.BLACK);
+	        labelPuntos.setForeground(Color.WHITE);
 			
 	        frameBatalla.getContentPane().add(panelPuntaje); //agrega una nueva columna para los puntos
 	        //se setean los tamanyos de esta nueva columna
@@ -144,6 +161,9 @@ public class VistaBatalla implements Observer {
 	        gbc_textField.gridy = 2;
 	        panelPuntaje.add(textoPuntos, gbc_textField);
 	        textoPuntos.setEditable(false);
+	        textoPuntos.setBackground(Color.BLACK);
+	        textoPuntos.setForeground(Color.WHITE);
+	        textoPuntos.setBorder(null);
 	    
 	        
 	        
@@ -202,7 +222,10 @@ public class VistaBatalla implements Observer {
 	        }
 
 	        Border border = BorderFactory.createLineBorder(Color.BLACK);
-
+	        
+	        labelMuniciones.setForeground(Color.WHITE);
+	        panelLista.setBackground(Color.BLACK);
+	        panelMuniciones.setBackground(Color.BLACK);
 	        panelMuniciones.setLayout(new GridLayout(0, 1));
 	        panelMuniciones.add(panelLista);
 	        panelMuniciones.add(informacionMunicion);
