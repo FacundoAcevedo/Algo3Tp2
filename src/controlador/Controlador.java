@@ -61,6 +61,7 @@ public class Controlador {
     		if (!coleccionSeccionesDeNave.isEmpty()){
     			int porcenjateDeSalud = coleccionSeccionesDeNave.get(0).obtenerPorcentajeDeSalud();
     			boton.setToolTipText(Integer.toString(porcenjateDeSalud)+"%");
+
     		}
 			
 		}
