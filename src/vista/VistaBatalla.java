@@ -1,5 +1,7 @@
 package vista;
 
+import instanciadores.InstanciadorImagenes;
+
 import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
@@ -8,22 +10,31 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.TextField;
 import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
+import naves.SeccionDeNave;
+
+import tablero.Casillero;
 
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -206,6 +217,7 @@ public class VistaBatalla implements Observer {
 	        
 	        frameBatalla.getContentPane().add(panelMuniciones);
 	        
+	        
 
 	        
 	        
@@ -272,14 +284,37 @@ public class VistaBatalla implements Observer {
 		private void actualizarPuntaje() {
 			int puntaje = this.modelo.puntosDelJugador();
 			setTextoPuntos(Integer.toString(puntaje));
-			
-			
+			this.actualizarBotonesDelTablero();
 		}
 
-		private void actualizarBotonesDelTablero(){
-			//TODO: Este metodo actualiza los botones moviendo las imagenes de las naves
-
+		public void actualizarBotonesDelTablero(){
+			this.limpiarBotonesDelTablero();
+			 for(int x = 0; x < 10; x++){
+		        	for(int y = 0; y < 10; y++){
+		        		int[] id = {x,y};	
+		        		Casillero  casillero = modelo.obtenerCasillero(id);
+		        		List<SeccionDeNave> coleccionSeccionesDeNave = casillero.devolverSeccionesDeNave();
+		        		//Solo una de las secciones sera mostrada
+		        		if (!coleccionSeccionesDeNave.isEmpty()){
+		        			ImageIcon imagen = InstanciadorImagenes.nave(coleccionSeccionesDeNave.get(0));
+		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+		        			JButton botonTablero = this.botonesTablero.get(idComoString);
+		        			botonTablero.setIcon(imagen);
+		        		}
+		        	}
+		        }
 			
+		}
+		public void limpiarBotonesDelTablero(){
+			 for(int x = 0; x < 10; x++){
+		        	for(int y = 0; y < 10; y++){
+		        		int[] id = {x,y};
+	        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+	        			JButton botonTablero = this.botonesTablero.get(idComoString);
+	        			botonTablero.setIcon(null);
+
+		        	}
+			 }
 		}
 
 		public void setTextoPuntos(String s){
