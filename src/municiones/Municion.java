@@ -25,6 +25,7 @@ public class Municion {
 		return miCosto;
 	}
 	
+	
 	public void impactar(Tablero tablero, Casillero miCasillero){
 		
 	}

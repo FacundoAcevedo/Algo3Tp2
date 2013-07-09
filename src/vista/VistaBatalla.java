@@ -31,6 +31,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import municiones.Municion;
 import naves.SeccionDeNave;
 
 import tablero.Casillero;
@@ -320,6 +321,13 @@ public class VistaBatalla implements Observer {
 		        		//Solo una de las secciones sera mostrada
 		        		if (!coleccionSeccionesDeNave.isEmpty()){
 		        			ImageIcon imagen = InstanciadorImagenes.nave(coleccionSeccionesDeNave.get(0));
+		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+		        			JButton botonTablero = this.botonesTablero.get(idComoString);
+		        			botonTablero.setIcon(imagen);
+		        		}
+		        		List<Municion> coleccionMuniciones = casillero.devolverMuniciones();
+		        		if(!coleccionMuniciones.isEmpty()){
+		        			ImageIcon imagen = InstanciadorImagenes.municion(coleccionMuniciones.get(0));
 		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
 		        			JButton botonTablero = this.botonesTablero.get(idComoString);
 		        			botonTablero.setIcon(imagen);
