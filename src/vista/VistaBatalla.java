@@ -215,7 +215,8 @@ public class VistaBatalla implements Observer {
 	    	        //Seteo la trasparencia en los botones
 	    	        botonCasillero.setContentAreaFilled(false);
 	    	        //Cargo su listener
-	    	        botonCasillero.addActionListener(control.obtenerListenerBotonesTablero());   
+	    	        botonCasillero.addMouseListener(control.obtenerMouseListenerBotonesTablero());   
+
 	    	        // Guarda en el hash
 	    	        String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
 	    	        botonesTablero.put(idComoString, botonCasillero);
@@ -241,13 +242,7 @@ public class VistaBatalla implements Observer {
 	        
 	        frameBatalla.getContentPane().add(panelMuniciones);
 	        
-	        
-
-	        
-	        
-	        
-	        // Crea panel para lista de municiones.
-	        //frameBatalla.getContentPane().add(panelLista);
+	     
 	        // Agrega lista con municiones
 	        GridBagLayout gbl_panel_2 = new GridBagLayout();
 	        gbl_panel_2.columnWidths = new int[]{0, 89, 22, 0};
