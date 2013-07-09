@@ -8,10 +8,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Visibility;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JList;
 
+import naves.SeccionDeNave;
+
+import tablero.Casillero;
 import tablero.TableroComunicable;
 import vista.VistaBatalla;
 
@@ -35,12 +39,9 @@ public class Controlador {
 		this.vista = vistaRecibida;
 	}
 	
-	
-	
-	public class ListenerBotonesTablero implements ActionListener {
+	public class MouseListenerBotonesTablero implements MouseListener {
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{	
+		public void mouseClicked(MouseEvent e) {
 			JButton boton = (JButton) e.getSource();
 			int [] id = (int[]) boton.getClientProperty("id");
 			
@@ -50,6 +51,42 @@ public class Controlador {
 			
 			modelo.ronda(municion, id);
 		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			JButton boton = (JButton) e.getSource();
+			int [] id = (int[]) boton.getClientProperty("id");
+    		Casillero  casillero = modelo.obtenerCasillero(id);
+    		List<SeccionDeNave> coleccionSeccionesDeNave = casillero.devolverSeccionesDeNave();
+    		if (!coleccionSeccionesDeNave.isEmpty()){
+    			int porcenjateDeSalud = coleccionSeccionesDeNave.get(0).obtenerPorcentajeDeSalud();
+    			boton.setToolTipText(Integer.toString(porcenjateDeSalud)+"%");
+    		}
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+
+	
+	public MouseListener obtenerMouseListenerBotonesTablero(){
+		return new MouseListenerBotonesTablero();
 	}
 	
 	public class ListenerBotonInicarPartida implements ActionListener {
@@ -65,9 +102,7 @@ public class Controlador {
 		return new ListenerBotonInicarPartida();
 	}
 	
-	public ActionListener obtenerListenerBotonesTablero(){
-		return new ListenerBotonesTablero();
-	}
+
 	
 	
 	
