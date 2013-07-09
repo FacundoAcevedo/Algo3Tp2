@@ -1,10 +1,12 @@
 package juego;
 
 
+import java.util.LinkedList;
 import java.util.Observable;
 
 import municiones.Municion;
 
+import tablero.Casillero;
 import tablero.Tablero;
 import tablero.TableroComunicable;
 
@@ -43,7 +45,7 @@ public class BatallaNavalgo extends Observable {
 	public Jugador obtenerJugador(){
 		return this.jugador;
 	}
-
+	
 	//Tablero
 	public TableroComunicable obtenerTablero(){
 		return this.tablero;
@@ -67,7 +69,9 @@ public class BatallaNavalgo extends Observable {
 	public int cantidadDeNavesDestruidas(){
 		return this.tablero.cantidadDeNavesDestruidas();
 	}
-	
+	public Casillero obtenerCasillero(int[] id){
+		return this.tablero.obtenerCasillero(id);
+	}
 	/* Cantidad de naves en el tablero, sin importar estado. */
 	public int cantidadTotalNaves(){
 		return this.tablero.cantidadTotalDeNaves();
