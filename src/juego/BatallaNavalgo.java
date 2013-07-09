@@ -39,7 +39,10 @@ public class BatallaNavalgo extends Observable {
 	}
 
 	public boolean juegoTerminado() {
-		return ( this.cantidadDeNavesDestruidas() == this.cantidadTotalNaves() );
+		if (this.cantidadTotalNaves() == 0)
+			return false;
+		else
+			return ( this.cantidadDeNavesDestruidas() == this.cantidadTotalNaves() );
 	}
 
 	public Jugador obtenerJugador(){
@@ -54,7 +57,6 @@ public class BatallaNavalgo extends Observable {
 	private void ponerMunicion(Municion municion, int[] id){
 		this.tablero.ponerMunicion(municion, id);
 		this.jugador.descontarPuntos(municion.costo());
-		this.ActualizarObservadores();
 	}
 	
 	public int puntosDelJugador(){
