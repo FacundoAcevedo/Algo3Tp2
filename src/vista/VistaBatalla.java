@@ -2,7 +2,7 @@ package vista;
 
 import instanciadores.InstanciadorImagenes;
 
-import java.awt.Component;
+//import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
-import java.awt.TextField;
 import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,7 +22,6 @@ import java.util.Observer;
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,7 +43,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import controlador.Controlador;
 
 import juego.BatallaNavalgo;
-import java.awt.event.*;
+//import java.awt.event.*;
 
 public class VistaBatalla implements Observer {
 
@@ -60,7 +57,7 @@ public class VistaBatalla implements Observer {
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
-        private JButton botonesIniciarYSalir[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
+        private JButton botonesOpciones[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
         private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
         
         private JPanel panelMuniciones = new JPanel();
@@ -81,7 +78,7 @@ public class VistaBatalla implements Observer {
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
-        private Component[] componentes;
+        //private Component[] componentes;
         
 		//Constructor de la vista
 		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
@@ -100,23 +97,23 @@ public class VistaBatalla implements Observer {
 	        panelBotones.setLayout(new GridLayout(0, 1));
 		  	  
 	        // crear y agregar botones
-	        botonesIniciarYSalir[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
-	        JButton botonIniciar = botonesIniciarYSalir[ 0 ];
+	        botonesOpciones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
+	        JButton botonIniciar = botonesOpciones[ 0 ];
             botonIniciar.addActionListener(control.obtenerListenerBotonIniciarPartida());
             panelBotones.add( botonIniciar );
 
-            botonesIniciarYSalir[ 1 ] = new JButton ("Guardar Juego");
-	        JButton botonGuardar = botonesIniciarYSalir [ 1 ];
+            botonesOpciones[ 1 ] = new JButton ("Guardar Juego");
+	        JButton botonGuardar = botonesOpciones [ 1 ];
 	        botonGuardar.setEnabled(false); //Deshabilitado temporalmente
             panelBotones.add( botonGuardar );
             
-            botonesIniciarYSalir[ 2 ] = new JButton ("Cargar Juego");
-	        JButton botonCargar = botonesIniciarYSalir [ 2 ];
+            botonesOpciones[ 2 ] = new JButton ("Cargar Juego");
+	        JButton botonCargar = botonesOpciones [ 2 ];
 	        botonCargar.setEnabled(false); //Deshabilitado temporalmente
             panelBotones.add( botonCargar );
             
-	        botonesIniciarYSalir[ 3 ] = new JButton ("Salir del Juego");
-	        JButton botonSalir = botonesIniciarYSalir [ 3 ];
+            botonesOpciones[ 3 ] = new JButton ("Salir del Juego");
+	        JButton botonSalir = botonesOpciones [ 3 ];
             panelBotones.add( botonSalir );
             
 
@@ -124,7 +121,7 @@ public class VistaBatalla implements Observer {
 	        {
 	        	   public void actionPerformed (ActionEvent e)
 	        	   {
-	        		   if (e.getSource()== botonesIniciarYSalir [ 3 ]) {
+	        		   if (e.getSource()== botonesOpciones [ 3 ]) {
 	        	            System.exit(0);
 	        	   } 
 	        	}
