@@ -76,5 +76,9 @@ public class SeccionDeNave {
 	public TipoDeSeccion obtenerTipoDeSeccion(){
 		return this.tipoDeSeccion;
 	}
+
+	public int obtenerPorcentajeDeSalud() {
+		return this.nave.porcentajeDeVida;
+	}
 	
 }
