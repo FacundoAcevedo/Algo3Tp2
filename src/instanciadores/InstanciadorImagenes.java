@@ -53,7 +53,7 @@ public class InstanciadorImagenes {
 		if (sentidoPreProcesado == Sentido.OESTE){
 			sentido = "HL";
 		}
-		if (sentidoPreProcesado == Sentido.ESTE){
+		else if (sentidoPreProcesado == Sentido.ESTE){
 			sentido = "HR";
 		}
 		else if (sentidoPreProcesado == Sentido.NORESTE){
