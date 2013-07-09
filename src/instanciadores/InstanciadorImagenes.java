@@ -81,7 +81,7 @@ public class InstanciadorImagenes {
 			estado = "Sana";
 		}
 		else{
-			estado = "Daniado";
+			estado = "Daniada";
 		}
 		
 		rutaImagen = "estaticos/Naves/"+posicion+estado+sentido+".png";
