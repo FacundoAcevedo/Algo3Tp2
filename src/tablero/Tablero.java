@@ -514,6 +514,8 @@ public class Tablero implements  TableroComunicable, Reseteable {
 		this.naves.clear();
 		
 	}
+
+
 	
 	
 }
