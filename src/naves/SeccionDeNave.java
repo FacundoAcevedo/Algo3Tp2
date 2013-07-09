@@ -65,7 +65,7 @@ public class SeccionDeNave {
 		return this.estado;
 	}
 	
-	public String obtenerTipo(){
+	public String obtenerTipoDeNave(){
 		return this.nave.getClass().getSimpleName();
 	}
 	
