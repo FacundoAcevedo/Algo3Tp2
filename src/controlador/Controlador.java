@@ -57,6 +57,7 @@ public class Controlador {
 		public void actionPerformed(ActionEvent e)
 		{		
 			modelo.iniciarPartidaNueva();
+			vista.actualizarBotonesDelTablero();
 		}
 	}
 	
@@ -77,11 +78,11 @@ public class Controlador {
 
 			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
 			
-			informacionDeMuniciones.put("Disparo Convencional","Impacta en una posición en el mismo momento del disparo" + "\n" + "Costo: 200 puntos");
-			informacionDeMuniciones.put("Mina Por Contacto","El impacto se realiza cuando una nave pasa por esa posición" + "\n" + "Costo: 150 puntos");
-			informacionDeMuniciones.put("Mina Puntual Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición" + "\n" + "Costo: 50 puntos");
-			informacionDeMuniciones.put("Mina Doble Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición. Destruye la posición actual y las posiciones adyacentes con radio 1" + "\n" + "Costo: 100 puntos");
-			informacionDeMuniciones.put("Mina Triple Con Retardo","Impacta tres turnos después de haber sido colocado en esa posición. Destruye la posición actual y las posiciones adyacentes con radio 2" + "\n" + "Costo: 150 puntos");
+			informacionDeMuniciones.put("Disparo Convencional","Impacta en una posicion en el mismo momento del disparo" + "\n" + "Costo: 200 puntos");
+			informacionDeMuniciones.put("Mina Por Contacto","El impacto se realiza cuando una nave pasa por esa posicion" + "\n" + "Costo: 150 puntos");
+			informacionDeMuniciones.put("Mina Puntual Con Retardo","Impacta tres turnos despuï¿½s de haber sido colocado en esa posicion" + "\n" + "Costo: 50 puntos");
+			informacionDeMuniciones.put("Mina Doble Con Retardo","Impacta tres turnos despuï¿½s de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 1" + "\n" + "Costo: 100 puntos");
+			informacionDeMuniciones.put("Mina Triple Con Retardo","Impacta tres turnos despuï¿½s de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 2" + "\n" + "Costo: 150 puntos");
 			
 			vista.informacionMunicion.setText((String)informacionDeMuniciones.get(municionSeleccionada));
 		}
