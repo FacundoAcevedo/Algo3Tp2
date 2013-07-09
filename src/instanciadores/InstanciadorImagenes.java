@@ -64,7 +64,7 @@ public class InstanciadorImagenes {
 			sentido = "DLD";
 		}
 		else if (sentidoPreProcesado == Sentido.SUDOESTE){
-			sentido = "DLD";
+			sentido = "DRD";
 		}
 		else if(sentidoPreProcesado == Sentido.SUR){
 			sentido = "VD";
