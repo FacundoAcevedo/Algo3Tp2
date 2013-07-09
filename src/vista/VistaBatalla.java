@@ -332,7 +332,7 @@ public class VistaBatalla implements Observer {
 
 		public void actualizarBotonesDelTablero(){
 			this.limpiarBotonesDelTablero();
-			BufferedImage bufferDeImagenes = new BufferedImage(JButton.WIDTH, JButton.HEIGHT,0);
+			//BufferedImage bufferDeImagenes = new BufferedImage(JButton.WIDTH, JButton.HEIGHT,0);
 			 for(int x = 0; x < 10; x++){
 		        	for(int y = 0; y < 10; y++){
 		        		int[] id = {x,y};	
