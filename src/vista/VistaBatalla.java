@@ -6,6 +6,7 @@ import instanciadores.InstanciadorImagenes;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -26,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -297,17 +299,40 @@ public class VistaBatalla implements Observer {
 		
 		//Metodo que es llamado por el modelo al actualizarse el mismo
 		public void update(Observable t, Object o){
-			this.actualizarPuntaje();
-			this.actualizarBotonesDelTablero();
+			if (modelo.juegoTerminado()){
+				String mensaje;
+				String titulo;
+				int puntaje = modelo.puntosDelJugador();
+				
+				if (puntaje >= 5000){
+					mensaje = "Asi es, parece que sos bueno en esto!\n Tu puntaje es:"+Integer.toString(puntaje);
+					titulo = "¡¡Victoria!!";
+				}
+				else if (puntaje >= 1000 && puntaje <5000){
+					mensaje = "No es un mal puntaje...\n Tu puntaje es:"+Integer.toString(puntaje);
+					titulo = "Victoria?";
+				}
+				else{
+					mensaje = "Segui participando...\n Tu puntaje es:"+Integer.toString(puntaje);
+					titulo =  "Cof Cof";
+					
+				}
+				JOptionPane.showMessageDialog(this.frameBatalla,mensaje ,titulo , JOptionPane.INFORMATION_MESSAGE);
+
+			}
+			else{
+				this.actualizarPuntaje();
+				this.actualizarBotonesDelTablero();
+			}
 		}
 		private void actualizarPuntaje() {
 			int puntaje = this.modelo.puntosDelJugador();
 			setTextoPuntos(Integer.toString(puntaje));
-			this.actualizarBotonesDelTablero();
 		}
 
 		public void actualizarBotonesDelTablero(){
 			this.limpiarBotonesDelTablero();
+			BufferedImage bufferDeImagenes = new BufferedImage(JButton.WIDTH, JButton.HEIGHT,0);
 			 for(int x = 0; x < 10; x++){
 		        	for(int y = 0; y < 10; y++){
 		        		int[] id = {x,y};	
@@ -316,6 +341,7 @@ public class VistaBatalla implements Observer {
 		        		//Solo una de las secciones sera mostrada
 		        		if (!coleccionSeccionesDeNave.isEmpty()){
 		        			ImageIcon imagen = InstanciadorImagenes.nave(coleccionSeccionesDeNave.get(0));
+//		        			bufferDeImagenes.s	
 		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
 		        			JButton botonTablero = this.botonesTablero.get(idComoString);
 		        			botonTablero.setIcon(imagen);
