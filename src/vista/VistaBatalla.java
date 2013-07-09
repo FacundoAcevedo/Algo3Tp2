@@ -97,25 +97,27 @@ public class VistaBatalla implements Observer {
 	        panelBotones.setLayout(new GridLayout(0, 1));
 		  	  
 	        // crear y agregar botones
-	        botonesOpciones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); //Este boton deberia posicionar las naves. (seria partida() de batalla navalgo)
+	        botonesOpciones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); 
 	        JButton botonIniciar = botonesOpciones[ 0 ];
             botonIniciar.addActionListener(control.obtenerListenerBotonIniciarPartida());
-            panelBotones.add( botonIniciar );
 
             botonesOpciones[ 1 ] = new JButton ("Guardar Juego");
 	        JButton botonGuardar = botonesOpciones [ 1 ];
 	        botonGuardar.setEnabled(false); //Deshabilitado temporalmente
-            panelBotones.add( botonGuardar );
             
             botonesOpciones[ 2 ] = new JButton ("Cargar Juego");
 	        JButton botonCargar = botonesOpciones [ 2 ];
 	        botonCargar.setEnabled(false); //Deshabilitado temporalmente
-            panelBotones.add( botonCargar );
             
             botonesOpciones[ 3 ] = new JButton ("Salir del Juego");
 	        JButton botonSalir = botonesOpciones [ 3 ];
-            panelBotones.add( botonSalir );
             
+	        //Personaliza los botones y los agrega al panel
+            for(int i = 0; i < 4; i++){
+            	botonesOpciones[ i ].setBackground(Color.BLACK);
+            	botonesOpciones[ i ].setForeground(Color.WHITE);
+            	panelBotones.add( botonesOpciones[ i ] );
+            }
 
 	        botonSalir.addActionListener(new ActionListener ()
 	        {
@@ -162,7 +164,8 @@ public class VistaBatalla implements Observer {
 	        textoPuntos.setForeground(Color.WHITE);
 	        textoPuntos.setBorder(null);
 	    
-	        
+	     
+	       
 	        
 	        frameBatalla.getContentPane().add(panelTablero); //agrega la "matriz" del tablero a la ventana
 	        //Se asigna la disposicion de los botones.
