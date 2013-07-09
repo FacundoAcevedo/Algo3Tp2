@@ -20,7 +20,8 @@ public class Puntaje implements Reseteable {
 
 	@Override
 	public void reset() {
-		this.puntos();
+        this.puntos = 10000;
+
 		
 	}
 
