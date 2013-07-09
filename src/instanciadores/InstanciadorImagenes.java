@@ -4,6 +4,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import municiones.MinaSubmarinaPorContacto;
+import municiones.Municion;
 import naves.EstadoDeSalud;
 import naves.SeccionDeNave;
 import naves.Sentido;
@@ -88,8 +90,9 @@ public class InstanciadorImagenes {
 		return  new ImageIcon(rutaImagen);//.getImage();		
 	}
 //	
-//	static public Image municion(Municion municion){
-//		
-//	}
+	static public ImageIcon municion(Municion municion){
+		//falta implementar
+		return new ImageIcon("estaticos/Minas/minaPuntual.png");
+	}
 
 }
