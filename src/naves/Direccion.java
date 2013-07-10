@@ -1,10 +1,16 @@
 package naves;
 
+import java.io.Serializable;
+
 
 /*Los enum van con la primer letra en mayusculas*/ 
 
 
-public class Direccion {
+public class Direccion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4541541574159245703L;
 	/*Es una idea, hay que ver si es lo correcto, pero como siempre dijeron
 	 * que no hay que usar strings, lo que podemos hacer es usar tipos enumerados
 	 * como estos:

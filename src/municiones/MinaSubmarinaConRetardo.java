@@ -5,6 +5,10 @@ import tablero.Casillero;
 import tablero.Tablero;
 
 public abstract class MinaSubmarinaConRetardo extends MinaSubmarina {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4716575347807314627L;
 	final static int miRetardo = 3;
 	protected int rango;
 	

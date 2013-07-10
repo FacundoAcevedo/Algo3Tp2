@@ -3,6 +3,10 @@ package naves;
 import municiones.Municion;
 
 public class RompeHielos extends Nave{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8613927080698050510L;
 	final static int miLargo = 3;
 	
 	public RompeHielos(Direccion direccionRompehielos){

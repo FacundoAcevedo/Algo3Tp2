@@ -1,7 +1,7 @@
 package juego;
 
 
-import java.util.LinkedList;
+import java.io.Serializable;
 import java.util.Observable;
 
 import municiones.Municion;
@@ -11,7 +11,10 @@ import tablero.Tablero;
 import tablero.TableroComunicable;
 
 
-public class BatallaNavalgo extends Observable {
+public class BatallaNavalgo extends Observable implements Serializable {
+
+	private static final long serialVersionUID = -4624714350585496059L;
+	
 	private Jugador jugador;
 	private TableroComunicable tablero;
 	

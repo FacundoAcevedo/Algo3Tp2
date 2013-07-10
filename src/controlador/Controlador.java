@@ -7,6 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Visibility;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -147,8 +153,60 @@ public class Controlador {
 			
 		}
 	}
-	
+	public class ListenerBotonGuardar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			List<Object> objetosSerializables = new ArrayList<Object>();
+			try{
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("PartidaGuardad.ser"));
+//				objetosSerializables.add(modelo);				
+//				out.writeObject(objetosSerializables);
+				out.writeObject(modelo);
+				out.close();
+				
+			} catch (IOException error){
+				//aca vemos que hacemos...
+			}			
+		}
+		
+	}
+	public class ListenerBotonCargar implements ActionListener {
+		private Controlador control;
+		
+		public  ListenerBotonCargar(Controlador controlador){
+			this.control = controlador;
+			
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			try {
+				FileInputStream door = new FileInputStream("PartidaGuardad.ser");
+				ObjectInputStream reader = new ObjectInputStream(door);
+				BatallaNavalgo modelo = null;
+//				VistaBatalla vista = null;
+				modelo =  (BatallaNavalgo) reader.readObject();
+				reader.close();
+				this.control.cargarModelo(modelo);
+				modelo.ActualizarObservadores();
+				
+				
+			} catch (IOException | ClassNotFoundException error) {
+				error.printStackTrace();
+			}
+		}
+		
+	}
 	public MouseListener obtenerListenerListadoMuniciones(){
 		return new ListenerListadoMuniciones();
+	}
+	
+	public ActionListener obtenerListenerBotonCargar() {
+		return new ListenerBotonCargar(this);
+	}
+
+	public ActionListener obtenerListenerBotonGuardar() {
+		return new ListenerBotonGuardar();
 	}
 }

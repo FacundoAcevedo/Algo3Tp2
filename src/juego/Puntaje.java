@@ -1,10 +1,16 @@
 package juego;
 
+import java.io.Serializable;
+
 import interfaces.Reseteable;
 
-public class Puntaje implements Reseteable {
+public class Puntaje implements Reseteable, Serializable{
 
-    private int puntos;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6937809165775033662L;
+	private int puntos;
 
     public Puntaje() {
             puntos = 10000;

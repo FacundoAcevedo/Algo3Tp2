@@ -1,6 +1,12 @@
 package naves;
+import java.io.Serializable;
+
 import municiones.Municion;
-public class SeccionDeNave {
+public class SeccionDeNave implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1650899062038379271L;
 	private EstadoDeSalud estado;
 	private Nave nave; //Referencia a la nave donde pertenece esta seccion
 	private TipoDeSeccion tipoDeSeccion;

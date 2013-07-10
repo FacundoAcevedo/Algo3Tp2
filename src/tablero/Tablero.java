@@ -3,6 +3,7 @@ package tablero;
 
 import interfaces.Reseteable;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,8 +23,12 @@ import naves.Sentido;
 import tablero.Casillero;
 import excepciones.ErrorIdCasilleroInvalido;
 
-public class Tablero implements  TableroComunicable, Reseteable {
+public class Tablero implements  TableroComunicable, Reseteable, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5973397865057430823L;
 	private Hashtable<String, Casillero> coleccionCasilleros;
 	private LinkedList<Casillero> casillerosConMunicion;
 	private LinkedList<Nave> naves;

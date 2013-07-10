@@ -3,11 +3,16 @@ package naves;
 
 import municiones.Municion;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Nave implements Iterable<SeccionDeNave>{
+public class Nave implements Iterable<SeccionDeNave>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -269839951354084772L;
 	protected int largo;
 	protected Direccion direccion;
 	protected EstadoDeSalud estado;

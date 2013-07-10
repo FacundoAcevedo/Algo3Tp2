@@ -15,6 +15,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Observable;
@@ -48,8 +49,13 @@ import controlador.Controlador;
 import juego.BatallaNavalgo;
 //import java.awt.event.*;
 
-public class VistaBatalla implements Observer {
+public class VistaBatalla implements Observer, Serializable{
 
+	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3332326063543538707L;
 	
 		private BatallaNavalgo modelo; //referencia al modelo
 		private JFrame frameBatalla = new JFrame("Batalla Navalgo"); //creamos el marco
@@ -106,11 +112,14 @@ public class VistaBatalla implements Observer {
 
             botonesOpciones[ 1 ] = new JButton ("Guardar Juego");
 	        JButton botonGuardar = botonesOpciones [ 1 ];
-	        botonGuardar.setEnabled(false); //Deshabilitado temporalmente
+	        botonGuardar.setEnabled(true); 
+	        botonGuardar.addActionListener(control.obtenerListenerBotonGuardar());
             
             botonesOpciones[ 2 ] = new JButton ("Cargar Juego");
 	        JButton botonCargar = botonesOpciones [ 2 ];
-	        botonCargar.setEnabled(false); //Deshabilitado temporalmente
+	        botonCargar.setEnabled(true); 
+	        botonGuardar.addActionListener(control.obtenerListenerBotonCargar());
+
             
             botonesOpciones[ 3 ] = new JButton ("Salir del Juego");
 	        JButton botonSalir = botonesOpciones [ 3 ];

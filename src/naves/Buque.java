@@ -2,6 +2,10 @@ package naves;
 import municiones.*;
 
 public class Buque extends Nave{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5264870690665125216L;
 	final static int miLargo = 4;
 	
 	public Buque (Direccion direccionBuqe){

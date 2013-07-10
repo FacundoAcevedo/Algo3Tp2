@@ -1,9 +1,15 @@
 package municiones;
 
+import java.io.Serializable;
+
 import tablero.Casillero;
 import tablero.Tablero;
 
-public class Municion {
+public class Municion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6585086692317395546L;
 	private int miCosto;
 	private int miRetardo;
 	

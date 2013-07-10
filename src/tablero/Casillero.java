@@ -2,6 +2,7 @@ package tablero;
 
 import interfaces.Reseteable;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,12 @@ import municiones.DisparoConvencional;
 import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
-public class Casillero implements Reseteable {
+public class Casillero implements Reseteable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 182154081074230940L;
+
 	protected int x, y;
 
 	protected List<SeccionDeNave> coleccionDeSeccionesDeNave = new LinkedList<SeccionDeNave>();
