@@ -68,6 +68,7 @@ public class VistaBatalla implements Observer, Serializable{
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
         private JButton botonesOpciones[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
         private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
+        public Boolean JuegoIniciado = false;
         
         private JPanel panelMuniciones = new JPanel();
         final ImageIcon imageIcon = new ImageIcon("estaticos/fondoMuniciones.jpg");
@@ -289,6 +290,9 @@ public class VistaBatalla implements Observer, Serializable{
 	        });
 	        listaMuniciones.setSelectedIndex(0);
 	        listaMuniciones.addMouseListener(control.obtenerListenerListadoMuniciones());
+	        if (!JuegoIniciado){
+	        	listaMuniciones.setEnabled(false);
+	        }
 	        
 	        //
 	        GridBagConstraints gbc_list = new GridBagConstraints();
