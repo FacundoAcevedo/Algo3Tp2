@@ -85,10 +85,11 @@ public class InstanciadorImagenes {
 		}
 		
 		rutaImagen = "estaticos/Naves/"+posicion+estado+sentido+".png";
-		//instancio la imagen
+
 		
-		return  new ImageIcon(rutaImagen);//.getImage();		
+		return  new ImageIcon(rutaImagen);	
 	}
+	
 //	
 	static public ImageIcon municion(Municion municion){
 		String nombreMunicion = municion.obtenerNombre();
