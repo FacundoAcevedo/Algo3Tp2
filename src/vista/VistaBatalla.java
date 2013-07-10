@@ -118,7 +118,7 @@ public class VistaBatalla implements Observer, Serializable{
             botonesOpciones[ 2 ] = new JButton ("Cargar Juego");
 	        JButton botonCargar = botonesOpciones [ 2 ];
 	        botonCargar.setEnabled(true); 
-	        botonGuardar.addActionListener(control.obtenerListenerBotonCargar());
+	        botonCargar.addActionListener(control.obtenerListenerBotonCargar());
 
             
             botonesOpciones[ 3 ] = new JButton ("Salir del Juego");
