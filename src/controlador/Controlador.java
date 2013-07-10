@@ -33,151 +33,165 @@ public class Controlador {
 
 	private BatallaNavalgo modelo;
 	private VistaBatalla vista;
-	private String municionSeleccionada = "Disparo Convencional" ; //seteado por defecto
-	
+	private String municionSeleccionada = "Disparo Convencional"; // seteado por
+																	// defecto
+
 	private Hashtable<String, String> informacionDeMuniciones = new Hashtable<String, String>();
 
-	public void cargarModelo(BatallaNavalgo modeloRecibido){
+	public void cargarModelo(BatallaNavalgo modeloRecibido) {
 		this.modelo = modeloRecibido;
 	}
-	
-	public void cargarVista(VistaBatalla vistaRecibida){
+
+	public void cargarVista(VistaBatalla vistaRecibida) {
 		this.vista = vistaRecibida;
 	}
-	
+
 	public class MouseListenerBotonesTablero implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JButton boton = (JButton) e.getSource();
-			int [] id = (int[]) boton.getClientProperty("id");
-			
-			Municion municion = InstanciadorMuniciones.instanciar(municionSeleccionada);
-			
-			//Pasarle al tablero el id del casillero y la municionSeleccionada
-			
+			int[] id = (int[]) boton.getClientProperty("id");
+
+			Municion municion = InstanciadorMuniciones
+					.instanciar(municionSeleccionada);
+
+			// Pasarle al tablero el id del casillero y la municionSeleccionada
+
 			modelo.ronda(municion, id);
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			JButton boton = (JButton) e.getSource();
-			int [] id = (int[]) boton.getClientProperty("id");
-    		Casillero  casillero = modelo.obtenerCasillero(id);
-    		List<SeccionDeNave> coleccionSeccionesDeNave = casillero.devolverSeccionesDeNave();
-    		if (!coleccionSeccionesDeNave.isEmpty()){
-    			int porcenjateDeSalud = coleccionSeccionesDeNave.get(0).obtenerPorcentajeDeSalud();
-    			boton.setToolTipText(Integer.toString(porcenjateDeSalud)+"%");
+			int[] id = (int[]) boton.getClientProperty("id");
+			Casillero casillero = modelo.obtenerCasillero(id);
+			List<SeccionDeNave> coleccionSeccionesDeNave = casillero
+					.devolverSeccionesDeNave();
+			if (!coleccionSeccionesDeNave.isEmpty()) {
+				int porcenjateDeSalud = coleccionSeccionesDeNave.get(0)
+						.obtenerPorcentajeDeSalud();
+				boton.setToolTipText(Integer.toString(porcenjateDeSalud) + "%");
 
-    		}
-			
+			}
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 
-	
-	public MouseListener obtenerMouseListenerBotonesTablero(){
+	public MouseListener obtenerMouseListenerBotonesTablero() {
 		return new MouseListenerBotonesTablero();
 	}
-	
+
 	public class ListenerBotonInicarPartida implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e)
-		{		
+		public void actionPerformed(ActionEvent e) {
 			modelo.iniciarPartidaNueva();
 			vista.actualizarBotonesDelTablero();
 		}
 	}
-	
-	public ActionListener obtenerListenerBotonIniciarPartida(){
+
+	public ActionListener obtenerListenerBotonIniciarPartida() {
 		return new ListenerBotonInicarPartida();
 	}
-	
 
-	
-	
-	
 	public class ListenerListadoMuniciones implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JList<String> listaMuniciones = (JList<String>) e.getSource();
 
 			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
-			
-			informacionDeMuniciones.put("Disparo Convencional","Impacta en una posicion en el mismo momento del disparo" + "\n" + "Costo: 200 puntos");
-			informacionDeMuniciones.put("Mina Por Contacto","El impacto se realiza cuando una nave pasa por esa posicion" + "\n" + "Costo: 150 puntos");
-			informacionDeMuniciones.put("Mina Puntual Con Retardo","Impacta tres turnos despu�s de haber sido colocado en esa posicion" + "\n" + "Costo: 50 puntos");
-			informacionDeMuniciones.put("Mina Doble Con Retardo","Impacta tres turnos despu�s de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 1" + "\n" + "Costo: 100 puntos");
-			informacionDeMuniciones.put("Mina Triple Con Retardo","Impacta tres turnos despu�s de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 2" + "\n" + "Costo: 150 puntos");
-			
-			vista.informacionMunicion.setText((String)informacionDeMuniciones.get(municionSeleccionada));
+
+			informacionDeMuniciones.put("Disparo Convencional",
+					"Impacta en una posicion en el mismo momento del disparo"
+							+ "\n" + "Costo: 200 puntos");
+			informacionDeMuniciones.put("Mina Por Contacto",
+					"El impacto se realiza cuando una nave pasa por esa posicion"
+							+ "\n" + "Costo: 150 puntos");
+			informacionDeMuniciones.put("Mina Puntual Con Retardo",
+					"Impacta tres turnos despues de haber sido colocado en esa posicion"
+							+ "\n" + "Costo: 50 puntos");
+			informacionDeMuniciones
+					.put("Mina Doble Con Retardo",
+							"Impacta tres turnos despues de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 1"
+									+ "\n" + "Costo: 100 puntos");
+			informacionDeMuniciones
+					.put("Mina Triple Con Retardo",
+							"Impacta tres turnos despues de haber sido colocado en esa posicion. Destruye la posicion actual y las posiciones adyacentes con radio 2"
+									+ "\n" + "Costo: 150 puntos");
+
+			vista.informacionMunicion.setText((String) informacionDeMuniciones
+					.get(municionSeleccionada));
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
+
 	public class ListenerBotonGuardar implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			List<Object> objetosSerializables = new ArrayList<Object>();
-			try{
-				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("PartidaGuardad.ser"));
-//				objetosSerializables.add(modelo);				
-//				out.writeObject(objetosSerializables);
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(
+						new FileOutputStream("PartidaGuardad.ser"));
 				out.writeObject(modelo);
 				out.close();
-				
-			} catch (IOException error){
-				//aca vemos que hacemos...
-			}			
+
+			} catch (IOException error) {
+				// aca vemos que hacemos...
+			}
 		}
-		
+
 	}
+
 	public class ListenerBotonCargar implements ActionListener {
 		private Controlador control;
-		
-		public  ListenerBotonCargar(Controlador controlador){
+		private VistaBatalla vista;
+
+		public ListenerBotonCargar(Controlador controlador, VistaBatalla vista) {
 			this.control = controlador;
-			
+			this.vista = this.control.vista;
+
 		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -185,25 +199,26 @@ public class Controlador {
 				FileInputStream door = new FileInputStream("PartidaGuardad.ser");
 				ObjectInputStream reader = new ObjectInputStream(door);
 				BatallaNavalgo modelo = null;
-//				VistaBatalla vista = null;
-				modelo =  (BatallaNavalgo) reader.readObject();
+				modelo = (BatallaNavalgo) reader.readObject();
 				reader.close();
 				this.control.cargarModelo(modelo);
+				// Aca esta el problema che, la vista es null
+				this.vista.cambiarModelo(modelo);
 				modelo.ActualizarObservadores();
-				
-				
+
 			} catch (IOException | ClassNotFoundException error) {
 				error.printStackTrace();
 			}
 		}
-		
+
 	}
-	public MouseListener obtenerListenerListadoMuniciones(){
+
+	public MouseListener obtenerListenerListadoMuniciones() {
 		return new ListenerListadoMuniciones();
 	}
-	
+
 	public ActionListener obtenerListenerBotonCargar() {
-		return new ListenerBotonCargar(this);
+		return new ListenerBotonCargar(this, this.vista);
 	}
 
 	public ActionListener obtenerListenerBotonGuardar() {

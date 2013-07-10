@@ -380,5 +380,13 @@ public class VistaBatalla implements Observer, Serializable{
 		public void setTextoPuntos(String s){
 			textoPuntos.setText(s);
 		}
+		public void cambiarModelo(BatallaNavalgo modelo){
+			
+			this.modelo.deleteObservers();
+			
+			this.modelo = modelo;
+			this.modelo.addObserver(this);
+			this.actualizarBotonesDelTablero();
+		}
 	}
 

@@ -2,3 +2,4 @@
 *.class
 metadata.tar.gz
 /bin
+*.ser
