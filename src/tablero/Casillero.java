@@ -111,7 +111,7 @@ public class Casillero implements Reseteable, Serializable {
 	public void reset() {
 		//Limpia el casillero y lo deja como nuevo...
 		this.coleccionDeSeccionesDeNave.clear();
-		this.coleccionDeSeccionesDeNave.clear();
+		this.coleccionMuniciones.clear();
 		
 	}
 
