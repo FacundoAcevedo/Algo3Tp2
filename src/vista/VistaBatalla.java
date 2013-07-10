@@ -341,7 +341,6 @@ public class VistaBatalla implements Observer {
 		        		//Solo una de las secciones sera mostrada
 		        		if (!coleccionSeccionesDeNave.isEmpty()){
 		        			ImageIcon imagen = InstanciadorImagenes.nave(coleccionSeccionesDeNave.get(0));
-//		        			bufferDeImagenes.s	
 		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
 		        			JButton botonTablero = this.botonesTablero.get(idComoString);
 		        			botonTablero.setIcon(imagen);
