@@ -30,4 +30,8 @@ public class Municion {
 		
 	}
 	
+	public String obtenerNombre(){
+		return this.getClass().getSimpleName();
+	}
+	
 }
