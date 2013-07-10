@@ -91,8 +91,9 @@ public class InstanciadorImagenes {
 	}
 //	
 	static public ImageIcon municion(Municion municion){
-		//falta implementar
-		return new ImageIcon("estaticos/Minas/minaPuntual.png");
+		String nombreMunicion = municion.obtenerNombre();
+		String ruta = "estaticos/Minas/"+nombreMunicion+".png";
+		return new ImageIcon(ruta);
 	}
 
 }
