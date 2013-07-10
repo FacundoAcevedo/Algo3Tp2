@@ -104,7 +104,7 @@ public class Controlador {
 		public void actionPerformed(ActionEvent e) {
 			modelo.iniciarPartidaNueva();
 			vista.actualizarBotonesDelTablero();
-			vista.habilitarMuniciones();
+			vista.habilitarJuego();
 		}
 	}
 

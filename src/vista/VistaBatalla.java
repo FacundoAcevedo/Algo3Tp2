@@ -68,6 +68,7 @@ public class VistaBatalla implements Observer, Serializable{
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
         private JButton botonesOpciones[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
         private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
+        private Boolean JuegoIniciado = false;
         
         private JPanel panelMuniciones = new JPanel();
         final ImageIcon imageIcon = new ImageIcon("estaticos/fondoMuniciones.jpg");
@@ -289,6 +290,7 @@ public class VistaBatalla implements Observer, Serializable{
 	        });
 	        listaMuniciones.setSelectedIndex(0);
 	        listaMuniciones.addMouseListener(control.obtenerListenerListadoMuniciones());
+	        listaMuniciones.clearSelection();
 	        listaMuniciones.setEnabled(false);
 	        
 	        //
@@ -309,6 +311,7 @@ public class VistaBatalla implements Observer, Serializable{
 		
 		//Metodo que es llamado por el modelo al actualizarse el mismo
 		public void update(Observable t, Object o){
+			if (JuegoIniciado){
 			if (modelo.juegoTerminado()){
 				String mensaje;
 				String titulo;
@@ -334,14 +337,18 @@ public class VistaBatalla implements Observer, Serializable{
 				this.actualizarPuntaje();
 				this.actualizarBotonesDelTablero();
 			}
+			}
 		}
 		private void actualizarPuntaje() {
 			int puntaje = this.modelo.puntosDelJugador();
 			setTextoPuntos(Integer.toString(puntaje));
+
 		}
 
-		public void habilitarMuniciones(){
+		public void habilitarJuego(){
 			listaMuniciones.setEnabled(true);
+			JuegoIniciado = true;
+			this.actualizarPuntaje();
 		}
 		
 		public void actualizarBotonesDelTablero(){
