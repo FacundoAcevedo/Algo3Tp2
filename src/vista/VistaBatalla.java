@@ -17,6 +17,7 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.io.Serializable;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -352,27 +353,43 @@ public class VistaBatalla implements Observer, Serializable{
 		}
 		
 		public void actualizarBotonesDelTablero(){
+			ImageIcon imagenBarcos = null;
+			ImageIcon imagenMuniciones = null;
 			this.limpiarBotonesDelTablero();
-			//BufferedImage bufferDeImagenes = new BufferedImage(JButton.WIDTH, JButton.HEIGHT,0);
 			 for(int x = 0; x < 10; x++){
 		        	for(int y = 0; y < 10; y++){
 		        		int[] id = {x,y};	
 		        		Casillero  casillero = modelo.obtenerCasillero(id);
 		        		List<SeccionDeNave> coleccionSeccionesDeNave = casillero.devolverSeccionesDeNave();
-		        		//Solo una de las secciones sera mostrada
-		        		if (!coleccionSeccionesDeNave.isEmpty()){
-		        			ImageIcon imagen = InstanciadorImagenes.nave(coleccionSeccionesDeNave.get(0));
-		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
-		        			JButton botonTablero = this.botonesTablero.get(idComoString);
-		        			botonTablero.setIcon(imagen);
-		        		}
 		        		List<Municion> coleccionMuniciones = casillero.devolverMuniciones();
-		        		if(!coleccionMuniciones.isEmpty()){
-		        			ImageIcon imagen = InstanciadorImagenes.municion(coleccionMuniciones.get(0));
-		        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+	        			String idComoString = Integer.toString(id[0]) + Integer.toString(id[1]);
+
+
+		        		//Solo una de las secciones sera mostrada
+		        		if (!coleccionSeccionesDeNave.isEmpty() & coleccionMuniciones.isEmpty()){		        			
+		        			imagenBarcos = InstanciadorImagenes.nave(coleccionSeccionesDeNave);
 		        			JButton botonTablero = this.botonesTablero.get(idComoString);
-		        			botonTablero.setIcon(imagen);
+		        			botonTablero.setIcon(imagenBarcos);
 		        		}
+		        		
+		        		else if(coleccionSeccionesDeNave.isEmpty()& !coleccionMuniciones.isEmpty()){
+		        			imagenMuniciones = InstanciadorImagenes.municion(coleccionMuniciones);
+		        			JButton botonTablero = this.botonesTablero.get(idComoString);
+		        			botonTablero.setIcon(imagenMuniciones);
+		        		}
+
+		        		else if (!coleccionSeccionesDeNave.isEmpty()& !coleccionMuniciones.isEmpty()){
+		        			imagenBarcos = InstanciadorImagenes.nave(coleccionSeccionesDeNave);
+		        			imagenMuniciones = InstanciadorImagenes.municion(coleccionMuniciones);
+		        			LinkedList<ImageIcon> listaImagenesBarcoYMuniciones = new LinkedList<ImageIcon>();
+		        			listaImagenesBarcoYMuniciones.add(imagenBarcos);
+		        			listaImagenesBarcoYMuniciones.add(imagenMuniciones);
+		        			
+		        			ImageIcon imagenBarcosYMuniciones = EditorDeImagenes.mixDesdeIconImage(listaImagenesBarcoYMuniciones);
+		        			JButton botonTablero = this.botonesTablero.get(idComoString);
+		        			botonTablero.setIcon(imagenBarcosYMuniciones);
+		        		}
+		        		
 		        	}
 		        }
 			
