@@ -67,7 +67,7 @@ public class VistaBatalla implements Observer, Serializable{
         private JPanel panelLista = new JPanel(); //creamos el panel que contiene la lista de municiones
         private Label labelMuniciones = new Label("Municiones:"); //etiqueta de "Municiones"
         private JList<String> listaMuniciones = new JList<String>();//listado de municiones
-        private JButton botonesOpciones[] = new JButton[ 4 ]; //Botones de iniciar, guardar, cargar y salir
+        private JButton botonesOpciones[] = new JButton[ 5 ]; //Botones de iniciar, guardar, cargar y salir
         private JPanel panelBotones = new JPanel(); //Panel de botones de  opciones
         private Boolean JuegoIniciado = false;
         
@@ -85,7 +85,8 @@ public class VistaBatalla implements Observer, Serializable{
               super.paint(g);
             }
           };
-        
+         
+         
         
         private Hashtable<String, JButton> botonesTablero = new Hashtable<String, JButton>();
         
@@ -96,7 +97,7 @@ public class VistaBatalla implements Observer, Serializable{
 		{	
 			//armado de la ventana
 
-
+		
 	        frameBatalla.setVisible(true);
 	        frameBatalla.setAlwaysOnTop(false); //En false para poder minimizar la pantalla
 	        frameBatalla.setResizable(false);
@@ -106,6 +107,7 @@ public class VistaBatalla implements Observer, Serializable{
 	          
 	       
 	        panelBotones.setLayout(new GridLayout(0, 1));
+	        
 		  	  
 	        // crear y agregar botones
 	        botonesOpciones[ 0 ] = new JButton( "Iniciar Juego Nuevo" ); 
@@ -121,13 +123,26 @@ public class VistaBatalla implements Observer, Serializable{
 	        JButton botonCargar = botonesOpciones [ 2 ];
 	        botonCargar.setEnabled(true); 
 	        botonCargar.addActionListener(control.obtenerListenerBotonCargar());
-
-            
-            botonesOpciones[ 3 ] = new JButton ("Salir del Juego");
-	        JButton botonSalir = botonesOpciones [ 3 ];
+	        
+	        botonesOpciones[ 3 ] = new JButton ("Ver Instrucciones");
+	        JButton botonInstrucciones = botonesOpciones [ 3 ];
+	        botonInstrucciones.setEnabled(true); 
+	        botonInstrucciones.addActionListener(new ActionListener ()
+	        {
+	        	public void actionPerformed (ActionEvent e)
+	        	{
+	        		if (e.getSource()== botonesOpciones [ 3 ]){
+	        			Instruccion instrucciones = new Instruccion();
+	        			instrucciones.setVisible(true);
+	        		}
+	        	}
+	        });
+	        
+            botonesOpciones[ 4 ] = new JButton ("Salir del Juego");
+	        JButton botonSalir = botonesOpciones [ 4 ];
             
 	        //Personaliza los botones y los agrega al panel
-            for(int i = 0; i < 4; i++){
+            for(int i = 0; i < 5; i++){
             	botonesOpciones[ i ].setBackground(Color.BLACK);
             	botonesOpciones[ i ].setForeground(Color.WHITE);
             	panelBotones.add( botonesOpciones[ i ] );
@@ -137,7 +152,7 @@ public class VistaBatalla implements Observer, Serializable{
 	        {
 	        	   public void actionPerformed (ActionEvent e)
 	        	   {
-	        		   if (e.getSource()== botonesOpciones [ 3 ]) {
+	        		   if (e.getSource()== botonesOpciones [ 4 ]) {
 	        	            System.exit(0);
 	        	   } 
 	        	}
