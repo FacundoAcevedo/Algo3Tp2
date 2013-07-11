@@ -70,7 +70,8 @@ public class Controlador {
 			if (!coleccionSeccionesDeNave.isEmpty()) {
 				int porcenjateDeSalud = coleccionSeccionesDeNave.get(0)
 						.obtenerPorcentajeDeSalud();
-				boton.setToolTipText(Integer.toString(porcenjateDeSalud) + "%");
+				String nombreNave = coleccionSeccionesDeNave.get(0).obtenerTipoDeNave();
+				boton.setToolTipText(nombreNave+"  "+Integer.toString(porcenjateDeSalud) + "%");
 
 			}
 
