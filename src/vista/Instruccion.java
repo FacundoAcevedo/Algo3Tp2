@@ -22,7 +22,7 @@ import javax.swing.border.Border;
        Image icono = Toolkit.getDefaultToolkit().getImage("estaticos/icono.png");
        setIconImage(icono);
  
-       informacion = "                        ¡Detruye las naves de la computadora!"+ "\n" + "\n"+
+       informacion = "                        Detruye las naves de la computadora!"+ "\n" + "\n"+
        		"Tu objetivo es terminar el juego destruyendo las naves con la mayor cantidad de puntos posible." +"\n" +
        				"Descuento de puntos:"+"\n"+ "-Paso del tiempo: 10 puntos por turno"+"\n"+
        		"-Disparos: distinta cantidad de putos segun el disparo"+"\n"+"\n"+ "Naves:"+ "\n"+
