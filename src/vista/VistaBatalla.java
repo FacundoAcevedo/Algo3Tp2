@@ -15,6 +15,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.Toolkit;
 import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -96,8 +97,8 @@ public class VistaBatalla implements Observer, Serializable{
 		public VistaBatalla(BatallaNavalgo modelo, Controlador control)
 		{	
 			//armado de la ventana
-
-		
+			Image icono = Toolkit.getDefaultToolkit().getImage("estaticos/icono.png");
+			frameBatalla.setIconImage(icono);
 	        frameBatalla.setVisible(true);
 	        frameBatalla.setAlwaysOnTop(false); //En false para poder minimizar la pantalla
 	        frameBatalla.setResizable(false);

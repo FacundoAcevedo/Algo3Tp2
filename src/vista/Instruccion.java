@@ -19,6 +19,8 @@ import javax.swing.border.Border;
     {
        super( "Instrucciones" );
        Container contenedor = getContentPane();
+       Image icono = Toolkit.getDefaultToolkit().getImage("estaticos/icono.png");
+       setIconImage(icono);
  
        informacion = "                        ¡Detruye las naves de la computadora!"+ "\n" + "\n"+
        		"Tu objetivo es terminar el juego destruyendo las naves con la mayor cantidad de puntos posible." +"\n" +
