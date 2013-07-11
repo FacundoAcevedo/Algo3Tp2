@@ -25,7 +25,6 @@ public class InstanciadorImagenes {
 		// Se fija que el tipo de seccion, en donde esta ubicada(proa, popa,
 		// etc), el sentido y el estado
 		// Va formando el nombre de la imagen segun su estado
-		String tipo;
 		String estado;
 		String posicion;
 		String sentido;
@@ -42,7 +41,6 @@ public class InstanciadorImagenes {
 		// D= down
 		for (SeccionDeNave seccion : coleccionSeccionesDeNave) {
 			// Obtengo el tipo:
-			tipo = seccion.obtenerTipoDeNave();
 
 			// Obtengo la ubicacion de la seccion
 			if (!seccion.esProa() && !seccion.esPopa()) {
