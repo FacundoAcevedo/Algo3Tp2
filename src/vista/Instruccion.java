@@ -43,6 +43,7 @@ import javax.swing.border.Border;
              super.paint(g);
            }
          };
+       this.setResizable(false);
        areaDeInformacion.setText(informacion);
        areaDeInformacion.setForeground(Color.WHITE);
        areaDeInformacion.setEditable(false);
@@ -50,6 +51,7 @@ import javax.swing.border.Border;
        areaDeInformacion.setWrapStyleWord(true);
 
        contenedor.add(areaDeInformacion);
+       
  
        botonSalir = new JButton("OK");
        botonSalir.addActionListener(new ActionListener ()
