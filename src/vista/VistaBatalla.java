@@ -330,23 +330,28 @@ public class VistaBatalla implements Observer, Serializable{
 				String mensaje;
 				String titulo;
 				String[] opcion;
-				
+				ImageIcon icono;
+				String rutaImagenesInformativas = "estaticos/informativos/";
+				String[] rutaCaras= {rutaImagenesInformativas+"cara_feliz.png", rutaImagenesInformativas+"cara_indiferente.png", rutaImagenesInformativas+"cara_triste.png"};
 				int puntaje = modelo.puntosDelJugador();
 				
 				if (puntaje >= 5000){
 					mensaje = "Asi es, parece que sos bueno en esto!\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo = "¡¡Victoria!!";
 					opcion = new String[]{ "Acepto con orgullo"};
+					icono = new ImageIcon(rutaCaras[0]);
 				}
 				else if (puntaje >= 1000 && puntaje <5000){
 					mensaje = "No es un mal puntaje...\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo = "Victoria?";
 					opcion = new String[]{ "Acepto..."};
+					icono = new ImageIcon(rutaCaras[1]);
 				}
 				else{
 					mensaje = "Segui participando...\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo =  "Cof Cof";
 					opcion = new String[]{ "Acepto, pero no le digan a nadie!"};
+					icono = new ImageIcon(rutaCaras[2]);
 					
 				}
 				JOptionPane.showOptionDialog(
@@ -355,7 +360,7 @@ public class VistaBatalla implements Observer, Serializable{
 						titulo,
 						   JOptionPane.OK_OPTION,
 						   JOptionPane.INFORMATION_MESSAGE,
-						   null,    // null para icono por defecto.
+						   icono,    
 						   opcion,   
 						   null);
 			}
