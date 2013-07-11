@@ -57,7 +57,7 @@ public class VistaBatalla implements Observer, Serializable{
 	private static final long serialVersionUID = 3332326063543538707L;
 	
 		private BatallaNavalgo modelo; //referencia al modelo
-		private JFrame frameBatalla = new JFrame("Batalla Navalgo"); //creamos el marco
+		public JFrame frameBatalla = new JFrame("Batalla Navalgo"); //creamos el marco
         private JPanel panelPuntaje = new JPanel(); //creamos el panel que contiene el puntaje
         private Label labelPuntos = new Label("Puntos:"); //etiqueta de "Puntos"
 		private JTextField textoPuntos = new JTextField(); //texto que mostrara el puntaje
@@ -96,7 +96,7 @@ public class VistaBatalla implements Observer, Serializable{
 			//armado de la ventana
 			Image icono = Toolkit.getDefaultToolkit().getImage("estaticos/icono.png");
 			frameBatalla.setIconImage(icono);
-	        frameBatalla.setVisible(true);
+	        //frameBatalla.setVisible(true);
 	        frameBatalla.setAlwaysOnTop(false); //En false para poder minimizar la pantalla
 	        frameBatalla.setResizable(false);
 	        frameBatalla.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
@@ -120,7 +120,7 @@ public class VistaBatalla implements Observer, Serializable{
             botonesOpciones[ 2 ] = new JButton ("Cargar Juego");
 	        JButton botonCargar = botonesOpciones [ 2 ];
 	        botonCargar.setEnabled(true); 
-	        botonCargar.addActionListener(control.obtenerListenerBotonCargar());
+	        botonCargar.addActionListener(control.obtenerListenerBotonCargar(this));
 	        
 	        botonesOpciones[ 3 ] = new JButton ("Ver Instrucciones");
 	        JButton botonInstrucciones = botonesOpciones [ 3 ];
@@ -427,6 +427,7 @@ public class VistaBatalla implements Observer, Serializable{
 			this.modelo.deleteObservers();
 			
 			this.modelo = modelo;
+			this.modelo.deleteObservers();
 			this.modelo.addObserver(this);
 			this.actualizarBotonesDelTablero();
 		}

@@ -16,8 +16,11 @@ public class Principal {
 		VistaBatalla vista = new VistaBatalla(modelo, control);
 		//cargo la vista en el controlado
 		control.cargarVista(vista);
+       
+
 		// esto es necesario para que la vista se actualice la 1ra vez
 		modelo.ActualizarObservadores();
+		 vista.frameBatalla.setVisible(true);
 	}
 
 }

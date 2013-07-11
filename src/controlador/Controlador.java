@@ -169,9 +169,13 @@ public class Controlador {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				ObjectOutputStream out = new ObjectOutputStream(
-						new FileOutputStream("PartidaGuardad.ser"));
+				//Creo el fichero que  que escribira en disco
+				FileOutputStream fichero = new FileOutputStream("PartidaGuardad.dato");
+				//Creo el escritor de objetos
+				ObjectOutputStream out = new ObjectOutputStream(fichero);
+				//Escribo los objetos
 				out.writeObject(modelo);
+				//Cierro el archivo
 				out.close();
 
 			} catch (IOException error) {
@@ -187,7 +191,7 @@ public class Controlador {
 
 		public ListenerBotonCargar(Controlador controlador, VistaBatalla vista) {
 			this.control = controlador;
-			this.vista = this.control.vista;
+			this.vista = vista;
 
 		}
 
@@ -195,15 +199,16 @@ public class Controlador {
 		public void actionPerformed(ActionEvent e) {
 
 			try {
-				FileInputStream door = new FileInputStream("PartidaGuardad.ser");
-				ObjectInputStream reader = new ObjectInputStream(door);
-				BatallaNavalgo modelo = null;
-				modelo = (BatallaNavalgo) reader.readObject();
-				reader.close();
+				FileInputStream ficheroEntrada = new FileInputStream("PartidaGuardad.dato");
+				ObjectInputStream streamDeEntrada = new ObjectInputStream(ficheroEntrada);
+				BatallaNavalgo modelo =  (BatallaNavalgo) streamDeEntrada.readObject();
+				ficheroEntrada.close();
+				streamDeEntrada.close();
 				this.control.cargarModelo(modelo);
-				// Aca esta el problema che, la vista es null
+				// Aca esta el problema che, 
 				this.vista.cambiarModelo(modelo);
 				modelo.ActualizarObservadores();
+				this.vista.actualizarBotonesDelTablero();
 
 			} catch (IOException | ClassNotFoundException error) {
 				error.printStackTrace();
@@ -216,8 +221,8 @@ public class Controlador {
 		return new ListenerListadoMuniciones();
 	}
 
-	public ActionListener obtenerListenerBotonCargar() {
-		return new ListenerBotonCargar(this, this.vista);
+	public ActionListener obtenerListenerBotonCargar(VistaBatalla vista) {
+		return new ListenerBotonCargar(this, vista);
 	}
 
 	public ActionListener obtenerListenerBotonGuardar() {
