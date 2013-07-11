@@ -2,11 +2,9 @@ package vista;
 
 import instanciadores.InstanciadorImagenes;
 
-//import java.awt.Component;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -49,7 +47,6 @@ import com.jgoodies.forms.layout.RowSpec;
 import controlador.Controlador;
 
 import juego.BatallaNavalgo;
-//import java.awt.event.*;
 
 public class VistaBatalla implements Observer, Serializable{
 

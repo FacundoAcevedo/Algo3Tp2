@@ -3,9 +3,7 @@ package juego;
 import java.io.Serializable;
 
 import interfaces.Reseteable;
-import municiones.Municion;
-import tablero.Casillero;
-import tablero.Tablero;
+
 
 public class Jugador implements Reseteable,Serializable {
 	/**
