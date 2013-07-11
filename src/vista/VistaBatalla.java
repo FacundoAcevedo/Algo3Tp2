@@ -72,7 +72,7 @@ public class VistaBatalla implements Observer, Serializable{
         private Boolean JuegoIniciado = false;
         
         private JPanel panelMuniciones = new JPanel();
-        final ImageIcon imageIcon = new ImageIcon("estaticos/fondoMuniciones.jpg");
+        final ImageIcon imageIcon = new ImageIcon("estaticos/Fondos/fondoMuniciones.jpg");
         public JTextArea informacionMunicion = new JTextArea(){
         	private static final long serialVersionUID = 1L;
 			Image image = imageIcon.getImage();

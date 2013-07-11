@@ -28,7 +28,7 @@ import javax.swing.border.Border;
        		"-1 buque: cualquier impacto en cualquier parte lo destruye por completo"+"\n"+
        				"-1 portaaviones" + "\n" + "1 rompehielos: Cada parte requiere dos impactos para ser destruida";
        
-       final ImageIcon imageIcon = new ImageIcon("estaticos/fondoInstrucciones.jpg");
+       final ImageIcon imageIcon = new ImageIcon("estaticos/Fondos/fondoInstrucciones.jpg");
        areaDeInformacion = new JTextArea(){
        	private static final long serialVersionUID = 1L;
 			Image image = imageIcon.getImage();
