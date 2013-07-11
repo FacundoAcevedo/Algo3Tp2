@@ -329,23 +329,35 @@ public class VistaBatalla implements Observer, Serializable{
 			if (modelo.juegoTerminado()){
 				String mensaje;
 				String titulo;
+				String[] opcion;
+				
 				int puntaje = modelo.puntosDelJugador();
 				
 				if (puntaje >= 5000){
 					mensaje = "Asi es, parece que sos bueno en esto!\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo = "¡¡Victoria!!";
+					opcion = new String[]{ "Acepto con orgullo"};
 				}
 				else if (puntaje >= 1000 && puntaje <5000){
 					mensaje = "No es un mal puntaje...\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo = "Victoria?";
+					opcion = new String[]{ "Acepto..."};
 				}
 				else{
 					mensaje = "Segui participando...\n Tu puntaje es:"+Integer.toString(puntaje);
 					titulo =  "Cof Cof";
+					opcion = new String[]{ "Acepto, pero no le digan a nadie!"};
 					
 				}
-				JOptionPane.showMessageDialog(this.frameBatalla,mensaje ,titulo , JOptionPane.INFORMATION_MESSAGE);
-
+				JOptionPane.showOptionDialog(
+						this.frameBatalla,
+						mensaje,
+						titulo,
+						   JOptionPane.OK_OPTION,
+						   JOptionPane.INFORMATION_MESSAGE,
+						   null,    // null para icono por defecto.
+						   opcion,   
+						   null);
 			}
 			else{
 				this.actualizarPuntaje();
