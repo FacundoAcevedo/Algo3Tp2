@@ -47,6 +47,13 @@ public class BatallaNavalgo extends Observable implements Serializable {
 		else
 			return ( this.cantidadDeNavesDestruidas() == this.cantidadTotalNaves() );
 	}
+	
+	public boolean juegoEnProceso(){
+		if (this.cantidadTotalNaves() != 0)
+			return true;
+		return false;
+	}
+	
 
 	public Jugador obtenerJugador(){
 		return this.jugador;
