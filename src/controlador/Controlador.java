@@ -114,7 +114,7 @@ public class Controlador {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JList<String> listaMuniciones = (JList<String>) e.getSource();
-
+			if (!listaMuniciones.isEnabled()) return;
 			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
 
 			informacionDeMuniciones.put("Disparo Convencional",
