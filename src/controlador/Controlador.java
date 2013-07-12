@@ -114,6 +114,7 @@ public class Controlador {
 	public class ListenerListadoMuniciones implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			@SuppressWarnings("unchecked")
 			JList<String> listaMuniciones = (JList<String>) e.getSource();
 			if (!listaMuniciones.isEnabled()) return;
 			municionSeleccionada = (String) listaMuniciones.getSelectedValue();
