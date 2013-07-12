@@ -205,8 +205,8 @@ public class Controlador {
 				ficheroEntrada.close();
 				streamDeEntrada.close();
 				this.control.cargarModelo(modelo);
-				// Aca esta el problema che, 
 				this.vista.cambiarModelo(modelo);
+				this.vista.habilitarJuego();
 				modelo.ActualizarObservadores();
 				this.vista.actualizarBotonesDelTablero();
 
