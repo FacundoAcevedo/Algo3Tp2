@@ -9,44 +9,44 @@ public class MunicionTest {
 
 	@Test
 	public void testCrear() {
-		Municion municion = new Municion(0,0);
+		Municion municion = new Municion(0,0,false);
 		assertTrue(municion != null);
 	}
 	
 	@Test
 	public void testCosto0(){
-		Municion municion = new Municion(0,0);
+		Municion municion = new Municion(0,0,false);
 		assertTrue(municion.costo() == 0);
 	}
 	
 	@Test
 	public void testCosto50(){
-		Municion municion = new Municion(50,0);
+		Municion municion = new Municion(50,0,false);
 		assertTrue(municion.costo() == 50);
 	}
 	
 	@Test
 	public void testRetardo0(){
-		Municion municion = new Municion(0,0);
+		Municion municion = new Municion(0,0,false);
 		assertTrue(municion.retardo() == 0);
 	}
 	
 	@Test
 	public void testRetardo3(){
-		Municion municion = new Municion(0,3);
+		Municion municion = new Municion(0,3,false);
 		assertTrue(municion.retardo() == 3);
 	}
 	
 	@Test
 	public void testDisminuirRetardo(){
-		Municion municion = new Municion(0,3);
+		Municion municion = new Municion(0,3,false);
 		municion.disminuirRetardo();
 		assertTrue(municion.retardo() == 2);
 	}
 	
 	@Test
 	public void testDisminuirRetardo0(){
-		Municion municion = new Municion(0,0);
+		Municion municion = new Municion(0,0,false);
 		municion.disminuirRetardo();
 		assertTrue(municion.retardo() == 0);
 	}

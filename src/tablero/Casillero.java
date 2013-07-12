@@ -9,8 +9,6 @@ import java.util.List;
 import excepciones.ErrorIdCasilleroInvalido;
 
 import naves.SeccionDeNave;
-import municiones.DisparoConvencional;
-import municiones.MinaSubmarinaPorContacto;
 import municiones.Municion;
 
 public class Casillero implements Reseteable, Serializable {
@@ -48,24 +46,13 @@ public class Casillero implements Reseteable, Serializable {
 	public boolean tieneMuniciones(){
 		return (this.coleccionMuniciones.size() > 0);
 	}
+	
 	public boolean tieneSeccionesDeNave(){
 		return (this.coleccionDeSeccionesDeNave.size() > 0);
 	}
 
 	public void ponerMunicion(Municion municion){// throws ErrorCasilleroOcupadoConOtraMunicion{
-		
-		if (municion instanceof DisparoConvencional
-				|| (municion instanceof MinaSubmarinaPorContacto && coleccionDeSeccionesDeNave.size() > 0)){
-			for (SeccionDeNave seccion : coleccionDeSeccionesDeNave){
-				seccion.recibirImpacto(municion);
-			}
-		}
-		
-		else {
-			this.coleccionMuniciones.add(municion);
-		}
-		
-
+		this.coleccionMuniciones.add(municion);
 	}
 
 	public List<Municion> devolverMuniciones() {
@@ -112,7 +99,6 @@ public class Casillero implements Reseteable, Serializable {
 		//Limpia el casillero y lo deja como nuevo...
 		this.coleccionDeSeccionesDeNave.clear();
 		this.coleccionMuniciones.clear();
-		
 	}
 
 }

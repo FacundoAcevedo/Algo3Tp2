@@ -456,6 +456,7 @@ public class TableroTest {
 		
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.ponerMunicion(disparoConvencional, posicionDeProa);
+		tablero.actualizarTablero();
 		
 		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
 	}
@@ -523,7 +524,7 @@ public class TableroTest {
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
 		int[] posicionDeProa = {0,1};
-		int[] posicionDeMina = {0,3};
+		int[] posicionDeMina = {0,4};
 		
 		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
 		MinaSubmarinaPuntualConRetardo mina = new MinaSubmarinaPuntualConRetardo();
@@ -531,9 +532,10 @@ public class TableroTest {
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.ponerMunicion(mina, posicionDeMina);
 		
+		tablero.actualizarTablero(); //se pone
+		tablero.actualizarTablero(); 
 		tablero.actualizarTablero();
-		tablero.actualizarTablero();
-		tablero.actualizarTablero(); //explota
+		tablero.actualizarTablero(); //3er turno, explota
 		
 		assertTrue(nave.estado() == EstadoDeSalud.DANADO);
 	}
@@ -544,7 +546,7 @@ public class TableroTest {
 		// no la aleatoreidad de sus posiciones.
 		Tablero tablero = new Tablero();
 		int[] posicionDeProa = {0,1};
-		int[] posicionDeMina = {0,4};
+		int[] posicionDeMina = {0,5};
 		
 		Nave nave = new Lancha(new Direccion(Sentido.NORTE));
 		MinaSubmarinaDobleConRetardo mina = new MinaSubmarinaDobleConRetardo();
@@ -552,6 +554,7 @@ public class TableroTest {
 		tablero.posicionarNaveEnTablero(nave, posicionDeProa);
 		tablero.ponerMunicion(mina, posicionDeMina);
 		
+		tablero.actualizarTablero();
 		tablero.actualizarTablero();
 		tablero.actualizarTablero();
 		tablero.actualizarTablero(); //explota
@@ -566,7 +569,8 @@ public class TableroTest {
 		Tablero tablero = new Tablero();
 		int[] posicionDeProaLancha = {0,1};
 		int[] posicionDeProaBuque = {3,4};
-		int[] posicionDeMina = {1,4};
+		int[] posicionDeMina = {1,5};
+	
 		
 		Nave lancha = new Lancha(new Direccion(Sentido.NORTE));
 		Nave buque = new Buque(new Direccion(Sentido.NORTE));
@@ -575,11 +579,12 @@ public class TableroTest {
 		tablero.posicionarNaveEnTablero(lancha, posicionDeProaLancha);
 		tablero.posicionarNaveEnTablero(buque, posicionDeProaBuque);
 		tablero.ponerMunicion(mina, posicionDeMina);
-		
-		tablero.actualizarTablero();
-		tablero.actualizarTablero();
-		tablero.actualizarTablero(); //explota
-		
+
+		tablero.actualizarTablero(); //se pone
+		tablero.actualizarTablero(); //1 turno
+		tablero.actualizarTablero(); //2 turnos
+		tablero.actualizarTablero(); //3 turnos. Exoplota
+
 		boolean todasLasNavesDestruidas = (lancha.estado() == EstadoDeSalud.DESTRUIDO) && (buque.estado() == EstadoDeSalud.DESTRUIDO);
 		
 		assertTrue(todasLasNavesDestruidas);

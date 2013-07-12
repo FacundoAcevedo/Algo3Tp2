@@ -310,7 +310,9 @@ public class Tablero implements  TableroComunicable, Reseteable, Serializable {
 	public void ponerMunicion(Municion municion, int[] id) {
 		Casillero casillero = this.obtenerCasillero(id);
 		casillero.ponerMunicion(municion);
-		this.casillerosConMunicion.add(casillero);
+		if(!casillerosConMunicion.contains(casillero)){
+			this.casillerosConMunicion.add(casillero);
+		}
 	}
 	
 	public void quitarMunicion(Casillero casillero, Municion municion){
@@ -321,38 +323,53 @@ public class Tablero implements  TableroComunicable, Reseteable, Serializable {
 	}
 	
 	public void actualizarTablero() {
-//		0-Se mueven las naves
-//		1-Estallan las minas que tengan retardo 0
-//		2-Se resta 1 al retardo de la municion  
-	
+//		0-Se aplican disparos convencionales
+//		1-Se mueven las naves
+//		2-Estallan las minas que tengan retardo 0
+//		3-Se resta 1 al retardo de la municion  
+		this.aplicarDisparosConvencionales();
 		this.moverTodasLasNaves();
 		this.actualizarMuniciones();
+	}
+	
+	private void aplicarDisparosConvencionales(){
+		for (Casillero casillero : this.casillerosConMunicion){
+			List<Municion> municiones = casillero.devolverMuniciones();
+			
+			for( Municion municion : municiones){	
+				if (municion.efectoInmediato()){
+					municion.impactar(this, casillero);
+					this.quitarMunicion(casillero, municion);
+					break;
+				}
+			}
+		}
 	}
 	
 	private void actualizarMuniciones(){
 		for (Casillero casillero : this.casillerosConMunicion){
 			List<Municion> municiones = casillero.devolverMuniciones();
+			Hashtable<Casillero,Municion> casillerosASacarMuniciones = new Hashtable<Casillero,Municion>();
 			
-			for( Municion municion : municiones){
-				
-				municion.disminuirRetardo();
+			for( Municion municion : municiones){	
 				if (municion.retardo() == 0){
 					
 					municion.impactar(this, casillero);
 					
 					if (municion instanceof MinaSubmarinaPorContacto){
 						if(casillero.tieneSeccionesDeNave()){ //mina por contacto detonada
-							this.quitarMunicion(casillero, municion);
+							casillerosASacarMuniciones.put(casillero, municion);
 						}
 					}else{
 						//Quita las minas que esten con retardo 0 pero que no sean por contacto
-						this.quitarMunicion(casillero, municion);
+						casillerosASacarMuniciones.put(casillero, municion);
 					}
-
 				}//if
-
+				municion.disminuirRetardo();
 			}//for
-			
+			for(Casillero casilleroASacarMunicion : casillerosASacarMuniciones.keySet()){
+				this.quitarMunicion(casilleroASacarMunicion, casillerosASacarMuniciones.get(casilleroASacarMunicion));
+			}
 		}//for
 	}
 	

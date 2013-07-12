@@ -12,10 +12,12 @@ public class Municion implements Serializable{
 	private static final long serialVersionUID = 6585086692317395546L;
 	private int miCosto;
 	private int miRetardo;
+	public boolean efectoInmediato;
 	
-	public Municion(int unCosto, int unRetardo){
+	public Municion(int unCosto, int unRetardo, boolean esEfectoInmediato){
 		miCosto = unCosto;
 		miRetardo = unRetardo;
+		efectoInmediato = esEfectoInmediato;
 	}
 	
 	public int retardo(){
@@ -38,6 +40,10 @@ public class Municion implements Serializable{
 	
 	public String obtenerNombre(){
 		return this.getClass().getSimpleName();
+	}
+	
+	public boolean efectoInmediato(){
+		return this.efectoInmediato;
 	}
 	
 }
