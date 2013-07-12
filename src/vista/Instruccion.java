@@ -66,7 +66,7 @@ import javax.swing.border.Border;
        
        contenedor.add( botonSalir, BorderLayout.SOUTH );
  
-       setSize( 425, 425 );
+       setSize( 420, 420 );
        setVisible( true );
        Border border = BorderFactory.createLineBorder(Color.BLACK);
        areaDeInformacion.setBorder(BorderFactory.createCompoundBorder(border, 
