@@ -15,7 +15,9 @@ import java.util.Hashtable;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import naves.SeccionDeNave;
 
@@ -165,21 +167,48 @@ public class Controlador {
 	}
 
 	public class ListenerBotonGuardar implements ActionListener {
+		private BatallaNavalgo modelo;
+
+		public ListenerBotonGuardar(BatallaNavalgo modeloRecibido) {
+			modelo = modeloRecibido;
+		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				//Creo el fichero que  que escribira en disco
-				FileOutputStream fichero = new FileOutputStream("PartidaGuardad.dato");
-				//Creo el escritor de objetos
-				ObjectOutputStream out = new ObjectOutputStream(fichero);
-				//Escribo los objetos
-				out.writeObject(modelo);
-				//Cierro el archivo
-				out.close();
+			if (this.modelo.juegoTerminado() | !this.modelo.juegoEnProceso()) {
+				JOptionPane.showOptionDialog(
+						null,
+						"El juego no se puede guardar en este estado",
+						"Error",
+						   JOptionPane.OK_OPTION,
+						   JOptionPane.ERROR_MESSAGE,
+						  null,    
+						   new String[]{"Acepto"},   
+						   null);
 
-			} catch (IOException error) {
-				// aca vemos que hacemos...
+			} else {
+				try {
+					// Creo el fichero que que escribira en disco
+					FileOutputStream fichero = new FileOutputStream(
+							"PartidaGuardad.dato");
+					// Creo el escritor de objetos
+					ObjectOutputStream out = new ObjectOutputStream(fichero);
+					// Escribo los objetos
+					out.writeObject(modelo);
+					// Cierro el archivo
+					out.close();
+
+				} catch (IOException error) {
+					JOptionPane.showOptionDialog(
+							null,
+							"No se pudo escribir en el disco.",
+							"Error",
+							   JOptionPane.OK_OPTION,
+							   JOptionPane.ERROR_MESSAGE,
+							  null,    
+							   new String[]{"Acepto"},   
+							   null);
+				}
 			}
 		}
 
@@ -211,7 +240,15 @@ public class Controlador {
 				this.vista.actualizarBotonesDelTablero();
 
 			} catch (IOException | ClassNotFoundException error) {
-				error.printStackTrace();
+				JOptionPane.showOptionDialog(
+						null,
+						"No se pudo leer el archivo desde el disco.",
+						"Error",
+						   JOptionPane.OK_OPTION,
+						   JOptionPane.ERROR_MESSAGE,
+						  null,    
+						   new String[]{"Acepto"},   
+						   null);
 			}
 		}
 
@@ -226,6 +263,6 @@ public class Controlador {
 	}
 
 	public ActionListener obtenerListenerBotonGuardar() {
-		return new ListenerBotonGuardar();
+		return new ListenerBotonGuardar(this.modelo);
 	}
 }
