@@ -29,7 +29,7 @@ import javax.swing.border.Border;
        				"-2 lanchas"+"\n"+"-2 destructores: solo lo impactan los disparos directos"+"\n"+
        		"-1 buque: cualquier impacto en cualquier parte lo destruye por completo"+"\n"+
        				"-1 portaaviones" + "\n" + "-1 rompehielos: Cada parte requiere dos impactos para ser destruida"+
-       			 "\n" + "\n" +"Apoya el cursor sobre las naves para saber qué tipo de nave es.";
+       			 "\n" + "\n" +"Apoya el cursor sobre las naves para saber que tipo de nave es.";
        
        final ImageIcon imageIcon = new ImageIcon("estaticos/Fondos/fondoInstrucciones.jpg");
        areaDeInformacion = new JTextArea(){
